@@ -9,6 +9,7 @@ namespace UserMenu
     {
         public void AddMenuItems()
         {
+            //Pham Quang Huy add comment Test
             SAPbouiCOM.Menus oMenus = null;
             SAPbouiCOM.MenuItem oMenuItem = null;
 
