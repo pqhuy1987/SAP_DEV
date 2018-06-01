@@ -1,0 +1,5 @@
+C:\Users\ly_ng\Desktop\FDC_B1\S_OutGoingPayments\bin\Debug\S_OutGoingPayments.exe
+C:\Users\ly_ng\Desktop\FDC_B1\S_OutGoingPayments\bin\Debug\S_OutGoingPayments.pdb
+C:\Users\ly_ng\Desktop\FDC_B1\S_OutGoingPayments\obj\Debug\S_OutGoingPayments.csprojResolveAssemblyReference.cache
+C:\Users\ly_ng\Desktop\FDC_B1\S_OutGoingPayments\obj\Debug\S_OutGoingPayments.exe
+C:\Users\ly_ng\Desktop\FDC_B1\S_OutGoingPayments\obj\Debug\S_OutGoingPayments.pdb

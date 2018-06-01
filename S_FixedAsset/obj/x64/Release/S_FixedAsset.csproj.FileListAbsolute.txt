@@ -1,0 +1,10 @@
+C:\Users\ly_ng\Desktop\S_FixedAsset\S_FixedAsset\bin\x64\Release\S_FixedAsset.exe
+C:\Users\ly_ng\Desktop\S_FixedAsset\S_FixedAsset\bin\x64\Release\S_FixedAsset.pdb
+C:\Users\ly_ng\Desktop\S_FixedAsset\S_FixedAsset\obj\x64\Release\S_FixedAsset.exe
+C:\Users\ly_ng\Desktop\S_FixedAsset\S_FixedAsset\obj\x64\Release\S_FixedAsset.pdb
+C:\Users\ly_ng\Desktop\S_FixedAsset\S_FixedAsset\obj\x64\Release\S_FixedAsset.csprojResolveAssemblyReference.cache
+C:\Users\ly_ng\Desktop\FDC_B1\S_FixedAsset\bin\x64\Release\S_FixedAsset.exe
+C:\Users\ly_ng\Desktop\FDC_B1\S_FixedAsset\bin\x64\Release\S_FixedAsset.pdb
+C:\Users\ly_ng\Desktop\FDC_B1\S_FixedAsset\obj\x64\Release\S_FixedAsset.csprojResolveAssemblyReference.cache
+C:\Users\ly_ng\Desktop\FDC_B1\S_FixedAsset\obj\x64\Release\S_FixedAsset.exe
+C:\Users\ly_ng\Desktop\FDC_B1\S_FixedAsset\obj\x64\Release\S_FixedAsset.pdb

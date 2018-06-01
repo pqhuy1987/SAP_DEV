@@ -1,0 +1,5 @@
+C:\Users\ly_ng\Desktop\FDC_B1\S_GoodsReturn\bin\Release\S_GoodsReturn.exe
+C:\Users\ly_ng\Desktop\FDC_B1\S_GoodsReturn\bin\Release\S_GoodsReturn.pdb
+C:\Users\ly_ng\Desktop\FDC_B1\S_GoodsReturn\obj\Release\S_GoodsReturn.csprojResolveAssemblyReference.cache
+C:\Users\ly_ng\Desktop\FDC_B1\S_GoodsReturn\obj\Release\S_GoodsReturn.exe
+C:\Users\ly_ng\Desktop\FDC_B1\S_GoodsReturn\obj\Release\S_GoodsReturn.pdb

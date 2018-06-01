@@ -1,0 +1,4 @@
+C:\Users\ly_ng\Desktop\FDC_B1\S_Issue2Production\bin\x64\Release\S_Issue4Production.exe
+C:\Users\ly_ng\Desktop\FDC_B1\S_Issue2Production\bin\x64\Release\S_Issue4Production.pdb
+C:\Users\ly_ng\Desktop\FDC_B1\S_Issue2Production\obj\x64\Release\S_Issue4Production.exe
+C:\Users\ly_ng\Desktop\FDC_B1\S_Issue2Production\obj\x64\Release\S_Issue4Production.pdb

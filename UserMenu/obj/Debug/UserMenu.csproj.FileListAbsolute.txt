@@ -1,0 +1,4 @@
+C:\Users\ly_ng\Desktop\FDC_B1\UserMenu\bin\Debug\UserMenu.exe
+C:\Users\ly_ng\Desktop\FDC_B1\UserMenu\bin\Debug\UserMenu.pdb
+C:\Users\ly_ng\Desktop\FDC_B1\UserMenu\obj\Debug\UserMenu.exe
+C:\Users\ly_ng\Desktop\FDC_B1\UserMenu\obj\Debug\UserMenu.pdb

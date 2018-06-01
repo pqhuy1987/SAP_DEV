@@ -1,0 +1,8 @@
+C:\Users\ly_ng\Desktop\FDC_B1\U_KLTT\bin\Debug\KLTT_Icon.png
+C:\Users\ly_ng\Desktop\FDC_B1\U_KLTT\bin\Debug\Template_KLTT_NT.xlsx
+C:\Users\ly_ng\Desktop\FDC_B1\U_KLTT\bin\Debug\Template_KLTT.xlsx
+C:\Users\ly_ng\Desktop\FDC_B1\U_KLTT\bin\Debug\U_KLTT.exe
+C:\Users\ly_ng\Desktop\FDC_B1\U_KLTT\bin\Debug\U_KLTT.pdb
+C:\Users\ly_ng\Desktop\FDC_B1\U_KLTT\obj\Debug\U_KLTT.csprojResolveAssemblyReference.cache
+C:\Users\ly_ng\Desktop\FDC_B1\U_KLTT\obj\Debug\U_KLTT.exe
+C:\Users\ly_ng\Desktop\FDC_B1\U_KLTT\obj\Debug\U_KLTT.pdb

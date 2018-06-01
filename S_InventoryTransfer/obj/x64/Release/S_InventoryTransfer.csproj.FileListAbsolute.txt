@@ -1,0 +1,4 @@
+C:\Users\ly_ng\Desktop\FDC_B1\S_InventoryTransfer\bin\x64\Release\S_InventoryTransfer.exe
+C:\Users\ly_ng\Desktop\FDC_B1\S_InventoryTransfer\bin\x64\Release\S_InventoryTransfer.pdb
+C:\Users\ly_ng\Desktop\FDC_B1\S_InventoryTransfer\obj\x64\Release\S_InventoryTransfer.exe
+C:\Users\ly_ng\Desktop\FDC_B1\S_InventoryTransfer\obj\x64\Release\S_InventoryTransfer.pdb

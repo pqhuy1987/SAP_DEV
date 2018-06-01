@@ -1,0 +1,5 @@
+C:\Users\ly_ng\Desktop\S_GoodsReceiptPO\S_GoodsReceiptPO\bin\x64\Debug\S_GoodsReceiptPO.exe
+C:\Users\ly_ng\Desktop\S_GoodsReceiptPO\S_GoodsReceiptPO\bin\x64\Debug\S_GoodsReceiptPO.pdb
+C:\Users\ly_ng\Desktop\S_GoodsReceiptPO\S_GoodsReceiptPO\obj\x64\Debug\S_GoodsReceiptPO.exe
+C:\Users\ly_ng\Desktop\S_GoodsReceiptPO\S_GoodsReceiptPO\obj\x64\Debug\S_GoodsReceiptPO.pdb
+C:\Users\ly_ng\Desktop\S_GoodsReceiptPO\S_GoodsReceiptPO\obj\x64\Debug\S_GoodsReceiptPO.csprojResolveAssemblyReference.cache

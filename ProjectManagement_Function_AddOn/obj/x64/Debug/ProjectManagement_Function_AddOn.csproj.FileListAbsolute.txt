@@ -1,0 +1,9 @@
+C:\Users\SAP CLIENT\Desktop\ProjectManagement_Function_AddOn\ProjectManagement_Function_AddOn\bin\x64\Debug\ProjectManagement_Function_AddOn.exe
+C:\Users\SAP CLIENT\Desktop\ProjectManagement_Function_AddOn\ProjectManagement_Function_AddOn\bin\x64\Debug\ProjectManagement_Function_AddOn.pdb
+C:\Users\SAP CLIENT\Desktop\ProjectManagement_Function_AddOn\ProjectManagement_Function_AddOn\obj\x64\Debug\ProjectManagement_Function_AddOn.exe
+C:\Users\SAP CLIENT\Desktop\ProjectManagement_Function_AddOn\ProjectManagement_Function_AddOn\obj\x64\Debug\ProjectManagement_Function_AddOn.pdb
+C:\Users\SAP CLIENT\Desktop\ProjectManagement_Function_AddOn\ProjectManagement_Function_AddOn\bin\x64\Debug\ProjectManagement_Function_AddOn.exe.config
+C:\Users\SAP CLIENT\Desktop\ProjectManagement_Function_AddOn\ProjectManagement_Function_AddOn\bin\x64\Debug\Addons-icon.png
+C:\Users\SAP CLIENT\Desktop\ProjectManagement_Function_AddOn\ProjectManagement_Function_AddOn\bin\x64\Debug\B1_Crystal90.dll
+C:\Users\ly_ng\Desktop\FDC_B1\ProjectManagement_Function_AddOn\obj\x64\Debug\ProjectManagement_Function_AddOn.exe
+C:\Users\ly_ng\Desktop\FDC_B1\ProjectManagement_Function_AddOn\obj\x64\Debug\ProjectManagement_Function_AddOn.pdb

@@ -1,0 +1,19 @@
+C:\Users\LETHONG\Documents\Visual Studio 2010\Projects\PurchaseBlanketAgreement\PurchaseBlanketAgreement\obj\Debug\PurchaseBlanketAgreement.csprojResolveAssemblyReference.cache
+C:\Users\LETHONG\Documents\Visual Studio 2010\Projects\PurchaseBlanketAgreement\PurchaseBlanketAgreement\bin\Debug\PurchaseBlanketAgreement.exe
+C:\Users\LETHONG\Documents\Visual Studio 2010\Projects\PurchaseBlanketAgreement\PurchaseBlanketAgreement\bin\Debug\PurchaseBlanketAgreement.pdb
+C:\Users\LETHONG\Documents\Visual Studio 2010\Projects\PurchaseBlanketAgreement\PurchaseBlanketAgreement\obj\Debug\PurchaseBlanketAgreement.exe
+C:\Users\LETHONG\Documents\Visual Studio 2010\Projects\PurchaseBlanketAgreement\PurchaseBlanketAgreement\obj\Debug\PurchaseBlanketAgreement.pdb
+C:\Users\Administrator\Desktop\PurchaseBlanketAgreement\PurchaseBlanketAgreement\obj\Debug\PurchaseBlanketAgreement.exe
+C:\Users\Administrator\Desktop\PurchaseBlanketAgreement\PurchaseBlanketAgreement\obj\Debug\PurchaseBlanketAgreement.pdb
+C:\Users\Administrator\Desktop\PurchaseBlanketAgreement\PurchaseBlanketAgreement\bin\Debug\PurchaseBlanketAgreement.exe
+C:\Users\Administrator\Desktop\PurchaseBlanketAgreement\PurchaseBlanketAgreement\bin\Debug\PurchaseBlanketAgreement.pdb
+C:\Users\Administrator\Desktop\PurchaseBlanketAgreement\PurchaseBlanketAgreement\obj\Debug\PurchaseBlanketAgreement.csprojResolveAssemblyReference.cache
+C:\Users\LETHONG\Desktop\PurchaseBlanketAgreement\PurchaseBlanketAgreement\obj\Debug\PurchaseBlanketAgreement.exe
+C:\Users\LETHONG\Desktop\PurchaseBlanketAgreement\PurchaseBlanketAgreement\obj\Debug\PurchaseBlanketAgreement.pdb
+C:\Users\LETHONG\Desktop\PurchaseBlanketAgreement\PurchaseBlanketAgreement\bin\Debug\PurchaseBlanketAgreement.exe
+C:\Users\LETHONG\Desktop\PurchaseBlanketAgreement\PurchaseBlanketAgreement\bin\Debug\PurchaseBlanketAgreement.pdb
+C:\Users\LETHONG\Desktop\PurchaseBlanketAgreement\PurchaseBlanketAgreement\obj\Debug\PurchaseBlanketAgreement.csprojResolveAssemblyReference.cache
+C:\Users\ly_ng\Desktop\FDC_B1\PurchaseBlanketAgreement\bin\Debug\PurchaseBlanketAgreement.exe
+C:\Users\ly_ng\Desktop\FDC_B1\PurchaseBlanketAgreement\bin\Debug\PurchaseBlanketAgreement.pdb
+C:\Users\ly_ng\Desktop\FDC_B1\PurchaseBlanketAgreement\obj\Debug\PurchaseBlanketAgreement.exe
+C:\Users\ly_ng\Desktop\FDC_B1\PurchaseBlanketAgreement\obj\Debug\PurchaseBlanketAgreement.pdb

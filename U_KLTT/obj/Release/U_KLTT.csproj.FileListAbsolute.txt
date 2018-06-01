@@ -1,0 +1,8 @@
+C:\Users\ly_ng\Desktop\FDC_B1\U_KLTT\bin\Release\KLTT_Icon.png
+C:\Users\ly_ng\Desktop\FDC_B1\U_KLTT\bin\Release\FDC_Bill_thanh_toan.xlsx
+C:\Users\ly_ng\Desktop\FDC_B1\U_KLTT\bin\Release\Template_Cover_KLTT.xlsx
+C:\Users\ly_ng\Desktop\FDC_B1\U_KLTT\bin\Release\Template_KLTT.xlsx
+C:\Users\ly_ng\Desktop\FDC_B1\U_KLTT\bin\Release\U_KLTT.exe
+C:\Users\ly_ng\Desktop\FDC_B1\U_KLTT\bin\Release\U_KLTT.pdb
+C:\Users\ly_ng\Desktop\FDC_B1\U_KLTT\obj\Release\U_KLTT.exe
+C:\Users\ly_ng\Desktop\FDC_B1\U_KLTT\obj\Release\U_KLTT.pdb

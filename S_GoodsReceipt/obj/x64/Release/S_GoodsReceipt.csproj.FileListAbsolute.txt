@@ -1,0 +1,9 @@
+C:\Users\ly_ng\Desktop\S_GoodsReceipt\S_GoodsReceipt\bin\x64\Release\S_GoodsReceipt.exe.config
+C:\Users\ly_ng\Desktop\S_GoodsReceipt\S_GoodsReceipt\bin\x64\Release\S_GoodsReceipt.exe
+C:\Users\ly_ng\Desktop\S_GoodsReceipt\S_GoodsReceipt\bin\x64\Release\S_GoodsReceipt.pdb
+C:\Users\ly_ng\Desktop\S_GoodsReceipt\S_GoodsReceipt\obj\x64\Release\S_GoodsReceipt.exe
+C:\Users\ly_ng\Desktop\S_GoodsReceipt\S_GoodsReceipt\obj\x64\Release\S_GoodsReceipt.pdb
+C:\Users\ly_ng\Desktop\FDC_B1\S_GoodsReceipt\bin\x64\Release\S_GoodsReceipt.exe
+C:\Users\ly_ng\Desktop\FDC_B1\S_GoodsReceipt\bin\x64\Release\S_GoodsReceipt.pdb
+C:\Users\ly_ng\Desktop\FDC_B1\S_GoodsReceipt\obj\x64\Release\S_GoodsReceipt.exe
+C:\Users\ly_ng\Desktop\FDC_B1\S_GoodsReceipt\obj\x64\Release\S_GoodsReceipt.pdb

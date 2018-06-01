@@ -1,0 +1,8 @@
+C:\Users\ly_ng\Desktop\FDC_B1\U_ApproveJV\bin\Debug\TMP_BCH.xlsx
+C:\Users\ly_ng\Desktop\FDC_B1\U_ApproveJV\bin\Debug\TMP_VP1.xlsx
+C:\Users\ly_ng\Desktop\FDC_B1\U_ApproveJV\bin\Debug\TMP_VP2.xlsx
+C:\Users\ly_ng\Desktop\FDC_B1\U_ApproveJV\bin\Debug\U_ApproveJV.exe
+C:\Users\ly_ng\Desktop\FDC_B1\U_ApproveJV\bin\Debug\U_ApproveJV.pdb
+C:\Users\ly_ng\Desktop\FDC_B1\U_ApproveJV\obj\Debug\U_ApproveJV.csprojResolveAssemblyReference.cache
+C:\Users\ly_ng\Desktop\FDC_B1\U_ApproveJV\obj\Debug\U_ApproveJV.exe
+C:\Users\ly_ng\Desktop\FDC_B1\U_ApproveJV\obj\Debug\U_ApproveJV.pdb

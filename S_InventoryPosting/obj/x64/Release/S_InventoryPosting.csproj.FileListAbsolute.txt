@@ -1,0 +1,5 @@
+C:\Users\ly_ng\Desktop\FDC_B1\S_InventoryPosting\bin\x64\Release\S_InventoryPosting.exe
+C:\Users\ly_ng\Desktop\FDC_B1\S_InventoryPosting\bin\x64\Release\S_InventoryPosting.pdb
+C:\Users\ly_ng\Desktop\FDC_B1\S_InventoryPosting\obj\x64\Release\S_InventoryPosting.csprojResolveAssemblyReference.cache
+C:\Users\ly_ng\Desktop\FDC_B1\S_InventoryPosting\obj\x64\Release\S_InventoryPosting.exe
+C:\Users\ly_ng\Desktop\FDC_B1\S_InventoryPosting\obj\x64\Release\S_InventoryPosting.pdb

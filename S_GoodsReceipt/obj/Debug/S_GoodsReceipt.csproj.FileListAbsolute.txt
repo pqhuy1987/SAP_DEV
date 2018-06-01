@@ -1,0 +1,11 @@
+C:\Users\ly_ng\Desktop\S_GoodsReceipt\S_GoodsReceipt\bin\Debug\S_GoodsReceipt.exe.config
+C:\Users\ly_ng\Desktop\S_GoodsReceipt\S_GoodsReceipt\bin\Debug\S_GoodsReceipt.exe
+C:\Users\ly_ng\Desktop\S_GoodsReceipt\S_GoodsReceipt\bin\Debug\S_GoodsReceipt.pdb
+C:\Users\ly_ng\Desktop\S_GoodsReceipt\S_GoodsReceipt\obj\Debug\S_GoodsReceipt.csprojResolveAssemblyReference.cache
+C:\Users\ly_ng\Desktop\S_GoodsReceipt\S_GoodsReceipt\obj\Debug\S_GoodsReceipt.exe
+C:\Users\ly_ng\Desktop\S_GoodsReceipt\S_GoodsReceipt\obj\Debug\S_GoodsReceipt.pdb
+C:\Users\ly_ng\Desktop\FDC_B1\S_GoodsReceipt\bin\Debug\S_GoodsReceipt.exe
+C:\Users\ly_ng\Desktop\FDC_B1\S_GoodsReceipt\bin\Debug\S_GoodsReceipt.pdb
+C:\Users\ly_ng\Desktop\FDC_B1\S_GoodsReceipt\obj\Debug\S_GoodsReceipt.csprojResolveAssemblyReference.cache
+C:\Users\ly_ng\Desktop\FDC_B1\S_GoodsReceipt\obj\Debug\S_GoodsReceipt.exe
+C:\Users\ly_ng\Desktop\FDC_B1\S_GoodsReceipt\obj\Debug\S_GoodsReceipt.pdb

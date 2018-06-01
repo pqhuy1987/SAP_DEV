@@ -1,0 +1,4 @@
+C:\Users\ly_ng\Desktop\FDC_B1\JE_TEST\bin\x64\Debug\JE_TEST.exe
+C:\Users\ly_ng\Desktop\FDC_B1\JE_TEST\bin\x64\Debug\JE_TEST.pdb
+C:\Users\ly_ng\Desktop\FDC_B1\JE_TEST\obj\x64\Debug\JE_TEST.exe
+C:\Users\ly_ng\Desktop\FDC_B1\JE_TEST\obj\x64\Debug\JE_TEST.pdb

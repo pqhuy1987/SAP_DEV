@@ -1,0 +1,17 @@
+C:\Users\SAP CLIENT\Desktop\ProjectManagement_Function_AddOn\ProjectManagement_Function_AddOn\bin\x86\Release\Addons-icon.png
+C:\Users\SAP CLIENT\Desktop\ProjectManagement_Function_AddOn\ProjectManagement_Function_AddOn\bin\x86\Release\ProjectManagement_Function_AddOn.exe.config
+C:\Users\SAP CLIENT\Desktop\ProjectManagement_Function_AddOn\ProjectManagement_Function_AddOn\bin\x86\Release\ProjectManagement_Function_AddOn.exe
+C:\Users\SAP CLIENT\Desktop\ProjectManagement_Function_AddOn\ProjectManagement_Function_AddOn\bin\x86\Release\ProjectManagement_Function_AddOn.pdb
+C:\Users\SAP CLIENT\Desktop\ProjectManagement_Function_AddOn\ProjectManagement_Function_AddOn\bin\x86\Release\Excel.dll
+C:\Users\SAP CLIENT\Desktop\ProjectManagement_Function_AddOn\ProjectManagement_Function_AddOn\bin\x86\Release\ICSharpCode.SharpZipLib.dll
+C:\Users\SAP CLIENT\Desktop\ProjectManagement_Function_AddOn\ProjectManagement_Function_AddOn\obj\x86\Release\ProjectManagement_Function_AddOn.exe
+C:\Users\SAP CLIENT\Desktop\ProjectManagement_Function_AddOn\ProjectManagement_Function_AddOn\obj\x86\Release\ProjectManagement_Function_AddOn.pdb
+C:\Users\ERP-User\Desktop\ProjectManagement_Function_AddOn\ProjectManagement_Function_AddOn\bin\x86\Release\ProjectManagement_Function_AddOn.exe.config
+C:\Users\ERP-User\Desktop\ProjectManagement_Function_AddOn\ProjectManagement_Function_AddOn\obj\x86\Release\ProjectManagement_Function_AddOn.exe
+C:\Users\ERP-User\Desktop\ProjectManagement_Function_AddOn\ProjectManagement_Function_AddOn\obj\x86\Release\ProjectManagement_Function_AddOn.pdb
+C:\Users\ERP-User\Desktop\ProjectManagement_Function_AddOn\ProjectManagement_Function_AddOn\bin\x86\Release\Addons-icon.png
+C:\Users\ERP-User\Desktop\ProjectManagement_Function_AddOn\ProjectManagement_Function_AddOn\bin\x86\Release\ProjectManagement_Function_AddOn.exe
+C:\Users\ERP-User\Desktop\ProjectManagement_Function_AddOn\ProjectManagement_Function_AddOn\bin\x86\Release\ProjectManagement_Function_AddOn.pdb
+C:\Users\ERP-User\Desktop\ProjectManagement_Function_AddOn\ProjectManagement_Function_AddOn\obj\x86\Release\ProjectManagement_Function_AddOn.csprojResolveAssemblyReference.cache
+C:\Users\ly_ng\Desktop\FDC_B1\ProjectManagement_Function_AddOn\obj\x86\Release\ProjectManagement_Function_AddOn.exe
+C:\Users\ly_ng\Desktop\FDC_B1\ProjectManagement_Function_AddOn\obj\x86\Release\ProjectManagement_Function_AddOn.pdb

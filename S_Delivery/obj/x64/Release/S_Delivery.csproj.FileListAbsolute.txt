@@ -1,0 +1,4 @@
+C:\Users\ly_ng\Desktop\FDC_B1\S_Delivery\bin\x64\Release\S_Delivery.exe
+C:\Users\ly_ng\Desktop\FDC_B1\S_Delivery\bin\x64\Release\S_Delivery.pdb
+C:\Users\ly_ng\Desktop\FDC_B1\S_Delivery\obj\x64\Release\S_Delivery.exe
+C:\Users\ly_ng\Desktop\FDC_B1\S_Delivery\obj\x64\Release\S_Delivery.pdb

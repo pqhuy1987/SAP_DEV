@@ -1,0 +1,7 @@
+C:\Users\ly_ng\Desktop\FDC_B1\U_KLTT\bin\x64\Release\Template_KLTT.xlsx
+C:\Users\ly_ng\Desktop\FDC_B1\U_KLTT\bin\x64\Release\U_KLTT.exe
+C:\Users\ly_ng\Desktop\FDC_B1\U_KLTT\bin\x64\Release\U_KLTT.pdb
+C:\Users\ly_ng\Desktop\FDC_B1\U_KLTT\obj\x64\Release\U_KLTT.exe
+C:\Users\ly_ng\Desktop\FDC_B1\U_KLTT\obj\x64\Release\U_KLTT.pdb
+C:\Users\ly_ng\Desktop\FDC_B1\U_KLTT\bin\x64\Release\KLTT_Icon.png
+C:\Users\ly_ng\Desktop\FDC_B1\U_KLTT\bin\x64\Release\Template_KLTT_NT.xlsx

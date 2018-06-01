@@ -1,0 +1,5 @@
+C:\Users\ly_ng\Desktop\FDC_B1\PurchaseBlanketAgreement\bin\x64\Release\PurchaseBlanketAgreement.exe
+C:\Users\ly_ng\Desktop\FDC_B1\PurchaseBlanketAgreement\bin\x64\Release\PurchaseBlanketAgreement.pdb
+C:\Users\ly_ng\Desktop\FDC_B1\PurchaseBlanketAgreement\obj\x64\Release\PurchaseBlanketAgreement.exe
+C:\Users\ly_ng\Desktop\FDC_B1\PurchaseBlanketAgreement\obj\x64\Release\PurchaseBlanketAgreement.pdb
+C:\Users\ly_ng\Desktop\FDC_B1\PurchaseBlanketAgreement\obj\x64\Release\PurchaseBlanketAgreement.csprojResolveAssemblyReference.cache

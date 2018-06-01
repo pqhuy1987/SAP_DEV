@@ -1,0 +1,4 @@
+C:\Users\ly_ng\Desktop\FDC_B1\S_GoodsIssue\bin\Debug\S_GoodsIssue.exe
+C:\Users\ly_ng\Desktop\FDC_B1\S_GoodsIssue\bin\Debug\S_GoodsIssue.pdb
+C:\Users\ly_ng\Desktop\FDC_B1\S_GoodsIssue\obj\Debug\S_GoodsIssue.exe
+C:\Users\ly_ng\Desktop\FDC_B1\S_GoodsIssue\obj\Debug\S_GoodsIssue.pdb

@@ -1,0 +1,4 @@
+C:\Users\ly_ng\Desktop\FDC_B1\U_DUTRU\bin\x64\Release\U_DUTRU.exe
+C:\Users\ly_ng\Desktop\FDC_B1\U_DUTRU\bin\x64\Release\U_DUTRU.pdb
+C:\Users\ly_ng\Desktop\FDC_B1\U_DUTRU\obj\x64\Release\U_DUTRU.exe
+C:\Users\ly_ng\Desktop\FDC_B1\U_DUTRU\obj\x64\Release\U_DUTRU.pdb

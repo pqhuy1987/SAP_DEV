@@ -1,0 +1,4 @@
+C:\Users\ly_ng\Desktop\FDC_B1\S_Del_JE\bin\Release\S_Del_JE.exe
+C:\Users\ly_ng\Desktop\FDC_B1\S_Del_JE\bin\Release\S_Del_JE.pdb
+C:\Users\ly_ng\Desktop\FDC_B1\S_Del_JE\obj\Release\S_Del_JE.exe
+C:\Users\ly_ng\Desktop\FDC_B1\S_Del_JE\obj\Release\S_Del_JE.pdb

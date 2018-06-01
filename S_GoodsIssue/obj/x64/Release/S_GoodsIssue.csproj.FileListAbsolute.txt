@@ -1,0 +1,4 @@
+C:\Users\ly_ng\Desktop\FDC_B1\S_GoodsIssue\bin\x64\Release\S_GoodsIssue.exe
+C:\Users\ly_ng\Desktop\FDC_B1\S_GoodsIssue\bin\x64\Release\S_GoodsIssue.pdb
+C:\Users\ly_ng\Desktop\FDC_B1\S_GoodsIssue\obj\x64\Release\S_GoodsIssue.exe
+C:\Users\ly_ng\Desktop\FDC_B1\S_GoodsIssue\obj\x64\Release\S_GoodsIssue.pdb

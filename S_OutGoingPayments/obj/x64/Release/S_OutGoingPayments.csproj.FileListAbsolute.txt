@@ -1,0 +1,4 @@
+C:\Users\ly_ng\Desktop\FDC_B1\S_OutGoingPayments\bin\x64\Release\S_OutGoingPayments.exe
+C:\Users\ly_ng\Desktop\FDC_B1\S_OutGoingPayments\bin\x64\Release\S_OutGoingPayments.pdb
+C:\Users\ly_ng\Desktop\FDC_B1\S_OutGoingPayments\obj\x64\Release\S_OutGoingPayments.exe
+C:\Users\ly_ng\Desktop\FDC_B1\S_OutGoingPayments\obj\x64\Release\S_OutGoingPayments.pdb

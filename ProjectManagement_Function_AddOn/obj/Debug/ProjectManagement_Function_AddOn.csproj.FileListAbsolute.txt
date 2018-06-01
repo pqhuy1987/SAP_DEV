@@ -1,0 +1,11 @@
+C:\Users\SAP CLIENT\Desktop\ProjectManagement_Function_AddOn\ProjectManagement_Function_AddOn\bin\Debug\ProjectManagement_Function_AddOn.exe
+C:\Users\SAP CLIENT\Desktop\ProjectManagement_Function_AddOn\ProjectManagement_Function_AddOn\bin\Debug\ProjectManagement_Function_AddOn.pdb
+C:\Users\SAP CLIENT\Desktop\ProjectManagement_Function_AddOn\ProjectManagement_Function_AddOn\obj\Debug\ProjectManagement_Function_AddOn.csprojResolveAssemblyReference.cache
+C:\Users\SAP CLIENT\Desktop\ProjectManagement_Function_AddOn\ProjectManagement_Function_AddOn\obj\Debug\ProjectManagement_Function_AddOn.exe
+C:\Users\SAP CLIENT\Desktop\ProjectManagement_Function_AddOn\ProjectManagement_Function_AddOn\obj\Debug\ProjectManagement_Function_AddOn.pdb
+C:\Users\ly_ng\Desktop\FDC_B1\ProjectManagement_Function_AddOn\bin\Debug\Addons-icon.png
+C:\Users\ly_ng\Desktop\FDC_B1\ProjectManagement_Function_AddOn\bin\Debug\ProjectManagement_Function.exe
+C:\Users\ly_ng\Desktop\FDC_B1\ProjectManagement_Function_AddOn\bin\Debug\ProjectManagement_Function.pdb
+C:\Users\ly_ng\Desktop\FDC_B1\ProjectManagement_Function_AddOn\obj\Debug\ProjectManagement_Function_AddOn.csprojResolveAssemblyReference.cache
+C:\Users\ly_ng\Desktop\FDC_B1\ProjectManagement_Function_AddOn\obj\Debug\ProjectManagement_Function.exe
+C:\Users\ly_ng\Desktop\FDC_B1\ProjectManagement_Function_AddOn\obj\Debug\ProjectManagement_Function.pdb
