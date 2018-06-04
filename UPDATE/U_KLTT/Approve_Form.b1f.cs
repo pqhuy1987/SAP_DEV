@@ -61,7 +61,9 @@ namespace U_KLTT
         private SAPbouiCOM.StaticText StaticText13;
         private SAPbouiCOM.StaticText StaticText14;
         private SAPbouiCOM.StaticText StaticText15;
+        private SAPbouiCOM.StaticText StaticText18;
         private SAPbouiCOM.EditText EditText4;
+        private SAPbouiCOM.EditText EditText5;
         private SAPbouiCOM.EditText EditText6;
         private SAPbouiCOM.EditText EditText7;
         private SAPbouiCOM.EditText EditText8;
@@ -86,8 +88,8 @@ namespace U_KLTT
         private SAPbouiCOM.OptionBtn OptionBtn1;
         private SAPbouiCOM.OptionBtn OptionBtn2;
         private SAPbouiCOM.OptionBtn OptionBtn3;
-
-
+        
+       
         public override void OnInitializeComponent()
         {
             this.Grid0 = ((SAPbouiCOM.Grid)(this.GetItem("grd_lst").Specific));
@@ -1171,7 +1173,7 @@ namespace U_KLTT
                             }
                         }
                     }
-                    rs += (rs == "" ? " " : ", ") + ch[n[i]];// đọc số
+                    rs += (rs == "" ? " " : " ") + ch[n[i]];// đọc số
                     rs += " " + (i % 3 == 0 ? u[i] : u[i % 3]);// đọc đơn vị
                 }
                 if (rs[rs.Length - 1] != ' ')
@@ -4122,9 +4124,7 @@ namespace U_KLTT
             }
         }
 
-        private SAPbouiCOM.StaticText StaticText18;
-        private SAPbouiCOM.EditText EditText5;
-
+        //Double click vao Link
         private void EditText5_DoubleClickAfter(object sboObject, SAPbouiCOM.SBOItemEventArg pVal)
         {
             try

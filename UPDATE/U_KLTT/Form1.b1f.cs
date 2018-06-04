@@ -28,6 +28,7 @@ namespace U_KLTT
         private SAPbouiCOM.Button Button2;
         private SAPbouiCOM.Button Button3;
         private SAPbouiCOM.Button Button4;
+        private SAPbouiCOM.Button Button6;
         private SAPbouiCOM.ComboBox ComboBox0;
         private SAPbouiCOM.ComboBox ComboBox1;
         private SAPbouiCOM.ComboBox ComboBox2;
@@ -37,16 +38,8 @@ namespace U_KLTT
         private SAPbouiCOM.EditText EditText2;
         private SAPbouiCOM.EditText EditText3;
         private SAPbouiCOM.EditText EditText4;
-        private SAPbouiCOM.Button Button6;
         private SAPbouiCOM.CheckBox CheckBox0;
         private SAPbouiCOM.Grid Grid0;
-        
-        //private SAPbouiCOM.StaticText StaticText0;
-        //private SAPbouiCOM.StaticText StaticText1;
-        //private SAPbouiCOM.StaticText StaticText2;
-        //private SAPbouiCOM.StaticText StaticText4;
-        //private SAPbouiCOM.StaticText StaticText5;
-        //private SAPbouiCOM.StaticText StaticText6;
 
         public override void OnInitializeComponent()
         {
@@ -525,8 +518,15 @@ namespace U_KLTT
         {
             if (!String.IsNullOrEmpty(EditText1.Value))
             {
-                if (!string.IsNullOrEmpty(ComboBox0.Value))
-                    Load_Grid_Period(this.EditText1.Value.Trim(), ComboBox0.Selected.Value, ComboBox1.Selected.Value,ComboBox3.Selected.Value);
+                try
+                {
+                    if (!string.IsNullOrEmpty(ComboBox0.Value))
+                        Load_Grid_Period(this.EditText1.Value.Trim(), ComboBox0.Selected.Value, ComboBox1.Selected.Value, ComboBox3.Selected.Value);
+                }
+                catch
+                {
+ 
+                }
             }
         }
 
@@ -568,7 +568,7 @@ namespace U_KLTT
                 {
                     try
                     {
-                        oApp.ActivateMenuItem("KLTT");
+                        oApp.ActivateMenuItem(MenuUID);
                         SAPbouiCOM.Form frm = Application.SBO_Application.Forms.ActiveForm;
                         frm.Mode = SAPbouiCOM.BoFormMode.fm_FIND_MODE;
                         frm.Items.Item("1_U_E").Enabled = true;
@@ -730,7 +730,7 @@ namespace U_KLTT
                             }
                         }
                     }
-                    rs += (rs == "" ? " " : ", ") + ch[n[i]];// đọc số
+                    rs += (rs == "" ? " " : " ") + ch[n[i]];// đọc số
                     rs += " " + (i % 3 == 0 ? u[i] : u[i % 3]);// đọc đơn vị
                 }
                 if (rs[rs.Length - 1] != ' ')
@@ -4052,7 +4052,6 @@ namespace U_KLTT
             }
             catch
             { }
-
         }
     }
 }
