@@ -1,0 +1,315 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6D923F79-29C5-43C7-892F-E27FEE20EA78}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>R_BCTC</RootNamespace>
+    <AssemblyName>R_BCTC</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>R_BCTC.Program</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="SAPBusinessOneSDK" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="AC_BALANCE_SHEET.b1f">
+      <FormCategory>UserForm</FormCategory>
+    </None>
+    <None Include="AC_SP_JV.b1f">
+      <FormCategory>UserForm</FormCategory>
+    </None>
+    <None Include="BASELINE.b1f">
+      <FormCategory>UserForm</FormCategory>
+    </None>
+    <None Include="BASELINE_MAN.b1f">
+      <FormCategory>UserForm</FormCategory>
+    </None>
+    <None Include="CCM_APPROVE_BILL.b1f">
+      <FormCategory>UserForm</FormCategory>
+    </None>
+    <None Include="CCM_DT_LN.b1f">
+      <FormCategory>UserForm</FormCategory>
+    </None>
+    <None Include="CCM_DT_LN_LIST.b1f">
+      <FormCategory>UserForm</FormCategory>
+    </None>
+    <None Include="CCM_HAOHUT_THEP.b1f">
+      <FormCategory>UserForm</FormCategory>
+    </None>
+    <None Include="CCM_HQDP.b1f">
+      <FormCategory>UserForm</FormCategory>
+    </None>
+    <None Include="CCM_SANLUONG.b1f">
+      <FormCategory>UserForm</FormCategory>
+    </None>
+    <None Include="CCM_SUMMARY_BILL.b1f">
+      <FormCategory>UserForm</FormCategory>
+    </None>
+    <None Include="CCM_SUMMARY_HD.b1f">
+      <FormCategory>UserForm</FormCategory>
+    </None>
+    <None Include="CCM_THEODOI_VP.b1f">
+      <FormCategory>UserForm</FormCategory>
+    </None>
+    <None Include="CCM_TONGHOP_VP.b1f">
+      <FormCategory>UserForm</FormCategory>
+    </None>
+    <None Include="EQ_CE_O.b1f">
+      <FormCategory>UserForm</FormCategory>
+    </None>
+    <None Include="EQ_FR.b1f">
+      <FormCategory>UserForm</FormCategory>
+    </None>
+    <None Include="MM_FI.b1f">
+      <FormCategory>UserForm</FormCategory>
+    </None>
+    <Compile Include="AC_BALANCE_SHEET.b1f.cs">
+      <DependentUpon>AC_BALANCE_SHEET.b1f</DependentUpon>
+    </Compile>
+    <Compile Include="AC_SP_JV.b1f.cs">
+      <DependentUpon>AC_SP_JV.b1f</DependentUpon>
+    </Compile>
+    <Compile Include="BASELINE.b1f.cs">
+      <DependentUpon>BASELINE.b1f</DependentUpon>
+    </Compile>
+    <Compile Include="BASELINE_MAN.b1f.cs">
+      <DependentUpon>BASELINE_MAN.b1f</DependentUpon>
+    </Compile>
+    <Compile Include="CCM_APPROVE_BILL.b1f.cs">
+      <DependentUpon>CCM_APPROVE_BILL.b1f</DependentUpon>
+    </Compile>
+    <Compile Include="CCM_DT_LN.b1f.cs">
+      <DependentUpon>CCM_DT_LN.b1f</DependentUpon>
+    </Compile>
+    <Compile Include="CCM_DT_LN_LIST.b1f.cs">
+      <DependentUpon>CCM_DT_LN_LIST.b1f</DependentUpon>
+    </Compile>
+    <Compile Include="CCM_HAOHUT_THEP.b1f.cs">
+      <DependentUpon>CCM_HAOHUT_THEP.b1f</DependentUpon>
+    </Compile>
+    <Compile Include="CCM_HQDP.b1f.cs">
+      <DependentUpon>CCM_HQDP.b1f</DependentUpon>
+    </Compile>
+    <Compile Include="CCM_SANLUONG.b1f.cs">
+      <DependentUpon>CCM_SANLUONG.b1f</DependentUpon>
+    </Compile>
+    <Compile Include="CCM_SUMMARY_BILL.b1f.cs">
+      <DependentUpon>CCM_SUMMARY_BILL.b1f</DependentUpon>
+    </Compile>
+    <Compile Include="CCM_SUMMARY_HD.b1f.cs">
+      <DependentUpon>CCM_SUMMARY_HD.b1f</DependentUpon>
+    </Compile>
+    <Compile Include="CCM_THEODOI_VP.b1f.cs">
+      <DependentUpon>CCM_THEODOI_VP.b1f</DependentUpon>
+    </Compile>
+    <Compile Include="CCM_TONGHOP_VP.b1f.cs">
+      <DependentUpon>CCM_TONGHOP_VP.b1f</DependentUpon>
+    </Compile>
+    <Compile Include="EQ_CE_O.b1f.cs">
+      <DependentUpon>EQ_CE_O.b1f</DependentUpon>
+    </Compile>
+    <Compile Include="EQ_FR.b1f.cs">
+      <DependentUpon>EQ_FR.b1f</DependentUpon>
+    </Compile>
+    <Compile Include="MM_FI.b1f.cs">
+      <DependentUpon>MM_FI.b1f</DependentUpon>
+    </Compile>
+    <Compile Include="MM_CE.b1f.cs">
+      <DependentUpon>MM_CE.b1f</DependentUpon>
+    </Compile>
+    <Compile Include="EQ_CE.b1f.cs">
+      <DependentUpon>EQ_CE.b1f</DependentUpon>
+    </Compile>
+    <Compile Include="MM_ITEM_CON.b1f.cs">
+      <DependentUpon>MM_ITEM_CON.b1f</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Menu.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="MM_CE.b1f">
+      <FormCategory>UserForm</FormCategory>
+    </None>
+    <None Include="EQ_CE.b1f">
+      <FormCategory>UserForm</FormCategory>
+    </None>
+    <None Include="MM_ITEM_CON.b1f">
+      <FormCategory>UserForm</FormCategory>
+    </None>
+    <None Include="TMP_BCDT.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="TMP_BCTC.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="TMP_CT_CP_VP.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="TMP_DNTL_TH.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="TMP_DTLN_THONGKE.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="TMP_DUYET_BILL.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="TMP_DUYET_HD.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="TMP_EQ_BCDT.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="TMP_EQ_BCDT_O.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="TMP_EQ_BCTC.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="TMP_HAOHUT_THEP.XLSX">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="TMP_HQDP.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="TMP_QC_ITEM.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="TMP_QC_ITEM_HM.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="TMP_SANLUONG_CT.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="TMP_SANLUONG_DT.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="TMP_TH_CP_VP.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="TMP_TONG_HOP_THANH_TOAN_KY.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Excel_icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
