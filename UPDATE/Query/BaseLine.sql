@@ -507,7 +507,7 @@ CREATE TABLE BASELINE_KLTTK(
 	[U_CompleteAmount] [numeric](19, 6) NULL);
 GO
 
-ALTER PROCEDURE [dbo].[BASELINE_GetList_Approve]
+CREATE PROCEDURE [dbo].[BASELINE_GetList_Approve]
 	-- Add the parameters for the stored procedure here
 	@Usr as varchar(100)
 AS
@@ -536,21 +536,26 @@ BEGIN
 	--4	Phó tổng giám đốc
 	--5	Chỉ huy trưởng DA
 	--6	Chỉ huy trưởng ME
-	Select X.*,Y.Name as 'DeptName',Z.name as 'PosName'
+	Select X.[LEVEL], X.[Position], Y.[Name] as 'DeptName',Z.[name] as 'PosName'
 	from (
-	Select 3 as 'LEVEL', 5 as 'Position'
+	Select 3 as 'LEVEL', 5 as 'Position', 1 as 'Order'
 	union all
-	Select 6 as 'LEVEL', 3 as 'Position'
+	Select 2 as 'LEVEL', 2 as 'Position', 2 as 'Order'
 	union all
-	Select 1 as 'LEVEL', 2 as 'Position'
+	Select 2 as 'LEVEL', 1 as 'Position', 3 as 'Order'
+	union
+	Select 6 as 'LEVEL', 3 as 'Position', 4 as 'Order'
 	union all
-	Select 1 as 'LEVEL', 1 as 'Position') X
+	Select 1 as 'LEVEL', 2 as 'Position', 5 as 'Order'
+	union all
+	Select 1 as 'LEVEL', 1 as 'Position', 6 as 'Order') X
 	inner join OUDP Y on X.LEVEL = Y.Code
-	inner join OHPS Z on X.Position = Z.posID;
+	inner join OHPS Z on X.Position = Z.posID
+	order by [Order] asc;
 END
 GO
 
-ALTER PROCEDURE [dbo].[BASELINE_GetList_Current]
+CREATE PROCEDURE [dbo].[BASELINE_GetList_Current]
 	@Usr as varchar(200)
 AS
 BEGIN
@@ -586,7 +591,7 @@ DECLARE @Pos_Name as nvarchar(100)
 END
 GO
 
-ALTER PROCEDURE [dbo].[BASELINE_GetList_Approved_Current]
+CREATE PROCEDURE [dbo].[BASELINE_GetList_Approved_Current]
 	@Usr as varchar(200)
 AS
 BEGIN
@@ -625,7 +630,7 @@ DECLARE @Pos_Name as nvarchar(100)
 END
 GO
 
-ALTER PROCEDURE [dbo].[BASELINE_GetList_Rejected_Current]
+CREATE PROCEDURE [dbo].[BASELINE_GetList_Rejected_Current]
 	@Usr as varchar(200)
 AS
 BEGIN
@@ -643,7 +648,7 @@ BEGIN
 END
 GO
 
-ALTER PROCEDURE [dbo].[BASELINE_GetList]
+CREATE PROCEDURE [dbo].[BASELINE_GetList]
 	@Usr as varchar(200)
 AS
 BEGIN
@@ -660,7 +665,7 @@ BEGIN
 END
 GO
 
-ALTER PROCEDURE [dbo].[BASELINE_Add_Data]
+CREATE PROCEDURE [dbo].[BASELINE_Add_Data]
 	@BaseLine_DocEntry as int
 AS
 BEGIN
@@ -824,6 +829,7 @@ BEGIN TRY
 													from [@KLTT] 
 													where U_FIPROJECT = @FProject 
 													and U_BType in (2,3) and Canceled not in ('Y','C') 
+													and [Status] = 'C'
 													group by U_BPCode,U_BGroup,U_PUType) y
 						on x.U_BPCode = y.U_BPCode and x.U_DATETO = y.Dateto 
 						and x.U_BGroup = y.U_BGroup and x.U_PUType = y.U_PUType
@@ -837,6 +843,7 @@ BEGIN TRY
 	from [@KLTT] 
 	where U_FIPROJECT = @FProject
 	and U_BType = 1
+	and [Status] ='C'
 	and Canceled not in ('Y','C');
 
 	--Insert BASELINE_KLTTA
@@ -954,59 +961,137 @@ END CATCH
 END
 GO
 
+--Get Doanh thu CDT bao cao du tru
 ALTER PROCEDURE [dbo].[BASELINE_GET_DATA_BCDT_A]
 	-- Add the parameters for the stored procedure here
 	@FinancialProject as varchar(100)
+	,@Goithau_Key as varchar(200)
 AS
 BEGIN
 	SET NOCOUNT ON;
-	--DECLARE @ProjectID as int;
-	--DECLARE @DocEntry as int;
-	--SELECT top 1 @ProjectID = AbsEntry from OPMG where FIPROJECT = @FinancialProject;
+	if (@Goithau_Key = '')
+	BEGIN
+		Select SUM(z.GTHD) as 'GTHD'
+			  ,SUM(z.GGTM) as 'GGTM'
+			  ,SUM(z.PA) as 'PA'
+			  ,SUM(z.PhiQL) as 'PhiQL'
+			  ,SUM(z.PLHD) as 'PLHD'
+			  ,SUM(z.KHAC) as 'KHAC'
+		from (
+				--Hop dong
+				Select SUM(b.PlanQty*b.UnitPrice)+ SUM(b.PlanAmtLC) as 'GTHD'
+				,SUM(a.U_GGTM) as 'GGTM'
+				,SUM(a.U_PADXTK) as 'PA'
+				,SUM(a.U_PQL) as 'PhiQL'
+				,'0' as 'PLHD'
+				,'0' as 'KHAC'
+				from OOAT a left join OAT1 b on a.AbsID = b.AgrNo
+				where a.U_PRJ = @FinancialProject
+				and a.Series = 47
+				and a.BpType = 'C'
+				and a.[Status] = 'A'
+				and a.[Cancelled] not in ('Y','C')
 
-	Select SUM(z.GTHD) as 'GTHD'
-,SUM(z.GGTM) as 'GGTM'
-,SUM(z.PA) as 'PA'
-,SUM(z.PhiQL) as 'PhiQL'
-,SUM(z.PLHD) as 'PLHD'
-,SUM(z.KHAC) as 'KHAC'
-from (
-	Select SUM(b.PlanQty*b.UnitPrice)+ SUM(b.PlanAmtLC) as 'GTHD'
-	,SUM(a.U_GGTM) as 'GGTM'
-	,SUM(a.U_PADXTK) as 'PA'
-	,SUM(a.U_PQL) as 'PhiQL'
-	,'0' as 'PLHD'
-	,'0' as 'KHAC'
-	from OOAT a left join OAT1 b on a.AbsID = b.AgrNo
-	where a.U_PRJ = @FinancialProject
-	and a.Series = 47
-	and a.BpType = 'C'
-	union
-	Select '0' as 'GTHD'
-	,'0' as 'GGTM'
-	,'0' as 'PA'
-	,'0' as 'PhiQL'
-	,SUM(t1.PLHD) as PLHD
-	,'0' as 'KHAC'
-	from (
-	Select case a.Method when 'I' then b.PlanQty*b.UnitPrice else b.PlanAmtLC end as 'PLHD'
-	from OOAT a left join OAT1 b on a.AbsID = b.AgrNo
-	where a.U_PRJ = @FinancialProject
-	and a.Series = 142
-	and a.BpType = 'C') t1
-	union
-	Select 
-	'0' as 'GTHD'
-	,'0' as 'GGTM'
-	,'0' as 'PA'
-	,'0' as 'PhiQL'
-	,'0' as 'PLHD'
-	,SUM(t2.KHAC) as KHAC from (
-	Select case a.Method when 'I' then b.PlanQty*b.UnitPrice else b.PlanAmtLC end as 'KHAC'
-	from OOAT a left join OAT1 b on a.AbsID = b.AgrNo
-	where a.U_PRJ = @FinancialProject
-	and a.Series = 161
-	and a.BpType = 'C') t2) z
+				union all
+
+				--Phu luc HD
+				Select '0' as 'GTHD'
+				,'0' as 'GGTM'
+				,'0' as 'PA'
+				,'0' as 'PhiQL'
+				,SUM(t1.PLHD) as PLHD
+				,'0' as 'KHAC'
+				from (
+				Select case a.Method when 'I' then b.PlanQty*b.UnitPrice else b.PlanAmtLC end as 'PLHD'
+				from OOAT a left join OAT1 b on a.AbsID = b.AgrNo
+				where a.U_PRJ = @FinancialProject
+				and a.Series = 142
+				and a.BpType = 'C'
+				and a.[Status] = 'A'
+				and a.[Cancelled] not in ('Y','C')) t1
+
+				union all
+
+				--Khac
+				Select 
+				'0' as 'GTHD'
+				,'0' as 'GGTM'
+				,'0' as 'PA'
+				,'0' as 'PhiQL'
+				,'0' as 'PLHD'
+				,SUM(t2.KHAC) as KHAC from (
+				Select case a.Method when 'I' then b.PlanQty*b.UnitPrice else b.PlanAmtLC end as 'KHAC'
+				from OOAT a left join OAT1 b on a.AbsID = b.AgrNo
+				where a.U_PRJ = @FinancialProject
+				and a.Series = 161
+				and a.BpType = 'C'
+				and a.[Status] = 'A'
+				and a.[Cancelled] not in ('Y','C')) t2
+			) z
+	END
+	else
+	BEGIN
+		Select SUM(z.GTHD) as 'GTHD'
+			  ,SUM(z.GGTM) as 'GGTM'
+			  ,SUM(z.PA) as 'PA'
+			  ,SUM(z.PhiQL) as 'PhiQL'
+			  ,SUM(z.PLHD) as 'PLHD'
+			  ,SUM(z.KHAC) as 'KHAC'
+		from (
+				--Hop dong
+				Select SUM(b.PlanQty*b.UnitPrice)+ SUM(b.PlanAmtLC) as 'GTHD'
+				,SUM(a.U_GGTM) as 'GGTM'
+				,SUM(a.U_PADXTK) as 'PA'
+				,SUM(a.U_PQL) as 'PhiQL'
+				,'0' as 'PLHD'
+				,'0' as 'KHAC'
+				from OOAT a left join OAT1 b on a.AbsID = b.AgrNo
+				where a.U_PRJ = @FinancialProject
+				and (Select AbsEntry from OPMG where DocNum = a.U_Goithau) in (Select splitdata from dbo.fnSplitString(@Goithau_Key,','))
+				and a.Series = 47
+				and a.BpType = 'C'
+				and a.[Status] = 'A'
+				and a.[Cancelled] not in ('Y','C')
+
+				union all
+
+				--Phu luc HD
+				Select '0' as 'GTHD'
+				,'0' as 'GGTM'
+				,'0' as 'PA'
+				,'0' as 'PhiQL'
+				,SUM(t1.PLHD) as PLHD
+				,'0' as 'KHAC'
+				from (
+				Select case a.Method when 'I' then b.PlanQty*b.UnitPrice else b.PlanAmtLC end as 'PLHD'
+				from OOAT a left join OAT1 b on a.AbsID = b.AgrNo
+				where a.U_PRJ = @FinancialProject
+				and (Select AbsEntry from OPMG where DocNum = a.U_Goithau) in (Select splitdata from dbo.fnSplitString(@Goithau_Key,','))
+				and a.Series = 142
+				and a.BpType = 'C'
+				and a.[Status] = 'A'
+				and a.[Cancelled] not in ('Y','C')) t1
+
+				union all
+
+				--Khac
+				Select 
+				'0' as 'GTHD'
+				,'0' as 'GGTM'
+				,'0' as 'PA'
+				,'0' as 'PhiQL'
+				,'0' as 'PLHD'
+				,SUM(t2.KHAC) as KHAC from (
+				Select case a.Method when 'I' then b.PlanQty*b.UnitPrice else b.PlanAmtLC end as 'KHAC'
+				from OOAT a left join OAT1 b on a.AbsID = b.AgrNo
+				where a.U_PRJ = @FinancialProject
+				and (Select AbsEntry from OPMG where DocNum = a.U_Goithau) in (Select splitdata from dbo.fnSplitString(@Goithau_Key,','))
+				and a.Series = 161
+				and a.BpType = 'C'
+				and a.[Status] = 'A'
+				and a.[Cancelled] not in ('Y','C')) t2
+			) z
+	END
 END
 GO
 
@@ -1314,7 +1399,7 @@ END;
 
 GO
 
-ALTER PROCEDURE [dbo].[BASELINE_MM_FI_GET_DATA_B]
+CREATE PROCEDURE [dbo].[BASELINE_MM_FI_GET_DATA_B]
 	-- Add the parameters for the stored procedure here
 	@DocEntry_BaseLine as int
 	,@Goithau_Key as varchar(200)
@@ -1710,7 +1795,7 @@ END
 
 GO
 
-ALTER PROCEDURE [dbo].[BASELINE_MM_FI_GET_DATA_BCH]
+CREATE PROCEDURE [dbo].[BASELINE_MM_FI_GET_DATA_BCH]
 	-- Add the parameters for the stored procedure here
 	@DocEntry_BaseLine as int
 	,@GoiThauKey as varchar(200)

@@ -16,16 +16,11 @@ BEGIN
 		Select left(U_TKKT + '00000000',8) as 'U_TKKT',U_TTKKT,SUM(U_GTDP) as 'U_GTDP' 
 		FROM [@CTG4] d
 		where DocEntry in 
-		(Select DocEntry 
-		from [@DUTRU] 
-		where 
-		U_DUTRU_TYPE=1
-		and U_CTG_Key in 
 				(Select x.CTG_KEY 
 				from 
 					(Select U_GoiThauKey,max(DocEntry) as CTG_KEY 
 					from [@CTG] 
-					where U_PrjCode = @FinancialProject group by U_GoiThauKey) x))
+					where U_PrjCode = @FinancialProject group by U_GoiThauKey) x)
 		group by U_TKKT,U_TTKKT) a
 		left join 
 		(Select b.Account,SUM(b.Debit) as TOTAL_BCH
@@ -709,7 +704,8 @@ GO
 
 ALTER PROCEDURE [dbo].[GET_DATA_BCDT_A]
 	-- Add the parameters for the stored procedure here
-	@FinancialProject as varchar(100)
+	 @FinancialProject as varchar(100)
+	,@GoiThauKey as varchar(250)
 AS
 BEGIN
 	SET NOCOUNT ON;
@@ -1651,16 +1647,11 @@ BEGIN
 		Select left(U_TKKT + '00000000',8) as 'U_TKKT',U_TTKKT,SUM(U_GTDP) as 'U_GTDP' 
 		FROM [@CTG4] 
 		where DocEntry in 
-		(Select DocEntry 
-		from [@DUTRU] 
-		where 
-		U_DUTRU_TYPE=1
-		and U_CTG_Key in 
 				(Select x.CTG_KEY 
 				from 
 					(Select U_GoiThauKey,max(DocEntry) as CTG_KEY 
 					from [@CTG] 
-					where U_PrjCode = @FinancialProject group by U_GoiThauKey) x))
+					where U_PrjCode = @FinancialProject group by U_GoiThauKey) x)
 		group by U_TKKT,U_TTKKT) a
 		left join 
 		(Select b.Account,SUM(b.Debit) as TOTAL_BCH
@@ -2439,7 +2430,7 @@ BEGIN
 END
 GO
 
-ALTER PROCEDURE dbo.CCM_TONGHOP_VP_DETAILS_DATA 
+CREATE PROCEDURE dbo.CCM_TONGHOP_VP_DETAILS_DATA 
 	@ToDate AS DATE
 AS
      BEGIN
@@ -2595,7 +2586,7 @@ ORDER BY CONVERT(INT , SUBSTRING(X.MA_CP , 2 , LEN(X.MA_CP)-1));
      END;
 GO
 
-ALTER PROCEDURE [dbo].[CCM_DT_LN_Project_List]
+CREATE PROCEDURE [dbo].[CCM_DT_LN_Project_List]
 	  @FrDate as date
 	, @ToDate as date
 AS
@@ -2671,7 +2662,7 @@ and T0.PrjCode <> 'VTTB';
 END
 GO
 
-ALTER PROCEDURE [dbo].[CCM_BASELINE_A_INDEX]
+CREATE PROCEDURE [dbo].[CCM_BASELINE_A_INDEX]
 	@BASELINE_DocEntry as int
 	,@ProjectId as int
 AS
@@ -2747,7 +2738,7 @@ BEGIN
 END
 GO
 
-ALTER PROCEDURE [dbo].[CCM_CURRENT_A_INDEX]
+CREATE PROCEDURE [dbo].[CCM_CURRENT_A_INDEX]
 	 @FProject as nvarchar(100)
 	,@ProjectID as int
 AS
@@ -2817,7 +2808,7 @@ BEGIN
 END
 GO
 
-ALTER PROCEDURE [dbo].[CCM_BASELINE_LST]
+CREATE PROCEDURE [dbo].[CCM_BASELINE_LST]
 	@UserName as varchar(200)
 AS
 BEGIN
@@ -2826,7 +2817,7 @@ BEGIN
 END
 GO
 
-ALTER PROCEDURE [dbo].[CCM_DT_LN_TONGHOP_LST]
+CREATE PROCEDURE [dbo].[CCM_DT_LN_TONGHOP_LST]
 	@ToDate as datetime
 AS
 BEGIN
@@ -2961,7 +2952,7 @@ BEGIN
 END
 GO
 
-ALTER PROCEDURE [dbo].[CCM_GET_LST_DT]
+CREATE PROCEDURE [dbo].[CCM_GET_LST_DT]
 AS
 BEGIN
 Select A.CardCode,A.CardCode+' - ' +B.CardName as 'CardName'from (
@@ -2970,7 +2961,7 @@ order by CARDCODE
 END
 GO
 
-ALTER PROCEDURE [dbo].[CCM_GET_LST_CT]
+CREATE PROCEDURE [dbo].[CCM_GET_LST_CT]
 AS
 BEGIN
 	Select distinct A0.U_001,
@@ -2985,7 +2976,7 @@ BEGIN
 END
 GO
 
-ALTER PROCEDURE [dbo].[CCM_SANLUONG_DATA_DT]
+CREATE PROCEDURE [dbo].[CCM_SANLUONG_DATA_DT]
 	@FrDate datetime
 	,@ToDate datetime
 	,@BpCode varchar(50)
@@ -3017,7 +3008,7 @@ BEGIN
 END
 GO
 
-ALTER PROCEDURE [dbo].[CCM_SANLUONG_DATA_CT]
+CREATE PROCEDURE [dbo].[CCM_SANLUONG_DATA_CT]
 	@FrDate datetime
 	,@ToDate datetime
 	,@CT varchar(50)
@@ -3043,7 +3034,7 @@ BEGIN
 END
 GO
 
-ALTER PROCEDURE [dbo].[CCM_SANLUONG_GTHD]
+CREATE PROCEDURE [dbo].[CCM_SANLUONG_GTHD]
 	@BpCode varchar(50)
 	, @FProject as varchar(50)
 	, @FrDate datetime
@@ -3428,38 +3419,76 @@ BEGIN
 	where Code = @Account;
 END
 GO
-Select A0.Project
-,A0.CardCode
-,A0.U_RECTYPE
-, A1.U_ParentID3
-,dbo.fnPUType_Convert(A0.U_PUTYPE,A0.CardCode) as 'NDT'
-,SUM(A1.LineTotal) as 'GT'
-, SUM(A1.Quantity) as 'SL'
-from OPDN A0 inner join PDN1 A1 on A0.DocEntry = A1.DocEntry
-where A0.Project is not null
-and A1.Quantity <> 0
-group by A0.Project,A0.CardCode,A0.U_RECTYPE, dbo.fnPUType_Convert(A0.U_PUTYPE,A0.CardCode), A1.U_ParentID3 
-order by A0.Project,A0.CardCode
 
-Select * from OPHA where Level =3;
+CREATE PROCEDURE [dbo].[CCM_HQDP_GTHD]
+	@BpCode varchar(50)
+	, @FProject as varchar(50)
+	, @FrDate datetime
+	, @ToDate datetime
+AS
+BEGIN
+	Select (SUM(A1.PlanQty*A1.UnitPrice) + SUM(A1.PlanAmtLC)) as 'GTHD'
+	from OOAT A0 inner join OAT1 A1 on A0.AbsId = A1.AgrNo
+	where A0.U_PRJ = @FProject
+	and A0.Series =48
+	and A0.BpCode = @BpCode
+	and A0.Status ='A'
+	and A0.StartDate <= @ToDate;
+END
+GO
 
-Select * from [@KLTT] where DocEntry = 260;
-
-
-
-
-Select * from 
+CREATE PROCEDURE [dbo].[CCM_HQDP]
+	 @FromDate as date
+	,@ToDate as date
+AS
+BEGIN
+Select 
+Z.Project
+, Z.CardCode 
+, (Select CardName from OCRD where CardCode = Z.CardCode) as 'CardName'
+, Z.U_RECTYPE
+--, Z.U_001
+, Z.HM_NAME
+, Z.NDT
+, SUM(Z.Quantity) as 'Quantity'
+, SUM(Z.Total_GRPO) as 'Total_GRPO'
+, SUM(Z.GT_BOQ) as 'GT_BOQ'
+, SUM(Z.GG_DT) as 'GG_DT'
+from
+(
+Select Y.Project, Y.ProjectId, Y.CardCode, Y.U_RECTYPE
+, (Select [Name] from OPHA where AbsEntry = (Select ParentID from OPHA where AbsEntry = Y.U_ParentID4)) as 'HM_NAME'
+, Y.U_001, Y.NDT, SUM(Y.Quantity) as 'Quantity' 
+, SUM(Y.LineTotal) as 'Total_GRPO'
+, SUM(Y.GT_BOQ) as 'GT_BOQ'
+, SUM(Y.GG_DT) as 'GG_DT'
+from
+(
+Select X0.Project, X0.CardCode, X0.U_RECTYPE, X0.U_ParentID1 as 'ProjectId'
+, X0.U_ParentID4
+, X0.U_001, X0.NDT, X0.Quantity
+, X0.LineTotal 
+, (X0.Quantity * X0.U_DG) as 'GT_BOQ'
+, (X0.Quantity * X0.U_DGHD) as 'GG_DT'
+from 
 (
 Select A0.Project
 , A0.CardCode
 , A0.U_RECTYPE
 , A1.U_ParentID1
-, (Select U_001 from OPHA where AbsEntry = A1.U_ParentID3) as 'U_001'
+, A1.U_ParentID4
+, (Select U_001 from OPHA where AbsEntry = A1.U_ParentID4) as 'U_001'
 , A1.ItemCode
+, A1.Quantity
+, A1.LineTotal
 ,dbo.fnPUType_Convert(A0.U_PUTYPE,A0.CardCode) as 'NDT'
+, ISNULL(A2.U_DG,0) as 'U_DG'
+, ISNULL(A2.U_DGHD,0) as 'U_DGHD'
 from OPDN A0 inner join PDN1 A1 on A0.DocEntry = A1.DocEntry
+left join OPHA A2 on A1.U_ParentID1 = A2.ProjectID and A1.U_ParentID4 = A2.AbsEntry
 where A1.U_ParentID1 is not null
-and A1.U_ParentID3 is not null) X0
+and A1.U_ParentID3 is not null
+and A0.U_RECTYPE is not null) X0
 inner join
 (
 Select A1.U_PrjCode, A0.U_001,A0.U_ITEMNO
@@ -3476,4 +3505,12 @@ and A1.DocEntry in
 	and B0.U_Date = B1.U_DATE
 )
 ) X1
-on X0.Project = X1.U_PrjCode and X0.U_001 = X1.U_001 and X0.ItemCode = X1.U_ITEMNO
+on X0.Project = X1.U_PrjCode and X0.U_001 = X1.U_001 and X0.ItemCode = X1.U_ITEMNO) Y
+group by Y.Project,Y.ProjectId,Y.U_ParentID4, Y.CardCode, Y.U_RECTYPE, Y.U_001, Y.NDT) Z
+group by Z.Project
+, Z.CardCode 
+, Z.U_RECTYPE
+--, Z.U_001
+, Z.HM_NAME
+, Z.NDT;
+END
