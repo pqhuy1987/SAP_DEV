@@ -560,7 +560,7 @@ namespace U_KLTT
                     string PUType = Grid0.DataTable.GetValue("Purchase Type", Grid0.Rows.SelectedRows.Item(0, SAPbouiCOM.BoOrderType.ot_RowOrder)).ToString();
                     string SToDate = Grid0.DataTable.GetValue("To Date", Grid0.Rows.SelectedRows.Item(0, SAPbouiCOM.BoOrderType.ot_RowOrder)).ToString();
                     string U_BPCode2 = Grid0.DataTable.GetValue("U_BPCode2", Grid0.Rows.SelectedRows.Item(0, SAPbouiCOM.BoOrderType.ot_RowOrder)).ToString();
-                    string Link = Grid0.DataTable.GetValue("Link", Grid0.Rows.SelectedRows.Item(0, SAPbouiCOM.BoOrderType.ot_RowOrder)).ToString();
+                    //string Link = Grid0.DataTable.GetValue("Link", Grid0.Rows.SelectedRows.Item(0, SAPbouiCOM.BoOrderType.ot_RowOrder)).ToString();
                     DateTime Todate = DateTime.Parse(SToDate);
                     int Period = 0;
                     int.TryParse(Grid0.DataTable.GetValue("Period", Grid0.Rows.SelectedRows.Item(0, SAPbouiCOM.BoOrderType.ot_RowOrder)).ToString(), out Period);
@@ -753,7 +753,7 @@ namespace U_KLTT
                     //GT thanh toan ky nay
                     EditText20.Value = String.Format("{0:n0}", Math.Round(decimal.Parse(EditText16.Value) - decimal.Parse(EditText18.Value), 0));
                     //Link
-                    EditText5.Value = Link;
+                    //EditText5.Value = Link;
                     #endregion
                 }
                 catch
@@ -992,7 +992,7 @@ namespace U_KLTT
             {
                 string position = oR_RecordSet.Fields.Item("position").Value.ToString();
                 string dept = oR_RecordSet.Fields.Item("dept").Value.ToString();
-                if ((position == "1" && dept == "-2") || dept == "20") return true;
+                if ((position == "1" && dept == "-2") || dept == "20" || dept == "21" || dept == "22") return true;
                 else return false;
             }
             return false;
@@ -1773,6 +1773,20 @@ namespace U_KLTT
                         //oWB = oXL.Workbooks.Open(System.Windows.Forms.Application.StartupPath + @"\Template_KLTT.xlsx");
                         oSheet = (Microsoft.Office.Interop.Excel._Worksheet)oWB.ActiveSheet;
                         //Fill Header
+
+                        //LOGO
+                        if (QLNT == "NTP00599")
+                        {
+                            oSheet.Cells[1, 1] = "NHÂN TRÍ";
+                        }
+                        else if (QLNT == "NTP00601")
+                        {
+                            oSheet.Cells[1, 1] = "NHÂN TIẾN";
+                        }
+                        else if (QLNT == "NTP00602")
+                        {
+                            oSheet.Cells[1, 1] = "NHÂN TÍN";
+                        }
                         //Tilte
                         if (BType == "3")
                             oSheet.Cells[4, 3] = "BẢNG KHỐI LƯỢNG QUYẾT TOÁN";

@@ -102,7 +102,7 @@ namespace U_KLTT
                 oApp.MessageBox("Can't connect DB !");
             }
             //Get MenuUID KLTT
-            MenuUID = Get_MenuUID_KLTT();
+            MenuUID = "KLTT";//Get_MenuUID_KLTT();
             if (string.IsNullOrEmpty(MenuUID))
             {
                 oApp.SetStatusBarMessage("Can't find MenuUID for KLTT",SAPbouiCOM.BoMessageTime.bmt_Short,true);
@@ -851,6 +851,7 @@ namespace U_KLTT
                     if (!string.IsNullOrEmpty(QLNT) && QLNT != "")
                         ((SAPbouiCOM.EditText)oForm.Items.Item("33_U_E").Specific).Value = QLNT;
                     //BILL NHAN TRI
+                    //BILL TAM UNG
                     if (BType == "1")
                     {
                         //Bill Tam ung
@@ -1324,7 +1325,7 @@ namespace U_KLTT
                 if (string.IsNullOrEmpty(QLNT) || QLNT=="")
                     APPRV = GetList_Approve(BGroup);
                 else
-                    APPRV = GetList_Approve(BGroup,"Y");
+                    APPRV = GetList_Approve(BGroup,QLNT); //pqhuy1987 20180611
 
                 if (APPRV.Rows.Count > 0)
                 {
