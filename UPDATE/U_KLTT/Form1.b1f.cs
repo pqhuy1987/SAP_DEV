@@ -1323,7 +1323,12 @@ namespace U_KLTT
                 oForm.Freeze(true);
                 DataTable APPRV= null;
                 if (string.IsNullOrEmpty(QLNT) || QLNT=="")
-                    APPRV = GetList_Approve(BGroup);
+                {
+                    if (NT)
+                        APPRV = GetList_Approve(BGroup,"YY");
+                    else
+                        APPRV = GetList_Approve(BGroup);
+                }             
                 else
                     APPRV = GetList_Approve(BGroup,QLNT); //pqhuy1987 20180611
 

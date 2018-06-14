@@ -983,7 +983,7 @@ namespace U_KLTT
             }
         }
 
-        private bool Check_Ketoan_truong(string pUsrName)
+        private bool Check_Ketoan_truong(string pUsrName, bool NT = false)
         {
             string sql = string.Format("Select position,dept from OHEM  where userID = (Select t.USERID from OUSR t where t.User_Code='{0}')",pUsrName);
             SAPbobsCOM.Recordset oR_RecordSet = (SAPbobsCOM.Recordset)oCompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.BoRecordset);
@@ -992,8 +992,16 @@ namespace U_KLTT
             {
                 string position = oR_RecordSet.Fields.Item("position").Value.ToString();
                 string dept = oR_RecordSet.Fields.Item("dept").Value.ToString();
-                if ((position == "1" && dept == "-2") || dept == "20" || dept == "21" || dept == "22") return true;
-                else return false;
+                if (NT == true)
+                {
+                    if (position == "6") return true;
+                    else return false;
+                }
+                else
+                {
+                    if ((position == "1" && dept == "-2") || dept == "20" || dept == "21" || dept == "22") return true;
+                    else return false;
+                }
             }
             return false;
         }
@@ -1238,6 +1246,8 @@ namespace U_KLTT
         private void Button0_PressedAfter(object sboObject, SAPbouiCOM.SBOItemEventArg pVal)
         {
             SqlCommand cmd = null;
+            string BPCode = Grid0.DataTable.GetValue("BPCode", Grid0.Rows.SelectedRows.Item(0, SAPbouiCOM.BoOrderType.ot_RowOrder)).ToString();
+            bool NT = Check_NT(BPCode);
             try
             {
                 cmd = new SqlCommand("KLTT_Approve_LV", conn);
@@ -1255,7 +1265,7 @@ namespace U_KLTT
                     //Gui tin nhan
                     Send_Alert();
                     //Update Status neu la Ke toan truong hoac Nhan Tri
-                    if (Check_Ketoan_truong(oCompany.UserName))
+                    if (Check_Ketoan_truong(oCompany.UserName,NT))
                     {
                         SAPbobsCOM.GeneralService oGeneralService = null;
                         SAPbobsCOM.GeneralDataParams oGeneralParams = null;
@@ -4149,5 +4159,19 @@ namespace U_KLTT
             catch
             { }
         }
+
+        private bool Check_NT(string pBpCode)
+        {
+            SAPbobsCOM.Recordset oR_RecordSet = (SAPbobsCOM.Recordset)oCompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.BoRecordset);
+            oR_RecordSet.DoQuery(string.Format("Select GroupCode from OCRD where CardCode='{0}'", pBpCode));
+            if (oR_RecordSet.RecordCount > 0)
+            {
+                string BPGCode = oR_RecordSet.Fields.Item("GroupCode").Value.ToString();
+                if (BPGCode == "112") return true;
+                else return false;
+            }
+            return false;
+        }
+
     }
 }
