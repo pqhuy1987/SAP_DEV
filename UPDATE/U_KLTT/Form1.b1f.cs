@@ -102,7 +102,7 @@ namespace U_KLTT
                 oApp.MessageBox("Can't connect DB !");
             }
             //Get MenuUID KLTT
-            MenuUID = "KLTT";//Get_MenuUID_KLTT();
+            MenuUID = Get_MenuUID_KLTT();
             if (string.IsNullOrEmpty(MenuUID))
             {
                 oApp.SetStatusBarMessage("Can't find MenuUID for KLTT",SAPbouiCOM.BoMessageTime.bmt_Short,true);

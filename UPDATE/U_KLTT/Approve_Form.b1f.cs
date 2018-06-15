@@ -560,7 +560,7 @@ namespace U_KLTT
                     string PUType = Grid0.DataTable.GetValue("Purchase Type", Grid0.Rows.SelectedRows.Item(0, SAPbouiCOM.BoOrderType.ot_RowOrder)).ToString();
                     string SToDate = Grid0.DataTable.GetValue("To Date", Grid0.Rows.SelectedRows.Item(0, SAPbouiCOM.BoOrderType.ot_RowOrder)).ToString();
                     string U_BPCode2 = Grid0.DataTable.GetValue("U_BPCode2", Grid0.Rows.SelectedRows.Item(0, SAPbouiCOM.BoOrderType.ot_RowOrder)).ToString();
-                    //string Link = Grid0.DataTable.GetValue("Link", Grid0.Rows.SelectedRows.Item(0, SAPbouiCOM.BoOrderType.ot_RowOrder)).ToString();
+                    string Link = Grid0.DataTable.GetValue("Link", Grid0.Rows.SelectedRows.Item(0, SAPbouiCOM.BoOrderType.ot_RowOrder)).ToString();
                     DateTime Todate = DateTime.Parse(SToDate);
                     int Period = 0;
                     int.TryParse(Grid0.DataTable.GetValue("Period", Grid0.Rows.SelectedRows.Item(0, SAPbouiCOM.BoOrderType.ot_RowOrder)).ToString(), out Period);
@@ -753,7 +753,7 @@ namespace U_KLTT
                     //GT thanh toan ky nay
                     EditText20.Value = String.Format("{0:n0}", Math.Round(decimal.Parse(EditText16.Value) - decimal.Parse(EditText18.Value), 0));
                     //Link
-                    //EditText5.Value = Link;
+                    EditText5.Value = Link;
                     #endregion
                 }
                 catch
