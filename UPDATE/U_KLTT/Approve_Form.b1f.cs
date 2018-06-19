@@ -994,7 +994,7 @@ namespace U_KLTT
                 string dept = oR_RecordSet.Fields.Item("dept").Value.ToString();
                 if (NT == true)
                 {
-                    if (position == "6") return true;
+                    if (position == "3") return true;
                     else return false;
                 }
                 else
