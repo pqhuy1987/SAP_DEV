@@ -1785,7 +1785,8 @@ namespace U_KLTT
                         //Fill Header
 
                         //LOGO pqhuy1987 20180619
-                        if (QLNT == "NTP00599")
+                        //if (QLNT == "NTP00599")
+                        if (QLNT == "NTP00611") //Update For Pro
                         {
                             oSheet.Cells[1, 1] = "NHÂN TRÍ";
                         }
