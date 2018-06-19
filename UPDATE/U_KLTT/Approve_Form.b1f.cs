@@ -999,7 +999,7 @@ namespace U_KLTT
                 }
                 else
                 {
-                    if ((position == "1" && dept == "-2") || dept == "20" || dept == "21" || dept == "22") return true;
+                    if ((((position == "1") ||(position == "2"))  && dept == "-2") || dept == "20" || dept == "21" || dept == "22") return true; //pqhuy1987 - 20180619
                     else return false;
                 }
             }
@@ -1784,7 +1784,7 @@ namespace U_KLTT
                         oSheet = (Microsoft.Office.Interop.Excel._Worksheet)oWB.ActiveSheet;
                         //Fill Header
 
-                        //LOGO
+                        //LOGO pqhuy1987 20180619
                         if (QLNT == "NTP00599")
                         {
                             oSheet.Cells[1, 1] = "NHÂN TRÍ";
