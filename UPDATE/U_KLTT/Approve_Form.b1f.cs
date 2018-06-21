@@ -992,16 +992,16 @@ namespace U_KLTT
             {
                 string position = oR_RecordSet.Fields.Item("position").Value.ToString();
                 string dept = oR_RecordSet.Fields.Item("dept").Value.ToString();
-                if (NT == true)
-                {
-                    if (position == "3") return true;
-                    else return false;
-                }
-                else
-                {
+                //if (NT == true)
+                //{
+                //    if (position == "3") return true;
+                //    else return false;
+                //}
+                //else
+                //{
                     if ((((position == "1") ||(position == "2"))  && dept == "-2") || dept == "20" || dept == "21" || dept == "22") return true; //pqhuy1987 - 20180619
                     else return false;
-                }
+                //}
             }
             return false;
         }
