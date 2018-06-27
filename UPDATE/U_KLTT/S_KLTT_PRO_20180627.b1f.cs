@@ -5,6 +5,7 @@ using System.Text;
 using SAPbouiCOM.Framework;
 using System.Data.SqlClient;
 using System.Data;
+using System.Xml;
 
 namespace U_KLTT
 {
@@ -32,7 +33,8 @@ namespace U_KLTT
         /// </summary>
         public override void OnInitializeFormEvents()
         {
-            this.DataLoadAfter += new DataLoadAfterHandler(this.Form_DataLoadAfter);
+            this.DataLoadAfter += new SAPbouiCOM.Framework.FormBase.DataLoadAfterHandler(this.Form_DataLoadAfter);
+            this.DataDeleteBefore += new DataDeleteBeforeHandler(this.Form_DataDeleteBefore);
 
         }
 
@@ -97,6 +99,64 @@ namespace U_KLTT
             }
             catch
             { }
+        }
+
+        private bool Check_Approve_KLTT(int pDocEntry)
+        {
+            bool kq = false;
+            DataTable result = new DataTable();
+            SqlCommand cmd = null;
+            try
+            {
+                cmd = new SqlCommand("KLTT_Check_Approve", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@DocEntry", pDocEntry);
+                conn.Open();
+                SqlDataReader rd = cmd.ExecuteReader();
+                result.Load(rd);
+                if (result.Rows.Count > 0)
+                {
+                    int tmp = 0;
+                    int.TryParse(result.Rows[0][0].ToString(), out tmp);
+                    if (tmp > 0) kq = true;
+                    else kq = false;
+                }
+                else
+                {
+                    kq = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                oApp.MessageBox(ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+                cmd.Dispose();
+            }
+            return kq;
+        }
+
+        private void Form_DataDeleteBefore(ref SAPbouiCOM.BusinessObjectInfo pVal, out bool BubbleEvent)
+        {
+            BubbleEvent = true;
+            //Get ObjectKey has created
+            XmlDocument xmldoc = new XmlDocument();
+            xmldoc.LoadXml(((SAPbouiCOM.BusinessObjectInfo)pVal).ObjectKey.Replace("Khối lượng thanh toán","KLTT"));
+            XmlNodeList nodeList = xmldoc.GetElementsByTagName("DocEntry");
+            string Object_Key = string.Empty;
+            if (nodeList.Count > 0)
+                Object_Key = nodeList.Item(0).InnerText;
+            int DocEntry = 0;
+            int.TryParse(Object_Key,out DocEntry);
+            if (Check_Approve_KLTT(DocEntry))
+            {
+                oApp.SetStatusBarMessage("Bill was approved ! Delete failed !", SAPbouiCOM.BoMessageTime.bmt_Medium, true);
+                BubbleEvent = false;
+                
+            }
+
         }
     }
 }

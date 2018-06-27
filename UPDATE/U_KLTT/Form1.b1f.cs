@@ -765,6 +765,43 @@ namespace U_KLTT
             return false;
         }
 
+        private bool Check_Approve_KLTT(int pDocEntry)
+        {
+            bool kq = false;
+            DataTable result = new DataTable();
+            SqlCommand cmd = null;
+            try
+            {
+                cmd = new SqlCommand("KLTT_Check_Approve", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@DocEntry", pDocEntry);
+                conn.Open();
+                SqlDataReader rd = cmd.ExecuteReader();
+                result.Load(rd);
+                if (result.Rows.Count > 0)
+                {
+                    int tmp = 0;
+                    int.TryParse(result.Rows[0][0].ToString(), out tmp);
+                    if (tmp > 0) kq = true;
+                    else kq = false;
+                }
+                else
+                {
+                    kq = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                oApp.MessageBox(ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+                cmd.Dispose();
+            }
+            return kq;
+        }
+
         //Get MenuUID of KLTT on Default Form Menu
         private string Get_MenuUID_KLTT()
         {
@@ -4038,6 +4075,11 @@ namespace U_KLTT
                 int DocEntry = 0;
                 string docnum = Grid0.DataTable.GetValue("Document Number", Grid0.Rows.SelectedRows.Item(0, SAPbouiCOM.BoOrderType.ot_RowOrder)).ToString();
                 int.TryParse(docnum, out DocEntry);
+                if(Check_Approve_KLTT(DocEntry))
+                {
+                    oApp.MessageBox("Bill was approved ! Delete failed !");
+                    return;
+                }
                 SAPbobsCOM.GeneralService oGeneralService = null;
                 SAPbobsCOM.GeneralDataParams oGeneralParams = null;
                 SAPbobsCOM.CompanyService sCmp = null;
