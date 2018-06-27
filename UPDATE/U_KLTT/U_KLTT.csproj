@@ -89,8 +89,8 @@
     <Reference Include="SAPBusinessOneSDK" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="S_KLTT_PRO_20180523.b1f.cs">
-      <DependentUpon>S_KLTT_PRO_20180523.b1f</DependentUpon>
+    <Compile Include="S_KLTT_PRO_20180627.b1f.cs">
+      <DependentUpon>S_KLTT_PRO_20180627.b1f</DependentUpon>
     </Compile>
     <None Include="Approve_Form.b1f">
       <FormCategory>UserForm</FormCategory>
@@ -109,7 +109,7 @@
     <Compile Include="Menu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="NT_Bill_thanh_toan.xlsx" />
-    <None Include="S_KLTT_PRO_20180523.b1f">
+    <None Include="S_KLTT_PRO_20180627.b1f">
       <FormCategory>UDOForm</FormCategory>
     </None>
     <None Include="Template_KLTT.xlsx">

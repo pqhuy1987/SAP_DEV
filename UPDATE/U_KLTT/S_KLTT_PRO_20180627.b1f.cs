@@ -8,10 +8,10 @@ using System.Data;
 
 namespace U_KLTT
 {
-    [FormAttribute("UDO_FT_KLTT2")]
-    class S_KLTT_PRO_20180523 : UDOFormBase
+    [FormAttribute("UDO_FT_KLTT")]
+    class S_KLTT_PRO_20180627 : UDOFormBase
     {
-        public S_KLTT_PRO_20180523()
+        public S_KLTT_PRO_20180627()
         {
         }
         SAPbouiCOM.Application oApp = null;
@@ -32,11 +32,11 @@ namespace U_KLTT
         /// </summary>
         public override void OnInitializeFormEvents()
         {
-            this.DataLoadAfter += new SAPbouiCOM.Framework.FormBase.DataLoadAfterHandler(this.Form_DataLoadAfter);
-            this.CloseBefore += new CloseBeforeHandler(this.Form_CloseBefore);
+            this.DataLoadAfter += new DataLoadAfterHandler(this.Form_DataLoadAfter);
 
         }
 
+        private SAPbouiCOM.EditText EditText0;
         private void OnCustomInitialize()
         {
             this.oApp = (SAPbouiCOM.Application)SAPbouiCOM.Framework.Application.SBO_Application; //UI
@@ -54,37 +54,6 @@ namespace U_KLTT
             {
                 oApp.MessageBox("Can't connect DB !");
             }
-        }
-
-        private SAPbouiCOM.EditText EditText0;
-
-        private void Form_DataLoadAfter(ref SAPbouiCOM.BusinessObjectInfo pVal)
-        {
-            try
-            {
-                DataTable rs = Load_Data_KLTT();
-                if (rs.Rows.Count == 1)
-                {
-                    double tmp = 0;
-                    double.TryParse(rs.Rows[0]["SUM_CA_NOVAT"].ToString(), out tmp);
-                    EditText0.Value = tmp.ToString("N2");
-                }
-            }
-            catch
-            { }
-
-        }
-
-        private void Form_CloseBefore(SAPbouiCOM.SBOItemEventArg pVal, out bool BubbleEvent)
-        {
-            BubbleEvent = true;
-            try
-            {
-                oCompany.Disconnect();
-            }
-            catch
-            { }
-
         }
 
         System.Data.DataTable Load_Data_KLTT()
@@ -112,6 +81,22 @@ namespace U_KLTT
                 cmd.Dispose();
             }
             return result;
+        }
+
+        private void Form_DataLoadAfter(ref SAPbouiCOM.BusinessObjectInfo pVal)
+        {
+            try
+            {
+                DataTable rs = Load_Data_KLTT();
+                if (rs.Rows.Count == 1)
+                {
+                    double tmp = 0;
+                    double.TryParse(rs.Rows[0]["SUM_CA_NOVAT"].ToString(), out tmp);
+                    EditText0.Value = tmp.ToString("N2");
+                }
+            }
+            catch
+            { }
         }
     }
 }

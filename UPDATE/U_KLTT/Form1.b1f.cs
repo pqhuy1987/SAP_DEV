@@ -1041,15 +1041,16 @@ namespace U_KLTT
                         DataRow r = C.Rows[i];
                         ((SAPbouiCOM.EditText)oMtx.Columns.Item("C_2_2").Cells.Item(i + 1).Specific).Value = r["GoiThauKey"].ToString();
                         ((SAPbouiCOM.EditText)oMtx.Columns.Item("C_2_3").Cells.Item(i + 1).Specific).Value = r["GoiThauName"].ToString();
-                        ((SAPbouiCOM.EditText)oMtx.Columns.Item("C_2_4").Cells.Item(i + 1).Specific).Value = r["GIKey"].ToString();
-                        ((SAPbouiCOM.EditText)oMtx.Columns.Item("C_2_5").Cells.Item(i + 1).Specific).Value = r["GIRowKey"].ToString();
-                        ((SAPbouiCOM.EditText)oMtx.Columns.Item("C_2_6").Cells.Item(i + 1).Specific).Value = r["DetailsName"].ToString();
-                        ((SAPbouiCOM.EditText)oMtx.Columns.Item("C_2_7").Cells.Item(i + 1).Specific).Value = r["UoM"].ToString();
-                        ((SAPbouiCOM.EditText)oMtx.Columns.Item("C_2_8").Cells.Item(i + 1).Specific).Value = r["UPrice"].ToString();
-                        ((SAPbouiCOM.EditText)oMtx.Columns.Item("C_2_9").Cells.Item(i + 1).Specific).Value = r["Quantity"].ToString();
-                        ((SAPbouiCOM.EditText)oMtx.Columns.Item("C_2_10").Cells.Item(i + 1).Specific).Value = r["Total"].ToString();
-                        ((SAPbouiCOM.EditText)oMtx.Columns.Item("C_2_11").Cells.Item(i + 1).Specific).Value = BType == "3" ? "100" : r["Last_Complete_Rate"].ToString();
-                        ((SAPbouiCOM.EditText)oMtx.Columns.Item("C_2_12").Cells.Item(i + 1).Specific).Value = BType == "3" ? r["Total"].ToString() : r["Last_Complete_Amount"].ToString();
+                        ((SAPbouiCOM.EditText)oMtx.Columns.Item("C_2_4").Cells.Item(i + 1).Specific).Value = r["TYPE"].ToString();
+                        ((SAPbouiCOM.EditText)oMtx.Columns.Item("C_2_5").Cells.Item(i + 1).Specific).Value = r["GIKey"].ToString();
+                        ((SAPbouiCOM.EditText)oMtx.Columns.Item("C_2_6").Cells.Item(i + 1).Specific).Value = r["GIRowKey"].ToString();
+                        ((SAPbouiCOM.EditText)oMtx.Columns.Item("C_2_7").Cells.Item(i + 1).Specific).Value = r["DetailsName"].ToString();
+                        ((SAPbouiCOM.EditText)oMtx.Columns.Item("C_2_8").Cells.Item(i + 1).Specific).Value = r["UoM"].ToString();
+                        ((SAPbouiCOM.EditText)oMtx.Columns.Item("C_2_9").Cells.Item(i + 1).Specific).Value = r["UPrice"].ToString();
+                        ((SAPbouiCOM.EditText)oMtx.Columns.Item("C_2_10").Cells.Item(i + 1).Specific).Value = r["Quantity"].ToString();
+                        ((SAPbouiCOM.EditText)oMtx.Columns.Item("C_2_11").Cells.Item(i + 1).Specific).Value = r["Total"].ToString();
+                        ((SAPbouiCOM.EditText)oMtx.Columns.Item("C_2_12").Cells.Item(i + 1).Specific).Value = BType == "3" ? "100" : r["Last_Complete_Rate"].ToString();
+                        ((SAPbouiCOM.EditText)oMtx.Columns.Item("C_2_13").Cells.Item(i + 1).Specific).Value = BType == "3" ? r["Total"].ToString() : r["Last_Complete_Amount"].ToString();
                         if (i < C.Rows.Count - 1)
                         {
                             oMtx.AddRow();
@@ -1060,8 +1061,8 @@ namespace U_KLTT
                 oForm.Items.Item("20_U_E").Click();
                 //Invisible Column 
                 oMtx.Columns.Item("C_2_2").Visible = false;
-                oMtx.Columns.Item("C_2_4").Visible = false;
-                oMtx.Columns.Item("C_2_5").Visible = false;
+                //oMtx.Columns.Item("C_2_4").Visible = false;
+                //oMtx.Columns.Item("C_2_5").Visible = false;
                 //Disable All Column except 2 last column
                 oMtx.AutoResizeColumns();
                 foreach (SAPbouiCOM.Column c in oMtx.Columns)
@@ -1089,15 +1090,16 @@ namespace U_KLTT
                         DataRow r = D.Rows[i];
                         ((SAPbouiCOM.EditText)oMtx.Columns.Item("C_3_2").Cells.Item(i + 1).Specific).Value = r["GoiThauKey"].ToString();
                         ((SAPbouiCOM.EditText)oMtx.Columns.Item("C_3_3").Cells.Item(i + 1).Specific).Value = r["GoiThauName"].ToString();
-                        ((SAPbouiCOM.EditText)oMtx.Columns.Item("C_3_4").Cells.Item(i + 1).Specific).Value = r["GIKey"].ToString();
-                        ((SAPbouiCOM.EditText)oMtx.Columns.Item("C_3_5").Cells.Item(i + 1).Specific).Value = r["GIRowKey"].ToString();
-                        ((SAPbouiCOM.EditText)oMtx.Columns.Item("C_3_6").Cells.Item(i + 1).Specific).Value = r["DetailsName"].ToString();
-                        ((SAPbouiCOM.EditText)oMtx.Columns.Item("C_3_7").Cells.Item(i + 1).Specific).Value = r["UoM"].ToString();
-                        ((SAPbouiCOM.EditText)oMtx.Columns.Item("C_3_8").Cells.Item(i + 1).Specific).Value = r["UPrice"].ToString();
-                        ((SAPbouiCOM.EditText)oMtx.Columns.Item("C_3_9").Cells.Item(i + 1).Specific).Value = r["Quantity"].ToString();
-                        ((SAPbouiCOM.EditText)oMtx.Columns.Item("C_3_10").Cells.Item(i + 1).Specific).Value = r["Total"].ToString();
-                        ((SAPbouiCOM.EditText)oMtx.Columns.Item("C_3_11").Cells.Item(i + 1).Specific).Value = BType == "3" ? "100" : r["Last_Complete_Rate"].ToString();
-                        ((SAPbouiCOM.EditText)oMtx.Columns.Item("C_3_12").Cells.Item(i + 1).Specific).Value = BType == "3" ? r["Total"].ToString() : r["Last_Complete_Amount"].ToString();
+                        ((SAPbouiCOM.EditText)oMtx.Columns.Item("C_3_4").Cells.Item(i + 1).Specific).Value = r["TYPE"].ToString();
+                        ((SAPbouiCOM.EditText)oMtx.Columns.Item("C_3_5").Cells.Item(i + 1).Specific).Value = r["GIKey"].ToString();
+                        ((SAPbouiCOM.EditText)oMtx.Columns.Item("C_3_6").Cells.Item(i + 1).Specific).Value = r["GIRowKey"].ToString();
+                        ((SAPbouiCOM.EditText)oMtx.Columns.Item("C_3_7").Cells.Item(i + 1).Specific).Value = r["DetailsName"].ToString();
+                        ((SAPbouiCOM.EditText)oMtx.Columns.Item("C_3_8").Cells.Item(i + 1).Specific).Value = r["UoM"].ToString();
+                        ((SAPbouiCOM.EditText)oMtx.Columns.Item("C_3_9").Cells.Item(i + 1).Specific).Value = r["UPrice"].ToString();
+                        ((SAPbouiCOM.EditText)oMtx.Columns.Item("C_3_10").Cells.Item(i + 1).Specific).Value = r["Quantity"].ToString();
+                        ((SAPbouiCOM.EditText)oMtx.Columns.Item("C_3_11").Cells.Item(i + 1).Specific).Value = r["Total"].ToString();
+                        ((SAPbouiCOM.EditText)oMtx.Columns.Item("C_3_12").Cells.Item(i + 1).Specific).Value = BType == "3" ? "100" : r["Last_Complete_Rate"].ToString();
+                        ((SAPbouiCOM.EditText)oMtx.Columns.Item("C_3_13").Cells.Item(i + 1).Specific).Value = BType == "3" ? r["Total"].ToString() : r["Last_Complete_Amount"].ToString();
                         if (i < D.Rows.Count - 1)
                         {
                             oMtx.AddRow();
@@ -1108,8 +1110,8 @@ namespace U_KLTT
                 oForm.Items.Item("20_U_E").Click();
                 //Invisible Column 
                 oMtx.Columns.Item("C_3_2").Visible = false;
-                oMtx.Columns.Item("C_3_4").Visible = false;
-                oMtx.Columns.Item("C_3_5").Visible = false;
+                //oMtx.Columns.Item("C_3_4").Visible = false;
+                //oMtx.Columns.Item("C_3_5").Visible = false;
                 //Disable All Column except 2 last column
                 oMtx.AutoResizeColumns();
                 foreach (SAPbouiCOM.Column c in oMtx.Columns)
@@ -1687,7 +1689,7 @@ namespace U_KLTT
 
                         //Write Details to Excel
                         int current_rownum = 8;
-                        string subprojectkey = "";
+                        //string subprojectkey = "";
                         int Group_No = 0;
                         int Detail_No = 1;
                         List<int> Group_No_RowNum = new List<int>();
@@ -2002,27 +2004,27 @@ namespace U_KLTT
                                 //Total Goi Thau LV 1
                                 if (Gr_element.Count > 0)
                                 {
-                                    string cell_sum_tt = "";
-                                    string cell_sum_gtth = "";
-                                    string cell_sum_gtth2 = "";
-                                    int temp = 1;
-                                    foreach (int t in Gr_element)
-                                    {
-                                        if (temp < Gr_element.Count)
-                                        {
-                                            cell_sum_tt += "E" + t + ",";
-                                            cell_sum_gtth += "G" + t + ",";
-                                            cell_sum_gtth2 += "I" + t + ",";
-                                            temp++;
-                                        }
+                                    //string cell_sum_tt = "";
+                                    //string cell_sum_gtth = "";
+                                    //string cell_sum_gtth2 = "";
+                                    //int temp = 1;
+                                    //foreach (int t in Gr_element)
+                                    //{
+                                    //    if (temp < Gr_element.Count)
+                                    //    {
+                                    //        cell_sum_tt += "E" + t + ",";
+                                    //        cell_sum_gtth += "G" + t + ",";
+                                    //        cell_sum_gtth2 += "I" + t + ",";
+                                    //        temp++;
+                                    //    }
 
-                                        else
-                                        {
-                                            cell_sum_tt += "E" + t;
-                                            cell_sum_gtth += "G" + t;
-                                            cell_sum_gtth2 += "I" + t;
-                                        }
-                                    }
+                                    //    else
+                                    //    {
+                                    //        cell_sum_tt += "E" + t;
+                                    //        cell_sum_gtth += "G" + t;
+                                    //        cell_sum_gtth2 += "I" + t;
+                                    //    }
+                                    //}
                                     ((Microsoft.Office.Interop.Excel.Range)oSheet.Cells[Group_No_RowNum[(Group_No_RowNum.Count - 1)], 5]).Formula = string.Format("=SUBTOTAL(9,E{0}:E{1})", Gr_element[0], current_rownum - 1); //string.Format("=SUM({0})", cell_sum_tt);
                                     ((Microsoft.Office.Interop.Excel.Range)oSheet.Cells[Group_No_RowNum[(Group_No_RowNum.Count - 1)], 7]).Formula = string.Format("=SUBTOTAL(9,G{0}:G{1})", Gr_element[0], current_rownum - 1); //string.Format("=SUM({0})", cell_sum_gtth);
                                     ((Microsoft.Office.Interop.Excel.Range)oSheet.Cells[Group_No_RowNum[(Group_No_RowNum.Count - 1)], 9]).Formula = string.Format("=SUBTOTAL(9,I{0}:I{1})", Gr_element[0], current_rownum - 1); //string.Format("=SUM({0})", cell_sum_gtth2);
@@ -2975,27 +2977,27 @@ namespace U_KLTT
                             //Total B
                             if (Group_No_RowNum.Count > 0)
                             {
-                                string cell_sum_tt = "";
-                                string cell_sum_gtth = "";
-                                string cell_sum_gtth2 = "";
-                                int temp = 1;
-                                foreach (int t in Group_No_RowNum)
-                                {
-                                    if (temp < Group_No_RowNum.Count)
-                                    {
-                                        cell_sum_tt += "E" + t + ",";
-                                        cell_sum_gtth += "G" + t + ",";
-                                        cell_sum_gtth2 += "I" + t + ",";
-                                        temp++;
-                                    }
+                                //string cell_sum_tt = "";
+                                //string cell_sum_gtth = "";
+                                //string cell_sum_gtth2 = "";
+                                //int temp = 1;
+                                //foreach (int t in Group_No_RowNum)
+                                //{
+                                //    if (temp < Group_No_RowNum.Count)
+                                //    {
+                                //        cell_sum_tt += "E" + t + ",";
+                                //        cell_sum_gtth += "G" + t + ",";
+                                //        cell_sum_gtth2 += "I" + t + ",";
+                                //        temp++;
+                                //    }
 
-                                    else
-                                    {
-                                        cell_sum_tt += "E" + t;
-                                        cell_sum_gtth += "G" + t;
-                                        cell_sum_gtth2 += "I" + t;
-                                    }
-                                }
+                                //    else
+                                //    {
+                                //        cell_sum_tt += "E" + t;
+                                //        cell_sum_gtth += "G" + t;
+                                //        cell_sum_gtth2 += "I" + t;
+                                //    }
+                                //}
                                 ((Microsoft.Office.Interop.Excel.Range)oSheet.Cells[Section_RowNum[(Section_RowNum.Count - 1)], 5]).Formula = string.Format("=SUBTOTAL(9,E{0}:E{1})", Group_No_RowNum[0], current_rownum - 1); //string.Format("=SUM({0})", cell_sum_tt);
                                 ((Microsoft.Office.Interop.Excel.Range)oSheet.Cells[Section_RowNum[(Section_RowNum.Count - 1)], 7]).Formula = string.Format("=SUBTOTAL(9,G{0}:G{1})", Group_No_RowNum[0], current_rownum - 1); //string.Format("=SUM({0})", cell_sum_gtth);
                                 ((Microsoft.Office.Interop.Excel.Range)oSheet.Cells[Section_RowNum[(Section_RowNum.Count - 1)], 9]).Formula = string.Format("=SUBTOTAL(9,I{0}:I{1})", Group_No_RowNum[0], current_rownum - 1); //string.Format("=SUM({0})", cell_sum_gtth2);
@@ -3471,27 +3473,27 @@ namespace U_KLTT
                                 //Total Goi Thau LV 1
                                 if (Gr_element.Count > 0)
                                 {
-                                    string cell_sum_tt = "";
-                                    string cell_sum_gtth = "";
-                                    string cell_sum_gtth2 = "";
-                                    int temp = 1;
-                                    foreach (int t in Gr_element)
-                                    {
-                                        if (temp < Gr_element.Count)
-                                        {
-                                            cell_sum_tt += "E" + t + ",";
-                                            cell_sum_gtth += "G" + t + ",";
-                                            cell_sum_gtth2 += "I" + t + ",";
-                                            temp++;
-                                        }
+                                    //string cell_sum_tt = "";
+                                    //string cell_sum_gtth = "";
+                                    //string cell_sum_gtth2 = "";
+                                    //int temp = 1;
+                                    //foreach (int t in Gr_element)
+                                    //{
+                                    //    if (temp < Gr_element.Count)
+                                    //    {
+                                    //        cell_sum_tt += "E" + t + ",";
+                                    //        cell_sum_gtth += "G" + t + ",";
+                                    //        cell_sum_gtth2 += "I" + t + ",";
+                                    //        temp++;
+                                    //    }
 
-                                        else
-                                        {
-                                            cell_sum_tt += "E" + t;
-                                            cell_sum_gtth += "G" + t;
-                                            cell_sum_gtth2 += "I" + t;
-                                        }
-                                    }
+                                    //    else
+                                    //    {
+                                    //        cell_sum_tt += "E" + t;
+                                    //        cell_sum_gtth += "G" + t;
+                                    //        cell_sum_gtth2 += "I" + t;
+                                    //    }
+                                    //}
                                     ((Microsoft.Office.Interop.Excel.Range)oSheet.Cells[Group_No_RowNum[(Group_No_RowNum.Count - 1)], 5]).Formula = string.Format("=SUBTOTAL(9,E{0}:E{1})", Gr_element[0], current_rownum - 1); //string.Format("=SUM({0})", cell_sum_tt);
                                     ((Microsoft.Office.Interop.Excel.Range)oSheet.Cells[Group_No_RowNum[(Group_No_RowNum.Count - 1)], 7]).Formula = string.Format("=SUBTOTAL(9,G{0}:G{1})", Gr_element[0], current_rownum - 1); //string.Format("=SUM({0})", cell_sum_gtth);
                                     ((Microsoft.Office.Interop.Excel.Range)oSheet.Cells[Group_No_RowNum[(Group_No_RowNum.Count - 1)], 9]).Formula = string.Format("=SUBTOTAL(9,I{0}:I{1})", Gr_element[0], current_rownum - 1); //string.Format("=SUM({0})", cell_sum_gtth2);
@@ -3502,27 +3504,27 @@ namespace U_KLTT
                             //Total K
                             if (Group_No_RowNum.Count > 0)
                             {
-                                string cell_sum_tt = "";
-                                string cell_sum_gtth = "";
-                                string cell_sum_gtth2 = "";
-                                int temp = 1;
-                                foreach (int t in Group_No_RowNum)
-                                {
-                                    if (temp < Group_No_RowNum.Count)
-                                    {
-                                        cell_sum_tt += "E" + t + ",";
-                                        cell_sum_gtth += "G" + t + ",";
-                                        cell_sum_gtth2 += "I" + t + ",";
-                                        temp++;
-                                    }
+                                //string cell_sum_tt = "";
+                                //string cell_sum_gtth = "";
+                                //string cell_sum_gtth2 = "";
+                                //int temp = 1;
+                                //foreach (int t in Group_No_RowNum)
+                                //{
+                                //    if (temp < Group_No_RowNum.Count)
+                                //    {
+                                //        cell_sum_tt += "E" + t + ",";
+                                //        cell_sum_gtth += "G" + t + ",";
+                                //        cell_sum_gtth2 += "I" + t + ",";
+                                //        temp++;
+                                //    }
 
-                                    else
-                                    {
-                                        cell_sum_tt += "E" + t;
-                                        cell_sum_gtth += "G" + t;
-                                        cell_sum_gtth2 += "I" + t;
-                                    }
-                                }
+                                //    else
+                                //    {
+                                //        cell_sum_tt += "E" + t;
+                                //        cell_sum_gtth += "G" + t;
+                                //        cell_sum_gtth2 += "I" + t;
+                                //    }
+                                //}
                                 ((Microsoft.Office.Interop.Excel.Range)oSheet.Cells[Section_RowNum[(Section_RowNum.Count - 1)], 5]).Formula = string.Format("=SUBTOTAL(9,E{0}:E{1})", Group_No_RowNum[0], current_rownum - 1); // string.Format("=SUM({0})", cell_sum_tt);
                                 ((Microsoft.Office.Interop.Excel.Range)oSheet.Cells[Section_RowNum[(Section_RowNum.Count - 1)], 7]).Formula = string.Format("=SUBTOTAL(9,G{0}:G{1})", Group_No_RowNum[0], current_rownum - 1); // string.Format("=SUM({0})", cell_sum_gtth);
                                 ((Microsoft.Office.Interop.Excel.Range)oSheet.Cells[Section_RowNum[(Section_RowNum.Count - 1)], 9]).Formula = string.Format("=SUBTOTAL(9,I{0}:I{1})", Group_No_RowNum[0], current_rownum - 1); //string.Format("=SUM({0})", cell_sum_gtth2);
@@ -3770,7 +3772,7 @@ namespace U_KLTT
                         oSheet.Cells[current_rownum, 2] = "Tổng giá trị thi công (bao gồm VAT)";
                         oSheet.Cells[current_rownum, 4] = "";
                         oSheet.Range["E" + current_rownum].NumberFormat = "#,##0";
-                        ((Microsoft.Office.Interop.Excel.Range)oSheet.Cells[current_rownum, 5]).Formula = string.Format("=ROUND(G{0},0)", current_rownum - 3); //string.Format("=ROUND(SUM({0})*(1+{1}),0)", cell_sum_total, "H" + VAT_Rownum);
+                        ((Microsoft.Office.Interop.Excel.Range)oSheet.Cells[current_rownum, 5]).Formula = string.Format("=G{0}", current_rownum - 3); //string.Format("=ROUND(SUM({0})*(1+{1}),0)", cell_sum_total, "H" + VAT_Rownum);
                         oSheet.Range["B" + current_rownum, "C" + current_rownum].Merge();
                         oSheet.Range["E" + current_rownum, "I" + current_rownum].Merge();
                         oSheet.Range["A" + current_rownum, "I" + current_rownum].Font.Bold = true;
@@ -3781,7 +3783,7 @@ namespace U_KLTT
 
                         oSheet.Cells[current_rownum, 4] = "";
                         oSheet.Range["E" + current_rownum].NumberFormat = "#,##0";
-                        ((Microsoft.Office.Interop.Excel.Range)oSheet.Cells[current_rownum, 5]).Formula = string.Format("=ROUND(I{0},0)", current_rownum - 4);
+                        ((Microsoft.Office.Interop.Excel.Range)oSheet.Cells[current_rownum, 5]).Formula = string.Format("=I{0}", current_rownum - 4);
                         oSheet.Range["B" + current_rownum, "C" + current_rownum].Merge();
                         oSheet.Range["E" + current_rownum, "I" + current_rownum].Merge();
                         oSheet.Range["A" + current_rownum, "I" + current_rownum].Font.Bold = true;
