@@ -1,4 +1,4 @@
---Purchase Request
+﻿--Purchase Request
 Select * from OPRQ;
 --Purchase Request Details
 Select * from PRQ1;
@@ -199,3 +199,30 @@ BEGIN
 	, Format( VatSum ,'N0','en-US' ) as 'LineVAT' 
 	from DRF1 where DocEntry = @DocEntry_ODRF;
 END
+GO
+
+ALTER PROCEDURE [dbo].[PR_GETDATA_COVER]
+	@DocNum as int
+AS
+BEGIN
+	Select DocTotal, OPOR.CreateDate, DocEntry, Project, OUSR.Department, OUDP.Remarks from  OPOR
+	inner join 
+	OUSR on OUSR.USERID = OPOR.UserSign
+	inner join
+	OUDP on OUDP.Code = OUSR.Department
+	where OPOR.DocEntry = @DocNum
+END
+GO
+
+CREATE PROCEDURE [dbo].[PR_GETDATA_COVER_DETAIL]
+	@DocEntry as int
+AS
+BEGIN
+	Select ItemCode, Dscription, UomCode, Quantity, Price, LineTotal from  POR1
+	--inner join 
+	--OUSR on OUSR.USERID = OPOR.UserSign
+	--inner join
+	--OUDP on OUDP.Code = OUSR.Department
+	where POR1.DocEntry = @DocEntry
+END
+GO

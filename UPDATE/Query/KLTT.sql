@@ -3316,13 +3316,24 @@ BEGIN
 		, @CCM_Comm = ''
 		from @TableTmp 
 		where LineId =3;
-
-		Select @BGD_Name = UserName
-			, @BGD_Arrpove = Approve_Status
-			, @BGD_Time = Approve_Time
-			, @BGD_Comm = Comment
-		from @TableTmp 
-		where LineId = 4;
+		if (@CreateDate <= '19-june-2018' )
+		begin
+			Select @BGD_Name = UserName
+				, @BGD_Arrpove = Approve_Status
+				, @BGD_Time = Approve_Time
+				, @BGD_Comm = Comment
+			from @TableTmp 
+			where LineId = 4;
+		end
+		else
+		begin
+			Select @BGD_Name = UserName
+				, @BGD_Arrpove = Approve_Status
+				, @BGD_Time = Approve_Time
+				, @BGD_Comm = Comment
+			from @TableTmp 
+			where LineId = 1;
+		end
 		if (@CreateDate <= '19-june-2018' ) begin
 				Select @KT_Name = UserName
 					, @KT_Arrpove = Approve_Status
@@ -3338,7 +3349,7 @@ BEGIN
 					, @KT_Time = Approve_Time
 					, @KT_Comm = ''
 				from @TableTmp 
-				where LineId = case ISNULL(@NT,'') when '' then 6 else 5 end;			
+				where LineId = case ISNULL(@NT,'') when '' then 2 else 2 end;			
 		end
 	end
 	else if (@BGroup = 'CDXD')
