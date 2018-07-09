@@ -3057,8 +3057,8 @@ if (@BType > 1)
 
 	SET @GT_thanhtoan_denKN = (1- ISNULL(@PTGL,0)/100) * @GT_thuchien_denKN;
 	SET @GT_giulai = (@PTGL/100) * @GT_thuchien_denKN;
-	SET @TongGT_thanhtoan_denKN = @GT_thanhtoan_denKN + ISNULL(@Tamung,0) - ISNULL(@HoanTamung,0);
-	SET @GT_Denghi_thanhtoan_KN = ISNULL(@TongGT_thanhtoan_denKN, 0) - ISNULL(@GT_thanhtoan_Kytruoc,0);
+	SET @TongGT_thanhtoan_denKN = round(@GT_thanhtoan_denKN + ISNULL(@Tamung,0) - ISNULL(@HoanTamung,0),0);
+	SET @GT_Denghi_thanhtoan_KN = round(ISNULL(@TongGT_thanhtoan_denKN, 0) - ISNULL(@GT_thanhtoan_Kytruoc,0),0);
 	
 	if(@BType = 2)
 		--Get DATA for Cover
@@ -3089,7 +3089,7 @@ if (@BType > 1)
 			else SET @GT_giulai = (@PTBH/100) * @GT_thuchien_denKN;
 			SET @GT_thanhtoan_denKN =  @GT_thuchien_denKN;
 			SET @TongGT_thanhtoan_denKN = @GT_thanhtoan_denKN;
-			SET @GT_Denghi_thanhtoan_KN = ISNULL(@TongGT_thanhtoan_denKN, 0) - ISNULL(@GT_thanhtoan_Kytruoc,0);
+			SET @GT_Denghi_thanhtoan_KN = round(ISNULL(@TongGT_thanhtoan_denKN, 0) - ISNULL(@GT_thanhtoan_Kytruoc,0),0);
 
 			Select @Period as 'So'
 				, @BpCode as 'BpCode'
