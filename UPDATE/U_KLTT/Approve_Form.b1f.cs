@@ -739,16 +739,16 @@ namespace U_KLTT
                     else if (BType == "2")
                     {
                         if (pp_tu_lastbill > 0)
-                            EditText18.Value = String.Format("{0:n0}", Math.Round((pp_ca * (1 - (decimal)PTGL)) + (pp_ca * (PhiQL_LastBill / 100)) + pp_tu_lastbill - pp_hu_lastbill, 0));
+                            EditText18.Value = String.Format("{0:n0}", Math.Round((pp_ca * (1 - (decimal)PTGL)) + (pp_ca * (PhiQL_LastBill / 100)) + pp_tu_lastbill - pp_hu_lastbill, 0, MidpointRounding.AwayFromZero));
                         else
-                            EditText18.Value = String.Format("{0:n0}", Math.Round((pp_ca * (1 - (decimal)PTGL)) + (pp_ca * (PhiQL_LastBill / 100)), 0));
+                            EditText18.Value = String.Format("{0:n0}", Math.Round((pp_ca * (1 - (decimal)PTGL)) + (pp_ca * (PhiQL_LastBill / 100)), 0, MidpointRounding.AwayFromZero));
                     }
                     else if (BType == "3")
                     {
                         if (pp_tu_lastbill > 0)
-                            EditText18.Value = String.Format("{0:n0}", Math.Round((pp_ca * (1 - (decimal)PTGL)) + (pp_ca * (PhiQL_LastBill / 100)) + pp_tu_lastbill - pp_hu_lastbill));
+                            EditText18.Value = String.Format("{0:n0}", Math.Round((pp_ca * (1 - (decimal)PTGL)) + (pp_ca * (PhiQL_LastBill / 100)) + pp_tu_lastbill - pp_hu_lastbill, 0, MidpointRounding.AwayFromZero));
                         else
-                            EditText18.Value = String.Format("{0:n0}", Math.Round((pp_ca * (1 - (decimal)PTGL) + (pp_ca * (PhiQL_LastBill / 100)))));
+                            EditText18.Value = String.Format("{0:n0}", Math.Round((pp_ca * (1 - (decimal)PTGL) + (pp_ca * (PhiQL_LastBill / 100))),0, MidpointRounding.AwayFromZero));
                     }
                     //GT thanh toan ky nay
                     EditText20.Value = String.Format("{0:n0}", Math.Round(decimal.Parse(EditText16.Value) - decimal.Parse(EditText18.Value), 0));

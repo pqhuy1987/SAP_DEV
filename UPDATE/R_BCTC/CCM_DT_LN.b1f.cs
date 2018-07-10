@@ -195,7 +195,7 @@ namespace R_BCTC
             return result;
         }
 
-        System.Data.DataTable Get_Data_BASELINE(int pBASELINE_DocEntry, int pProjectID)
+        System.Data.DataTable Get_Data_BASELINE(int pBASELINE_DocEntry, string pFProject, int pProjectID)
         {
             DataTable result = new DataTable();
             SqlCommand cmd = null;
@@ -204,8 +204,91 @@ namespace R_BCTC
                 cmd = new SqlCommand("CCM_BASELINE_A_INDEX", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@BASELINE_DocEntry", pBASELINE_DocEntry);
+                cmd.Parameters.AddWithValue("@FinancialProject", pFProject);
                 cmd.Parameters.AddWithValue("@ProjectID", pProjectID);
                 //cmd.Parameters.AddWithValue("@ProjectID", pProjectID);
+                conn.Open();
+                SqlDataReader rd = cmd.ExecuteReader();
+                result.Load(rd);
+            }
+            catch (Exception ex)
+            {
+                oApp.MessageBox(ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+                cmd.Dispose();
+            }
+            return result;
+        }
+
+        System.Data.DataTable Get_Data_BASELINE_Date(int pBASELINE_DocEntry, string pFProject, int pProjectID, DateTime pToDate)
+        {
+            DataTable result = new DataTable();
+            SqlCommand cmd = null;
+            try
+            {
+                cmd = new SqlCommand("CCM_BASELINE_DATE_A_INDEX", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@BASELINE_DocEntry", pBASELINE_DocEntry);
+                cmd.Parameters.AddWithValue("@FinancialProject", pFProject);
+                cmd.Parameters.AddWithValue("@ProjectID", pProjectID);
+                cmd.Parameters.AddWithValue("@ToDate", pToDate);
+                //cmd.Parameters.AddWithValue("@ProjectID", pProjectID);
+                conn.Open();
+                SqlDataReader rd = cmd.ExecuteReader();
+                result.Load(rd);
+            }
+            catch (Exception ex)
+            {
+                oApp.MessageBox(ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+                cmd.Dispose();
+            }
+            return result;
+        }
+
+        System.Data.DataTable Get_A_Index_Fproject(int pBASELINE_DocEntry, string pFProject)
+        {
+            DataTable result = new DataTable();
+            SqlCommand cmd = null;
+            try
+            {
+                cmd = new SqlCommand("CCM_BASELINE_FPROJECT_A_INDEX", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@BASELINE_DocEntry", pBASELINE_DocEntry);
+                cmd.Parameters.AddWithValue("@FinancialProject", pFProject);
+                conn.Open();
+                SqlDataReader rd = cmd.ExecuteReader();
+                result.Load(rd);
+            }
+            catch (Exception ex)
+            {
+                oApp.MessageBox(ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+                cmd.Dispose();
+            }
+            return result;
+        }
+
+        System.Data.DataTable Get_A_Index_Fproject_Date(int pBASELINE_DocEntry, string pFProject, DateTime pToDate)
+        {
+            DataTable result = new DataTable();
+            SqlCommand cmd = null;
+            try
+            {
+                cmd = new SqlCommand("CCM_BASELINE_FPROJECT_DATE_A_INDEX", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@BASELINE_DocEntry", pBASELINE_DocEntry);
+                cmd.Parameters.AddWithValue("@FinancialProject", pFProject);
+                cmd.Parameters.AddWithValue("@ToDate", pToDate);
                 conn.Open();
                 SqlDataReader rd = cmd.ExecuteReader();
                 result.Load(rd);
@@ -290,14 +373,32 @@ namespace R_BCTC
                                     oSheet.Cells[current_group, 4].Formula = string.Format("=SUBTOTAL(9,D{0}:D{1}", current_group + 1, current_row - 1);
                                     oSheet.Cells[current_group, 5].Formula = string.Format("=SUBTOTAL(9,E{0}:E{1}", current_group + 1, current_row - 1);
                                     oSheet.Cells[current_group, 6].Formula = string.Format("=SUBTOTAL(9,F{0}:F{1}", current_group + 1, current_row - 1);
-                                    oSheet.Cells[current_group, 8].Formula = string.Format("=SUBTOTAL(9,H{0}:H{1}", current_group + 1, current_row - 1);
-                                    oSheet.Cells[current_group, 9].Formula = string.Format("=SUBTOTAL(9,I{0}:I{1}", current_group + 1, current_row - 1);
-                                    oSheet.Cells[current_group, 12].Formula = string.Format("=SUBTOTAL(9,L{0}:L{1}", current_group + 1, current_row - 1);
+                                    
+                                    //oSheet.Cells[current_row, 7].Formula = string.Format("=F{0}/C{0}", current_group);
+                                    //oSheet.Cells[current_group, 8].Formula = string.Format("=SUBTOTAL(9,H{0}:H{1}", current_group + 1, current_row - 1);
+                                    //oSheet.Cells[current_group, 9].Formula = string.Format("=SUBTOTAL(9,I{0}:I{1}", current_group + 1, current_row - 1);
+                                    //oSheet.Cells[current_group, 12].Formula = string.Format("=SUBTOTAL(9,L{0}:L{1}", current_group + 1, current_row - 1);
                                 }
                                 //Print FProject Group
                                 current_group = current_row;
                                 oSheet.Cells[current_row, 1] = STT;
                                 oSheet.Cells[current_row, 2] = r["PrjName"];
+                                //% Hoan thanh
+                                oSheet.Cells[current_row, 7].Formula = string.Format("=F{0}/C{0}", current_group);
+                                //DT con lai phai thu trong nam
+                                oSheet.Cells[current_row, 8].Formula = string.Format("=C{0}-F{0}", current_group);
+                                //DT ke hoach sang nam
+                                oSheet.Cells[current_row, 9].Formula = string.Format("=D{0}-C{0}-E{0}", current_group);
+                                //Get A-Index Baseline
+                                DataTable rs_baseline_fproject = Get_A_Index_Fproject(-1, r["PrjCode"].ToString());
+                                if (rs_baseline_fproject.Rows.Count >= 1)
+                                    oSheet.Cells[current_row, 10] = rs_baseline_fproject.Rows[0]["A-INDEX"];
+                                //Get A-Index Baseline 2
+                                rs_baseline_fproject = Get_A_Index_Fproject_Date(-1, r["PrjCode"].ToString(), todate);
+                                if (rs_baseline_fproject.Rows.Count >= 1)
+                                    oSheet.Cells[current_row, 11] = rs_baseline_fproject.Rows[0]["A-INDEX"];
+                                //Loi nhuan 2
+                                oSheet.Cells[current_row, 12].Formula = string.Format("=K{0}*C{0}", current_group);
                                 current_row++;
                                 STT++;
                                 FProject = r["PrjCode"].ToString();
@@ -313,23 +414,27 @@ namespace R_BCTC
                             //DT trong nam
                             oSheet.Cells[current_row, 6] = r["DTthucte"];
                             //% Hoan thanh
-                            oSheet.Cells[current_row, 7].Formula = string.Format("=F{0}/C{0}", current_row);
+                            //oSheet.Cells[current_row, 7].Formula = string.Format("=F{0}/C{0}", current_row);
                             //DT con lai phai thu trong nam
-                            oSheet.Cells[current_row, 8].Formula = string.Format("=C{0}-F{0}", current_row);
+                            //oSheet.Cells[current_row, 8].Formula = string.Format("=C{0}-F{0}", current_row);
                             //DT ke hoach sang nam
-                            oSheet.Cells[current_row, 9].Formula = string.Format("=D{0}-C{0}-E{0}", current_row);
+                            //oSheet.Cells[current_row, 9].Formula = string.Format("=D{0}-C{0}-E{0}", current_row);
                             
                             //Get A-Index Baseline
-                            DataTable rs_baseline = Get_Data_BASELINE(-1, int.Parse(r["AbsEntry"].ToString()));
+                            DataTable rs_baseline = Get_Data_BASELINE(-1, r["PrjCode"].ToString(),int.Parse(r["AbsEntry"].ToString()));
                             if (rs_baseline.Rows.Count >= 1)
                                 oSheet.Cells[current_row, 10] = rs_baseline.Rows[0]["A-INDEX"];
+                            //Get A-Index Baseline 2
+                            rs_baseline = Get_Data_BASELINE_Date(-1, r["PrjCode"].ToString(), int.Parse(r["AbsEntry"].ToString()), todate);
+                            if (rs_baseline.Rows.Count >= 1)
+                                oSheet.Cells[current_row, 11] = rs_baseline.Rows[0]["A-INDEX"];
                             //Get A-Index Current
-                            DataTable rs_current = Get_Data_BASELINE(-1, int.Parse(r["AbsEntry"].ToString()));
-                                //Get_Data_CURRENT(r["PrjCode"].ToString(), int.Parse(r["AbsEntry"].ToString()));
-                            if (rs_current.Rows.Count >= 1)
-                                oSheet.Cells[current_row, 11] = rs_current.Rows[0]["A-INDEX"];
+                            //DataTable rs_current = Get_Data_BASELINE(-1, int.Parse(r["AbsEntry"].ToString()));
+                            //    //Get_Data_CURRENT(r["PrjCode"].ToString(), int.Parse(r["AbsEntry"].ToString()));
+                            //if (rs_current.Rows.Count >= 1)
+                            //    oSheet.Cells[current_row, 11] = rs_current.Rows[0]["A-INDEX"];
                             //Loi nhuan 2
-                            oSheet.Cells[current_row, 12].Formula = string.Format("=K{0}*C{0}", current_row);
+                            //oSheet.Cells[current_row, 12].Formula = string.Format("=K{0}*C{0}", current_row);
                             oSheet.Range["A" + current_row, "B" + current_row].Font.Italic = true;
                             current_row++;
                         }
@@ -338,9 +443,11 @@ namespace R_BCTC
                         oSheet.Cells[current_group, 4].Formula = string.Format("=SUBTOTAL(9,D{0}:D{1}", current_group + 1, current_row - 1);
                         oSheet.Cells[current_group, 5].Formula = string.Format("=SUBTOTAL(9,E{0}:E{1}", current_group + 1, current_row - 1);
                         oSheet.Cells[current_group, 6].Formula = string.Format("=SUBTOTAL(9,F{0}:F{1}", current_group + 1, current_row - 1);
-                        oSheet.Cells[current_group, 8].Formula = string.Format("=SUBTOTAL(9,H{0}:H{1}", current_group + 1, current_row - 1);
-                        oSheet.Cells[current_group, 9].Formula = string.Format("=SUBTOTAL(9,I{0}:I{1}", current_group + 1, current_row - 1);
-                        oSheet.Cells[current_group, 12].Formula = string.Format("=SUBTOTAL(9,L{0}:L{1}", current_group + 1, current_row - 1);
+                        //% Hoan thanh
+                        //oSheet.Cells[current_row, 7].Formula = string.Format("=F{0}/C{0}", current_group);
+                        //oSheet.Cells[current_group, 8].Formula = string.Format("=SUBTOTAL(9,H{0}:H{1}", current_group + 1, current_row - 1);
+                        //oSheet.Cells[current_group, 9].Formula = string.Format("=SUBTOTAL(9,I{0}:I{1}", current_group + 1, current_row - 1);
+                        //oSheet.Cells[current_group, 12].Formula = string.Format("=SUBTOTAL(9,L{0}:L{1}", current_group + 1, current_row - 1);
                         //Subtotal GDDA
                         oSheet.Cells[current_groupGDDA, 3].Formula = string.Format("=SUBTOTAL(9,C{0}:C{1}", current_groupGDDA + 1, current_row - 1);
                         oSheet.Cells[current_groupGDDA, 4].Formula = string.Format("=SUBTOTAL(9,D{0}:D{1}", current_groupGDDA + 1, current_row - 1);

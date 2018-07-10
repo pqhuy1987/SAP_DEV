@@ -46,6 +46,62 @@ END;
 
 GO
 
+ALTER PROCEDURE [dbo].[MM_CE_GET_DATA_BCH_NEW]
+	-- Add the parameters for the stored procedure here
+	@FinancialProject as varchar(100)
+	,@GoiThauKey as varchar(250)
+AS
+BEGIN
+	SET NOCOUNT ON;
+	--DECLARE @ProjectID as int;
+	DECLARE @DocEntry as int;
+    -- Insert statements for procedure here
+	--SELECT top 1 @ProjectID = AbsEntry from OPMG where FIPROJECT = @FinancialProject;
+	if (@GoiThauKey = '')
+		Select * from
+		(
+		Select left(U_TKKT + '00000000',8) as 'U_TKKT',U_TTKKT,SUM(U_GTDP) as 'U_GTDP' 
+		FROM [@CTG4] d
+		where DocEntry in 
+			(
+				 Select DocEntry from [@CTG] T0 inner join
+				 (Select U_GoiThauKey,MAX(U_Date) as 'U_DATE'
+				 From [@CTG] 
+				 where U_PrjCode = @FinancialProject
+				 group by U_GoiThauKey) T1 on T0.U_GoiThauKey = T1.U_GoiThauKey and T0.U_Date = T1.U_DATE
+			)
+		group by U_TKKT,U_TTKKT
+		) a
+		left join 
+		(Select b.Account,SUM(b.Debit) as TOTAL_BCH
+		From OJDT a inner join JDT1 b on a.TransID=b.TransId
+		where b.Project = @FinancialProject
+		--and a.U_LCP = 'BCH'
+		group by b.Account) b on a.U_TKKT=b.Account;
+	else
+		Select * from
+		(	Select left(U_TKKT + '00000000',8) as 'U_TKKT',U_TTKKT,SUM(U_GTDP) as 'U_GTDP' FROM [@CTG4] 
+			where DocEntry in 
+			(
+					Select DocEntry from [@CTG] T0 inner join
+					(Select U_GoiThauKey,MAX(U_Date) as 'U_DATE'
+					From [@CTG] 
+					where U_PrjCode = @FinancialProject
+					and U_GoiThauKey in (Select splitdata from dbo.fnSplitString(@GoiThauKey,','))
+					group by U_GoiThauKey) T1 on T0.U_GoiThauKey = T1.U_GoiThauKey and T0.U_Date = T1.U_DATE
+			)
+			group by U_TTKKT,left(U_TKKT + '00000000',8)
+		) a
+		left join 
+			(Select b.Account,SUM(b.Debit) as TOTAL_BCH
+			From OJDT a inner join JDT1 b on a.TransID=b.TransId
+			where b.Project = @FinancialProject
+			--and a.U_LCP = 'BCH'
+			group by b.Account) b 
+		on a.U_TKKT=b.Account ;
+END;
+GO
+
 ALTER PROCEDURE [dbo].[MM_CE_GET_FPROJECT]
 	-- Add the parameters for the stored procedure here
 	@Username as varchar(200)
@@ -2586,7 +2642,7 @@ ORDER BY CONVERT(INT , SUBSTRING(X.MA_CP , 2 , LEN(X.MA_CP)-1));
      END;
 GO
 
-CREATE PROCEDURE [dbo].[CCM_DT_LN_Project_List]
+ALTER PROCEDURE [dbo].[CCM_DT_LN_Project_List]
 	  @FrDate as date
 	, @ToDate as date
 AS
@@ -2658,12 +2714,173 @@ from (
 	group by z.U_PRJ,z.U_GOITHAU)T2 on T0.PrjCode=T2.U_PRJ and T1.DocNum = T2.U_GOITHAU
 where T0.Active ='Y'
 and T0.ValidFrom >= '01-Jan-2017'
-and T0.PrjCode <> 'VTTB';
+and T0.PrjCode <> 'VTTB'
+and ISNULL(T0.U_HOANTHANH,'N') <> 'Y'
+order by T0.[PrjCode],T1.AbsEntry;
 END
 GO
 
-CREATE PROCEDURE [dbo].[CCM_BASELINE_A_INDEX]
+ALTER PROCEDURE [dbo].[CCM_BASELINE_FPROJECT_A_INDEX]
 	@BASELINE_DocEntry as int
+	,@FinancialProject as varchar(250)
+AS
+DECLARE @DOANHTHU as decimal(19,6)
+DECLARE @Chiphi_DUTRU as decimal(19,6)
+DECLARE @Chiphi_BCH as decimal(19,6)
+DECLARE @Chiphi_DUPHONG as decimal(19,6)
+DECLARE @Chiphi_HOTRO as decimal(19,6)
+BEGIN
+	if (@BASELINE_DocEntry = -1)
+		Select top 1 @BASELINE_DocEntry= t0.DocEntry from [@BASELINE] t0 
+		where t0.[Status]= 'C'
+		and t0.[Canceled] <> 'Y'
+		and t0.U_FProject = @FinancialProject
+		order by DocEntry asc;
+	--Du tru
+	Select @Chiphi_DUTRU = SUM(ISNULL(U_CP_NCC,0) + ISNULL(U_CP_NTP,0) + ISNULL(U_CP_DTC,0) + ISNULL(U_CP_VTP,0) 
+			 + ISNULL(U_CP_VC,0)  + ISNULL(U_CP_VH,0)  + ISNULL(U_CP_CN,0)  + ISNULL(U_CP_DP,0)
+			 + ISNULL(U_CP_DP2,0) + + ISNULL(U_CP_K,0)) 
+	from BASELINE_DUTRUB where DocEntry_BaseLine = @BASELINE_DocEntry
+
+	--BCH
+	Select @Chiphi_BCH = SUM(ISNULL(U_GTDP,0))
+	FROM [BASELINE_CTG4] 
+	where DocEntry_BaseLine = @BASELINE_DocEntry
+	and U_TKKT not in ('CPQL','CPVTL','MMTB','BCHVP')
+	and U_TKKT is not null
+	and ISNUMERIC(U_TKKT) = 1;
+	
+	DECLARE @DP1 as decimal(19,6)
+	DECLARE @DPBH as decimal(19,6)
+	DECLARE @HT1 as decimal(19,6)
+	DECLARE @HT2 as decimal(19,6)
+	DECLARE @Chiphi_NG as decimal(19,6)
+	DECLARE @Table_HD TABLE(
+		U_GOITHAU int,
+		HT1 decimal(19,6),
+		HT2 decimal(19,6),
+		CPNG decimal(19,6),
+		DPCP decimal(19,6),
+		DPBH decimal(19,6),
+		CPQLCT decimal(19,6),
+		GTHD decimal(19,6),
+		GTTM decimal(19,6),
+		PA decimal(19,6),
+		PhiQL decimal(19,6),
+		PLHD decimal(19,6),
+		KHAC decimal(19,6),
+		Total decimal(19,6)
+	);
+
+	--Get HD cho Du an 
+	Insert into @Table_HD(U_GOITHAU, HT1, HT2, CPNG, DPCP, DPBH, CPQLCT, GTHD, GTTM, PA, PhiQL, PLHD, KHAC, Total)
+	Exec [dbo].[BASELINE_MM_FI_GET_DATA_VII] @BASELINE_DocEntry, '';
+
+	Select @DOANHTHU = SUM(ISNULL(Total,0)) --Doanh thu
+	,@DP1 = SUM(ISNULL(Total * DPCP/100 ,0)) --Phan tram chi phi du phong
+	,@DPBH = SUM(ISNULL(Total * DPBH/100 ,0)) --Phan tram chi phi du phong bao hanh
+	,@HT1 = SUM(ISNULL(Total * HT1/100 ,0))  --Ho tro 1
+	,@HT2 = SUM(ISNULL(Total * HT2/100 ,0))  --Ho tro 2
+	,@Chiphi_NG = SUM(ISNULL(CPNG,0)) -- Chi phi ngoai giao
+	from @Table_HD
+
+	--Chi phi DU PHONG
+	SET @Chiphi_DUPHONG = @DP1 + @DPBH;
+	--Chi phi HOTRO
+	SET @Chiphi_HOTRO = @HT1 + @HT2 + @Chiphi_NG
+	Select @DOANHTHU as 'Doanhthu'
+	, @Chiphi_DUTRU as 'Chiphi_DUTRU'
+	, @Chiphi_BCH as 'Chiphi_BCH'
+	, @Chiphi_DUPHONG as 'Chiphi_DP'
+	, @Chiphi_HOTRO as 'Chiphi_HT'
+	,(@DOANHTHU-(@Chiphi_DUTRU+ @Chiphi_BCH+@Chiphi_DUPHONG+@Chiphi_HOTRO))/@DOANHTHU as 'A-INDEX';
+
+END
+GO
+
+CREATE PROCEDURE [dbo].[CCM_BASELINE_FPROJECT_DATE_A_INDEX]
+	@BASELINE_DocEntry as int
+	,@FinancialProject as varchar(250)
+	,@ToDate as datetime
+AS
+DECLARE @DOANHTHU as decimal(19,6)
+DECLARE @Chiphi_DUTRU as decimal(19,6)
+DECLARE @Chiphi_BCH as decimal(19,6)
+DECLARE @Chiphi_DUPHONG as decimal(19,6)
+DECLARE @Chiphi_HOTRO as decimal(19,6)
+BEGIN
+	if (@BASELINE_DocEntry = -1)
+		Select top 1 @BASELINE_DocEntry= t0.DocEntry from [@BASELINE] t0 
+		where t0.[Status]= 'C'
+		and t0.[Canceled] <> 'Y'
+		and t0.U_FProject = @FinancialProject
+		and t0.U_BaseDate <= @ToDate
+		order by DocEntry desc;
+	--Du tru
+	Select @Chiphi_DUTRU = SUM(ISNULL(U_CP_NCC,0) + ISNULL(U_CP_NTP,0) + ISNULL(U_CP_DTC,0) + ISNULL(U_CP_VTP,0) 
+			 + ISNULL(U_CP_VC,0)  + ISNULL(U_CP_VH,0)  + ISNULL(U_CP_CN,0)  + ISNULL(U_CP_DP,0)
+			 + ISNULL(U_CP_DP2,0) + + ISNULL(U_CP_K,0)) 
+	from BASELINE_DUTRUB where DocEntry_BaseLine = @BASELINE_DocEntry
+
+	--BCH
+	Select @Chiphi_BCH = SUM(ISNULL(U_GTDP,0))
+	FROM [BASELINE_CTG4] 
+	where DocEntry_BaseLine = @BASELINE_DocEntry
+	and U_TKKT not in ('CPQL','CPVTL','MMTB','BCHVP')
+	and U_TKKT is not null
+	and ISNUMERIC(U_TKKT) = 1;
+	
+	DECLARE @DP1 as decimal(19,6)
+	DECLARE @DPBH as decimal(19,6)
+	DECLARE @HT1 as decimal(19,6)
+	DECLARE @HT2 as decimal(19,6)
+	DECLARE @Chiphi_NG as decimal(19,6)
+	DECLARE @Table_HD TABLE(
+		U_GOITHAU int,
+		HT1 decimal(19,6),
+		HT2 decimal(19,6),
+		CPNG decimal(19,6),
+		DPCP decimal(19,6),
+		DPBH decimal(19,6),
+		CPQLCT decimal(19,6),
+		GTHD decimal(19,6),
+		GTTM decimal(19,6),
+		PA decimal(19,6),
+		PhiQL decimal(19,6),
+		PLHD decimal(19,6),
+		KHAC decimal(19,6),
+		Total decimal(19,6)
+	);
+
+	--Get HD cho Du an 
+	Insert into @Table_HD(U_GOITHAU, HT1, HT2, CPNG, DPCP, DPBH, CPQLCT, GTHD, GTTM, PA, PhiQL, PLHD, KHAC, Total)
+	Exec [dbo].[BASELINE_MM_FI_GET_DATA_VII] @BASELINE_DocEntry, '';
+
+	Select @DOANHTHU = SUM(ISNULL(Total,0)) --Doanh thu
+	,@DP1 = SUM(ISNULL(Total * DPCP/100 ,0)) --Phan tram chi phi du phong
+	,@DPBH = SUM(ISNULL(Total * DPBH/100 ,0)) --Phan tram chi phi du phong bao hanh
+	,@HT1 = SUM(ISNULL(Total * HT1/100 ,0))  --Ho tro 1
+	,@HT2 = SUM(ISNULL(Total * HT2/100 ,0))  --Ho tro 2
+	,@Chiphi_NG = SUM(ISNULL(CPNG,0)) -- Chi phi ngoai giao
+	from @Table_HD
+
+	--Chi phi DU PHONG
+	SET @Chiphi_DUPHONG = @DP1 + @DPBH;
+	--Chi phi HOTRO
+	SET @Chiphi_HOTRO = @HT1 + @HT2 + @Chiphi_NG
+	Select @DOANHTHU as 'Doanhthu'
+	, @Chiphi_DUTRU as 'Chiphi_DUTRU'
+	, @Chiphi_BCH as 'Chiphi_BCH'
+	, @Chiphi_DUPHONG as 'Chiphi_DP'
+	, @Chiphi_HOTRO as 'Chiphi_HT'
+	,(@DOANHTHU-(@Chiphi_DUTRU+ @Chiphi_BCH+@Chiphi_DUPHONG+@Chiphi_HOTRO))/@DOANHTHU as 'A-INDEX';
+
+END
+GO
+
+ALTER PROCEDURE [dbo].[CCM_BASELINE_A_INDEX]
+	@BASELINE_DocEntry as int
+	,@FinancialProject as varchar(250)
 	,@ProjectId as int
 AS
 DECLARE @DOANHTHU as decimal(19,6)
@@ -2676,7 +2893,8 @@ BEGIN
 		Select top 1 @BASELINE_DocEntry= t0.DocEntry from [@BASELINE] t0 inner join BASELINE_OPMG t1 
 			on t0.DocEntry = t1.DocEntry_BaseLine and t1.AbsEntry=@ProjectId
 		where t0.[Status]= 'C'
-		and t0.[Canceled] = 'N'
+		and t0.[Canceled] <> 'Y'
+		and t0.U_FProject = @FinancialProject
 		order by DocEntry asc;
 	--Du tru
 	Select @Chiphi_DUTRU = SUM(ISNULL(U_CP_NCC,0) + ISNULL(U_CP_NTP,0) + ISNULL(U_CP_DTC,0) + ISNULL(U_CP_VTP,0) 
@@ -2700,35 +2918,141 @@ BEGIN
 	Select @Chiphi_BCH = SUM(ISNULL(U_GTDP,0))
 	FROM [BASELINE_CTG4] 
 	where DocEntry_BaseLine = @BASELINE_DocEntry
-	and DocEntry_CTG in (Select a.CTG_KEY 
-						from (Select U_GoiThauKey,max(DocEntry) as CTG_KEY 
-							from [BASELINE_CTG] 
-							where DocEntry_BaseLine = @BASELINE_DocEntry
-							and U_GoiThauKey = @ProjectID
-							group by U_GoiThauKey) a)
-	and ISNUMERIC(U_TKKT) = 1;
+	and DocEntry_CTG in (Select DocEntry from [BASELINE_CTG]  where U_GoiThauKey = @ProjectID)
+	and ISNUMERIC(U_TKKT) = 1
+	and U_TKKT is not null;
 	
-	DECLARE @Phantram_DP1 as decimal(19,6)
-	DECLARE @Phantram_DPBH as decimal(19,6)
-	DECLARE @Phatram_HT1 as decimal(19,6)
-	DECLARE @Phatram_HT2 as decimal(19,6)
+	DECLARE @DP1 as decimal(19,6)
+	DECLARE @DPBH as decimal(19,6)
+	DECLARE @HT1 as decimal(19,6)
+	DECLARE @HT2 as decimal(19,6)
 	DECLARE @Chiphi_NG as decimal(19,6)
-	--Chi phi DU PHONG
-	Select @Phantram_DP1=U_DPCP, @Phantram_DPBH = U_DPBH 
-	,@Phatram_HT1= ISNULL(U_CPHT1,0), @Phatram_HT2=ISNULL(U_CPHT1,0) 
-	,@Chiphi_NG = ISNULL(U_CPNG,0)
-	from BASELINE_OPMG a 
-	where a.DocEntry_BaseLine=@BASELINE_DocEntry and a.STATUS <> 'T';
-	
-	Select @DOANHTHU = SUM(ISNULL(b.PlanQty*b.UnitPrice,0) + ISNULL(b.PlanAmtLC,0))
-	from OOAT a left join OAT1 b on a.AbsID = b.AgrNo
-	where a.Series = 47
-	and a.BpType = 'C'
-	and a.U_PRJ in (Select U_FProject from [@BASELINE] where DocEntry = @BASELINE_DocEntry);
-	SET @Chiphi_DUPHONG = (@DOANHTHU * @Phantram_DP1/100) + (@DOANHTHU * @Phantram_DPBH/100);
+	DECLARE @Table_HD TABLE(
+		U_GOITHAU int,
+		HT1 decimal(19,6),
+		HT2 decimal(19,6),
+		CPNG decimal(19,6),
+		DPCP decimal(19,6),
+		DPBH decimal(19,6),
+		CPQLCT decimal(19,6),
+		GTHD decimal(19,6),
+		GTTM decimal(19,6),
+		PA decimal(19,6),
+		PhiQL decimal(19,6),
+		PLHD decimal(19,6),
+		KHAC decimal(19,6),
+		Total decimal(19,6)
+	);
+	--Get HD cho Du an 
+	Insert into @Table_HD(U_GOITHAU, HT1, HT2, CPNG, DPCP, DPBH, CPQLCT, GTHD, GTTM, PA, PhiQL, PLHD, KHAC, Total)
+	Exec [dbo].[BASELINE_MM_FI_GET_DATA_VII] @BASELINE_DocEntry, @ProjectID;
 
+	Select @DOANHTHU = SUM(ISNULL(Total,0)) --Doanh thu
+	,@DP1 = SUM(ISNULL(Total * DPCP/100 ,0)) --Phan tram chi phi du phong
+	,@DPBH = SUM(ISNULL(Total * DPBH/100 ,0)) --Phan tram chi phi du phong bao hanh
+	,@HT1 = SUM(ISNULL(Total * HT1/100 ,0))  --Ho tro 1
+	,@HT2 = SUM(ISNULL(Total * HT2/100 ,0))  --Ho tro 2
+	,@Chiphi_NG = SUM(ISNULL(CPNG,0)) -- Chi phi ngoai giao
+	from @Table_HD
+
+	--Chi phi DU PHONG
+	SET @Chiphi_DUPHONG = @DP1 + @DPBH;
 	--Chi phi HOTRO
-	SET @Chiphi_HOTRO = (@DOANHTHU * @Phatram_HT1/100) + (@DOANHTHU * @Phatram_HT2/100) + @Chiphi_NG;
+	SET @Chiphi_HOTRO = @HT1 + @HT2 + @Chiphi_NG
+
+	Select @DOANHTHU as 'Doanhthu'
+	, @Chiphi_DUTRU as 'Chiphi_DUTRU'
+	, @Chiphi_BCH as 'Chiphi_BCH'
+	, @Chiphi_DUPHONG as 'Chiphi_DP'
+	, @Chiphi_HOTRO as 'Chiphi_HT'
+	,(@DOANHTHU-(@Chiphi_DUTRU+ @Chiphi_BCH+@Chiphi_DUPHONG+@Chiphi_HOTRO))/@DOANHTHU as 'A-INDEX';
+END
+GO
+
+CREATE PROCEDURE [dbo].[CCM_BASELINE_DATE_A_INDEX]
+	@BASELINE_DocEntry as int
+	,@FinancialProject as varchar(250)
+	,@ProjectId as int
+	,@ToDate as datetime
+AS
+DECLARE @DOANHTHU as decimal(19,6)
+DECLARE @Chiphi_DUTRU as decimal(19,6)
+DECLARE @Chiphi_BCH as decimal(19,6)
+DECLARE @Chiphi_DUPHONG as decimal(19,6)
+DECLARE @Chiphi_HOTRO as decimal(19,6)
+BEGIN
+	if (@BASELINE_DocEntry = -1)
+		Select top 1 @BASELINE_DocEntry= t0.DocEntry from [@BASELINE] t0 inner join BASELINE_OPMG t1 
+			on t0.DocEntry = t1.DocEntry_BaseLine and t1.AbsEntry=@ProjectId
+		where t0.[Status]= 'C'
+		and t0.[Canceled] <> 'Y'
+		and t0.U_FProject = @FinancialProject
+		and t0.U_BaseDate <= @ToDate
+		order by DocEntry desc;
+	--Du tru
+	Select @Chiphi_DUTRU = SUM(ISNULL(U_CP_NCC,0) + ISNULL(U_CP_NTP,0) + ISNULL(U_CP_DTC,0) + ISNULL(U_CP_VTP,0) 
+			 + ISNULL(U_CP_VC,0)  + ISNULL(U_CP_VH,0)  + ISNULL(U_CP_CN,0)  + ISNULL(U_CP_DP,0)
+			 + ISNULL(U_CP_DP2,0) + + ISNULL(U_CP_K,0)) 
+	from BASELINE_DUTRUB where DocEntry_BaseLine = @BASELINE_DocEntry
+	and DocEntry_DUTRU in 
+					(Select DocEntry
+					from [BASELINE_DUTRU] 
+					where DUTRU_TYPE = 1
+					and DocEntry_BaseLine = @BASELINE_DocEntry
+					and CTG_Key in (
+							Select a.CTG_KEY 
+							from (Select U_GoiThauKey,max(DocEntry) as CTG_KEY 
+								from [BASELINE_CTG] 
+								where DocEntry_BaseLine = @BASELINE_DocEntry
+								and U_GoiThauKey = @ProjectID
+								group by U_GoiThauKey) a));
+
+	--BCH
+	Select @Chiphi_BCH = SUM(ISNULL(U_GTDP,0))
+	FROM [BASELINE_CTG4] 
+	where DocEntry_BaseLine = @BASELINE_DocEntry
+	and DocEntry_CTG in (Select DocEntry from [BASELINE_CTG]  where U_GoiThauKey = @ProjectID)
+	and ISNUMERIC(U_TKKT) = 1
+	and U_TKKT is not null;
+	
+	DECLARE @DP1 as decimal(19,6)
+	DECLARE @DPBH as decimal(19,6)
+	DECLARE @HT1 as decimal(19,6)
+	DECLARE @HT2 as decimal(19,6)
+	DECLARE @Chiphi_NG as decimal(19,6)
+	DECLARE @Table_HD TABLE(
+		U_GOITHAU int,
+		HT1 decimal(19,6),
+		HT2 decimal(19,6),
+		CPNG decimal(19,6),
+		DPCP decimal(19,6),
+		DPBH decimal(19,6),
+		CPQLCT decimal(19,6),
+		GTHD decimal(19,6),
+		GTTM decimal(19,6),
+		PA decimal(19,6),
+		PhiQL decimal(19,6),
+		PLHD decimal(19,6),
+		KHAC decimal(19,6),
+		Total decimal(19,6)
+	);
+	--Get HD cho Du an 
+	Insert into @Table_HD(U_GOITHAU, HT1, HT2, CPNG, DPCP, DPBH, CPQLCT, GTHD, GTTM, PA, PhiQL, PLHD, KHAC, Total)
+	Exec [dbo].[BASELINE_MM_FI_GET_DATA_VII] @BASELINE_DocEntry, @ProjectID;
+
+	Select @DOANHTHU = SUM(ISNULL(Total,0)) --Doanh thu
+	,@DP1 = SUM(ISNULL(Total * DPCP/100 ,0)) --Phan tram chi phi du phong
+	,@DPBH = SUM(ISNULL(Total * DPBH/100 ,0)) --Phan tram chi phi du phong bao hanh
+	,@HT1 = SUM(ISNULL(Total * HT1/100 ,0))  --Ho tro 1
+	,@HT2 = SUM(ISNULL(Total * HT2/100 ,0))  --Ho tro 2
+	,@Chiphi_NG = SUM(ISNULL(CPNG,0)) -- Chi phi ngoai giao
+	from @Table_HD
+
+	--Chi phi DU PHONG
+	SET @Chiphi_DUPHONG = @DP1 + @DPBH;
+	--Chi phi HOTRO
+	SET @Chiphi_HOTRO = @HT1 + @HT2 + @Chiphi_NG
+
 	Select @DOANHTHU as 'Doanhthu'
 	, @Chiphi_DUTRU as 'Chiphi_DUTRU'
 	, @Chiphi_BCH as 'Chiphi_BCH'
@@ -2817,7 +3141,7 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE [dbo].[CCM_DT_LN_TONGHOP_LST]
+ALTER PROCEDURE [dbo].[CCM_DT_LN_TONGHOP_LST]
 	@ToDate as datetime
 AS
 BEGIN
@@ -2857,7 +3181,7 @@ Select T0.PrjCode, T0.PrjName,T1.AbsEntry,T1.[NAME],T1.CARDNAME
 	and a.CANCELED not in ('Y','C')
 	and YEAR(a.DocDate) = YEAR(@ToDate)
 	and a.DocDate <= @ToDate) as 'DTthucte'
-from OPRJ T0 inner join OPMG T1 on T0.PrjCode=T1.FIPROJECT
+from OPRJ T0 inner join OPMG T1 on T0.PrjCode=T1.FIPROJECT and T1.[STATUS] <> 'N'
 left join 
 (Select 
 z.U_PRJ
@@ -2918,9 +3242,9 @@ from (
 where T0.Active ='Y'
 and T0.ValidFrom >= '01-Jan-2017'
 and T0.PrjCode <> 'VTTB'
-order by T1.[OWNER];
+and ISNULL(T0.U_HOANTHANH,'N') <> 'Y'
+order by T1.[OWNER],T0.[PrjCode];
 END
-GO
 
 CREATE FUNCTION [dbo].[fnPUType_Convert] 
 ( 

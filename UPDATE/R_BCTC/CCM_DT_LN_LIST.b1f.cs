@@ -118,7 +118,34 @@ namespace R_BCTC
             return result;
         }
 
-        System.Data.DataTable Get_Data_BASELINE(int pBASELINE_DocEntry, int pProjectID)
+        //System.Data.DataTable Get_Data_BASELINE(int pBASELINE_DocEntry, int pProjectID)
+        //{
+        //    DataTable result = new DataTable();
+        //    SqlCommand cmd = null;
+        //    try
+        //    {
+        //        cmd = new SqlCommand("CCM_BASELINE_A_INDEX", conn);
+        //        cmd.CommandType = CommandType.StoredProcedure;
+        //        cmd.Parameters.AddWithValue("@BASELINE_DocEntry", pBASELINE_DocEntry);
+        //        cmd.Parameters.AddWithValue("@ProjectID", pProjectID);
+        //        //cmd.Parameters.AddWithValue("@ProjectID", pProjectID);
+        //        conn.Open();
+        //        SqlDataReader rd = cmd.ExecuteReader();
+        //        result.Load(rd);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        oApp.MessageBox(ex.Message);
+        //    }
+        //    finally
+        //    {
+        //        conn.Close();
+        //        cmd.Dispose();
+        //    }
+        //    return result;
+        //}
+
+        System.Data.DataTable Get_Data_BASELINE(int pBASELINE_DocEntry, string pFProject, int pProjectID)
         {
             DataTable result = new DataTable();
             SqlCommand cmd = null;
@@ -127,8 +154,91 @@ namespace R_BCTC
                 cmd = new SqlCommand("CCM_BASELINE_A_INDEX", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@BASELINE_DocEntry", pBASELINE_DocEntry);
+                cmd.Parameters.AddWithValue("@FinancialProject", pFProject);
                 cmd.Parameters.AddWithValue("@ProjectID", pProjectID);
                 //cmd.Parameters.AddWithValue("@ProjectID", pProjectID);
+                conn.Open();
+                SqlDataReader rd = cmd.ExecuteReader();
+                result.Load(rd);
+            }
+            catch (Exception ex)
+            {
+                oApp.MessageBox(ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+                cmd.Dispose();
+            }
+            return result;
+        }
+
+        System.Data.DataTable Get_Data_BASELINE_Date(int pBASELINE_DocEntry, string pFProject, int pProjectID, DateTime pToDate)
+        {
+            DataTable result = new DataTable();
+            SqlCommand cmd = null;
+            try
+            {
+                cmd = new SqlCommand("CCM_BASELINE_DATE_A_INDEX", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@BASELINE_DocEntry", pBASELINE_DocEntry);
+                cmd.Parameters.AddWithValue("@FinancialProject", pFProject);
+                cmd.Parameters.AddWithValue("@ProjectID", pProjectID);
+                cmd.Parameters.AddWithValue("@ToDate", pToDate);
+                //cmd.Parameters.AddWithValue("@ProjectID", pProjectID);
+                conn.Open();
+                SqlDataReader rd = cmd.ExecuteReader();
+                result.Load(rd);
+            }
+            catch (Exception ex)
+            {
+                oApp.MessageBox(ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+                cmd.Dispose();
+            }
+            return result;
+        }
+
+        System.Data.DataTable Get_A_Index_Fproject(int pBASELINE_DocEntry, string pFProject)
+        {
+            DataTable result = new DataTable();
+            SqlCommand cmd = null;
+            try
+            {
+                cmd = new SqlCommand("CCM_BASELINE_FPROJECT_A_INDEX", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@BASELINE_DocEntry", pBASELINE_DocEntry);
+                cmd.Parameters.AddWithValue("@FinancialProject", pFProject);
+                conn.Open();
+                SqlDataReader rd = cmd.ExecuteReader();
+                result.Load(rd);
+            }
+            catch (Exception ex)
+            {
+                oApp.MessageBox(ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+                cmd.Dispose();
+            }
+            return result;
+        }
+
+        System.Data.DataTable Get_A_Index_Fproject_Date(int pBASELINE_DocEntry, string pFProject, DateTime pToDate)
+        {
+            DataTable result = new DataTable();
+            SqlCommand cmd = null;
+            try
+            {
+                cmd = new SqlCommand("CCM_BASELINE_FPROJECT_DATE_A_INDEX", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@BASELINE_DocEntry", pBASELINE_DocEntry);
+                cmd.Parameters.AddWithValue("@FinancialProject", pFProject);
+                cmd.Parameters.AddWithValue("@ToDate", pToDate);
                 conn.Open();
                 SqlDataReader rd = cmd.ExecuteReader();
                 result.Load(rd);
@@ -189,6 +299,14 @@ namespace R_BCTC
                             oSheet.Cells[current_row, 1] = STT;
                             oSheet.Cells[current_row, 2] = r["PrjName"];
                             oSheet.Range["A" + current_row, "J" + current_row].Interior.Color = System.Drawing.Color.FromArgb(252, 228, 214);
+                            //Get A-Index Baseline
+                            DataTable rs_baseline_f = Get_A_Index_Fproject_Date(-1, r["PrjCode"].ToString(), frdate);
+                            if (rs_baseline_f.Rows.Count >= 1)
+                                oSheet.Cells[current_row, 8] = rs_baseline_f.Rows[0]["A-INDEX"];
+                            //Get A-Index Current
+                            DataTable rs_current_f = Get_A_Index_Fproject_Date(-1, r["PrjCode"].ToString(), todate);
+                            if (rs_current_f.Rows.Count >= 1)
+                                oSheet.Cells[current_row, 9] = rs_current_f.Rows[0]["A-INDEX"];
                             current_row++;
                             STT++;
                             FProject = r["PrjCode"].ToString();
@@ -201,11 +319,11 @@ namespace R_BCTC
                         oSheet.Cells[current_row, 6] = r["PRJTYPE"];
                         oSheet.Cells[current_row, 7] = r["GTHD"];
                         //Get A-Index Baseline
-                        DataTable rs_baseline = Get_Data_BASELINE(-1, int.Parse(r["AbsEntry"].ToString()));
+                        DataTable rs_baseline = Get_Data_BASELINE_Date(-1, r["PrjCode"].ToString(),int.Parse(r["AbsEntry"].ToString()),frdate);
                         if (rs_baseline.Rows.Count >= 1)
                             oSheet.Cells[current_row, 8] = rs_baseline.Rows[0]["A-INDEX"];
                         //Get A-Index Current
-                        DataTable rs_current = Get_Data_CURRENT(r["PrjCode"].ToString(), int.Parse(r["AbsEntry"].ToString()));
+                        DataTable rs_current = Get_Data_BASELINE_Date(-1, r["PrjCode"].ToString(), int.Parse(r["AbsEntry"].ToString()), todate);
                         if (rs_current.Rows.Count >= 1)
                             oSheet.Cells[current_row, 9] = rs_current.Rows[0]["A-INDEX"];
                         current_row++;

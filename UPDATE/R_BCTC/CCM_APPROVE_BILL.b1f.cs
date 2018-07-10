@@ -174,7 +174,8 @@ namespace R_BCTC
                         oSheet.Cells[current_row, 12] = r["KT"];
                         //Total
                         oSheet.Cells[current_row, 13].Formula = string.Format("=IF(DAYS(L{0},G{0})<0,0,DAYS(L{0},G{0}))", current_row);
-
+                        //Ghi chu
+                        oSheet.Cells[current_row, 14] = r["Rejected"];
                         STT++;
                         current_row++;
                     }
@@ -391,8 +392,8 @@ namespace R_BCTC
             //Tong GT duoc thanh toan den ky nay
             decimal TongGT = 0;
             TongGT = GTTT_KN + TU - HU;// String.Format("{0:n}", decimal.Parse(EditText8.Value) + decimal.Parse(EditText12.Value) - decimal.Parse(EditText14.Value));
+            
             //Tong GT thanh toan den ky truoc
-
             if (BType == 1)
             {
                 KLTT_Kytruoc = 0;
@@ -402,23 +403,27 @@ namespace R_BCTC
             {
                 if (pp_tu_lastbill > 0)
                     KLTT_Kytruoc = Math.Round((pp_ca * (1 - (decimal)PTGL)) + pp_tu_lastbill - pp_hu_lastbill, 0);
-                //String.Format("{0:n}", Math.Round((pp_ca * (1 - (decimal)PTGL)) + pp_tu_lastbill - pp_hu_lastbill, 0));
                 else
                     KLTT_Kytruoc = Math.Round((pp_ca * (1 - (decimal)PTGL)), 0);
-                //String.Format("{0:n}", Math.Round((pp_ca * (1 - (decimal)PTGL)), 0));
             }
             else if (BType == 3)
             {
                 if (pp_tu_lastbill > 0)
                     KLTT_Kytruoc = Math.Round((pp_ca * (1 - (decimal)PTGL)) + pp_tu_lastbill - pp_hu_lastbill);
-                //String.Format("{0:n}", Math.Round((pp_ca * (1 - (decimal)PTGL)) + pp_tu_lastbill - pp_hu_lastbill));
                 else
                     KLTT_Kytruoc = Math.Round((pp_ca * (1 - (decimal)PTGL)));
-                //String.Format("{0:n}", Math.Round((pp_ca * (1 - (decimal)PTGL))));
             }
+
             //GT thanh toan ky nay
-            KLTT_Kynay = Math.Round(GTTT_KN - KLTT_Kytruoc, 0);
-            //String.Format("{0:n}", Math.Round(decimal.Parse(EditText16.Value) - decimal.Parse(EditText18.Value), 0));
+            if (BType != 1)
+            {
+                KLTT_Kynay = Math.Round(GTTT_KN - KLTT_Kytruoc, 0);
+            }
+            else
+            {
+                KLTT_Kynay = TU;
+            }
+
             #endregion
         }
     }

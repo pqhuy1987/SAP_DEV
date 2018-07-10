@@ -32,7 +32,10 @@ namespace R_BCTC
         private SAPbouiCOM.EditText EditText2;
 
         private SAPbouiCOM.Grid Grid0;
+
         private SAPbouiCOM.Button Button0;
+        private SAPbouiCOM.Button Button1;
+        private SAPbouiCOM.Button Button2;
 
         public override void OnInitializeComponent()
         {
@@ -46,6 +49,10 @@ namespace R_BCTC
             this.Grid0.DoubleClickAfter += new SAPbouiCOM._IGridEvents_DoubleClickAfterEventHandler(this.Grid0_DoubleClickAfter);
             this.Button0 = ((SAPbouiCOM.Button)(this.GetItem("bt_load").Specific));
             this.Button0.PressedAfter += new SAPbouiCOM._IButtonEvents_PressedAfterEventHandler(this.Button0_PressedAfter);
+            this.Button1 = ((SAPbouiCOM.Button)(this.GetItem("bt_r1").Specific));
+            this.Button1.PressedAfter += new SAPbouiCOM._IButtonEvents_PressedAfterEventHandler(this.Button1_PressedAfter);
+            this.Button2 = ((SAPbouiCOM.Button)(this.GetItem("bt_r2").Specific));
+            this.Button2.PressedAfter += new SAPbouiCOM._IButtonEvents_PressedAfterEventHandler(this.Button2_PressedAfter);
             this.OnCustomInitialize();
 
         }
@@ -377,6 +384,57 @@ namespace R_BCTC
                     }
                 }
             }
+        }
+
+        //Tong hop phat sinh cuoi ky
+        private void Button2_PressedAfter(object sboObject, SAPbouiCOM.SBOItemEventArg pVal)
+        {
+            try
+            {
+                if (Grid0.Rows.SelectedRows.Count == 1)
+                {
+                    string STK = Grid0.DataTable.GetValue(1, Grid0.Rows.SelectedRows.Item(0, SAPbouiCOM.BoOrderType.ot_RowOrder)).ToString();
+                    DataTable rs = Get_MenuUID_TonghopsoPS();
+                    if (rs.Rows.Count > 0)
+                    {
+                        oApp.ActivateMenuItem(rs.Rows[0]["MenuUID"].ToString());
+                        SAPbouiCOM.Form act_frm = oApp.Forms.ActiveForm;
+                        ((SAPbouiCOM.EditText)act_frm.Items.Item("1000003").Specific).Value = EditText0.Value;
+                        ((SAPbouiCOM.EditText)act_frm.Items.Item("1000009").Specific).Value = EditText1.Value;
+                        ((SAPbouiCOM.CheckBox)act_frm.Items.Item("1000015").Specific).Checked = true;
+                        ((SAPbouiCOM.EditText)act_frm.Items.Item("1000021").Specific).Value = STK;
+                        ((SAPbouiCOM.ComboBox)act_frm.Items.Item("1000027").Specific).Select(0, SAPbouiCOM.BoSearchKey.psk_Index);
+                        act_frm.Items.Item("1").Click();
+                    }
+                }
+            }
+            catch
+            {}
+        }
+
+        //So chi tiet tai khoan
+        private void Button1_PressedAfter(object sboObject, SAPbouiCOM.SBOItemEventArg pVal)
+        {
+            try
+            {
+                if (Grid0.Rows.SelectedRows.Count == 1)
+                {
+                    string STK = Grid0.DataTable.GetValue(1, Grid0.Rows.SelectedRows.Item(0, SAPbouiCOM.BoOrderType.ot_RowOrder)).ToString();
+                    DataTable rs = Get_MenuUID();
+                    if (rs.Rows.Count > 0)
+                    {
+                        oApp.ActivateMenuItem(rs.Rows[0]["MenuUID"].ToString());
+                        SAPbouiCOM.Form act_frm = oApp.Forms.ActiveForm;
+                        ((SAPbouiCOM.EditText)act_frm.Items.Item("1000003").Specific).Value = EditText0.Value;
+                        ((SAPbouiCOM.EditText)act_frm.Items.Item("1000009").Specific).Value = EditText1.Value;
+                        ((SAPbouiCOM.EditText)act_frm.Items.Item("1000027").Specific).Value = STK;
+                        act_frm.Items.Item("1").Click();
+                    }
+
+                }
+            }
+            catch
+            { }
         }
     }
 }

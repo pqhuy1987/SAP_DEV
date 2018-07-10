@@ -195,8 +195,11 @@ namespace R_BCTC
                 //oSheet.Cells[3, 3] = "Gói thầu: " + this.ComboBox1.Selected.Description;
                 //Thang
                 oSheet.Cells[4, 3] = "Tháng: " + DateTime.Today.ToString("MM-yyyy");//this.ComboBox2.Selected.Value;
-
-                DataTable A = Get_Data_BCDTA(this.ComboBox0.Selected.Value);
+                DataTable A = null;
+                if (!string.IsNullOrEmpty(GoiThau_Key))
+                    A = Get_Data_BCDTA(this.ComboBox0.Selected.Value, GoiThau_Key);
+                else
+                    A = Get_Data_BCDTA(this.ComboBox0.Selected.Value);
                 List<int> Group_No_RowNum = new List<int>();
                 List<int> Section_RowNum = new List<int>();
                 decimal sum_tb = 0, sum_dp2 = 0;
@@ -427,7 +430,7 @@ namespace R_BCTC
                         ((Microsoft.Office.Interop.Excel.Range)oSheet.Cells[detail_rownum - 1, 7]).Formula = string.Format("=SUBTOTAL(9,{0})", "G" + detail_rownum + ":G" + (current_rownum - 1));
                         ((Microsoft.Office.Interop.Excel.Range)oSheet.Cells[detail_rownum - 1, 8]).Formula = string.Format("=G{0}/F{0}", detail_rownum -1);
                     }
-
+                    
                     oSheet.Range["A" + current_rownum, "H" + current_rownum].Font.Italic = true;
                     oSheet.Range["A" + current_rownum, "H" + current_rownum].Font.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Blue);
                     oSheet.Cells[current_rownum, 2] = "Dự phòng";
@@ -570,27 +573,6 @@ namespace R_BCTC
                 //Total I
                 if (Group_No_RowNum.Count > 0)
                 {
-                    //string cell_sum_dutru_cptt = "";
-                    //string cell_sum_dutru_cppb = "";
-                    //string cell_sum_dutru_gttt_dd = "";
-                    //int temp = 1;
-                    //foreach (int t in Group_No_RowNum)
-                    //{
-                    //    if (temp < Group_No_RowNum.Count)
-                    //    {
-                    //        cell_sum_dutru_cptt += "E" + t + ",";
-                    //        cell_sum_dutru_cppb += "F" + t + ",";
-                    //        cell_sum_dutru_gttt_dd += "G" + t + ",";
-                    //        temp++;
-                    //    }
-                    //    else
-                    //    {
-                    //        cell_sum_dutru_cptt += "E" + t;
-                    //        cell_sum_dutru_cppb += "F" + t;
-                    //        cell_sum_dutru_gttt_dd += "G" + t;
-                    //    }
-                    //}
-                    //((Microsoft.Office.Interop.Excel.Range)oSheet.Cells[Section_RowNum[0] - 1, 7]).Formula = string.Format("=SUM({0})", cell_sum_tt);
                     ((Microsoft.Office.Interop.Excel.Range)oSheet.Cells[Section_RowNum[(Section_RowNum.Count - 1)], 4]).Formula = string.Format("=SUBTOTAL(9,{0})", "D" + (Section_RowNum[(Section_RowNum.Count - 1)] + 1) + ":D" + (current_rownum - 1));
                     ((Microsoft.Office.Interop.Excel.Range)oSheet.Cells[Section_RowNum[(Section_RowNum.Count - 1)], 5]).Formula = string.Format("=SUBTOTAL(9,{0})", "E" + (Section_RowNum[(Section_RowNum.Count - 1)] + 1) + ":E" + (current_rownum - 1));
                     ((Microsoft.Office.Interop.Excel.Range)oSheet.Cells[Section_RowNum[(Section_RowNum.Count - 1)], 6]).Formula = string.Format("=SUBTOTAL(9,{0})", "F" + (Section_RowNum[(Section_RowNum.Count - 1)] + 1) + ":F" + (current_rownum - 1));
@@ -600,7 +582,7 @@ namespace R_BCTC
 
 
                 //II - CHI PHÍ QUẢN LÝ BCH TRỰC TIẾP
-                DataTable D = Get_Data_BCH(this.ComboBox0.Selected.Value);
+                DataTable D = Get_Data_BCH(this.ComboBox0.Selected.Value, GoiThau_Key);
                 oSheet.Range["A" + current_rownum, "H" + current_rownum].Interior.Color = System.Drawing.Color.FromArgb(201, 201, 201);
                 oSheet.Range["A" + current_rownum, "H" + current_rownum].Font.Bold = true;
                 oSheet.Cells[current_rownum, 1] = "II";
@@ -872,7 +854,21 @@ namespace R_BCTC
                 #endregion
 
                 //III - CHI PHÍ HỔ TRỢ
-                DataTable E = Get_Prj_Info(this.ComboBox0.Selected.Value);
+                //DataTable E = Get_Prj_Info(this.ComboBox0.Selected.Value);
+                DataTable VII = Get_Data_VII(this.ComboBox0.Selected.Value, GoiThau_Key);
+                string f_ht1 = "", f_ht2 = "", f_ng = "", f_dpcp = "", f_dpbh = "", f_cpqlct = "";
+                if (VII.Rows.Count > 0)
+                {
+                    foreach (DataRow r in VII.Rows)
+                    {
+                        f_ht1 += string.Format(@"{0}*{1}/100 + ", r["Total"], r["HT1"]);
+                        f_ht2 += string.Format(@"{0}*{1}/100 + ", r["Total"], r["HT2"]);
+                        f_dpcp += string.Format(@"{0}*{1}/100 + ", r["Total"], r["DPCP"]);
+                        f_dpbh += string.Format(@"{0}*{1}/100 + ", r["Total"], r["DPBH"]);
+                        f_cpqlct += string.Format(@"{0}*{1}/100 + ", r["Total"], r["CPQLCT"]);
+                        f_ng += string.Format(@"{0} + ", r["CPNG"]);
+                    }
+                }
                 oSheet.Range["A" + current_rownum, "H" + current_rownum].Interior.Color = System.Drawing.Color.FromArgb(201, 201, 201);
                 oSheet.Range["A" + current_rownum, "H" + current_rownum].Font.Bold = true;
                 oSheet.Cells[current_rownum, 1] = "III";
@@ -882,20 +878,28 @@ namespace R_BCTC
                 //Chi phi ho tro 1
                 oSheet.Range["B" + current_rownum, "H" + current_rownum].Font.Italic = true;
                 oSheet.Cells[current_rownum, 2] = "Chi phi hỗ trợ 1";
-                //oSheet.Cells[current_rownum, 4].Value2 = D.Select("U_TKKT='62770'").Count<DataRow>() > 0 ? D.Select("U_TKKT='62770'")[0]["U_GTDP"] : "";
-                decimal tmp_cpht = 0;
-                decimal.TryParse(E.Rows[0]["U_CPHT1"].ToString(), out tmp_cpht);
-                ((Microsoft.Office.Interop.Excel.Range)oSheet.Cells[current_rownum, 5]).Formula = string.Format("={0}*{1}/100", "D6", tmp_cpht);
-                ((Microsoft.Office.Interop.Excel.Range)oSheet.Cells[current_rownum, 6]).Formula = string.Format("={0}*{1}/100", "D6", tmp_cpht);
+                //decimal tmp_cpht = 0;
+                //decimal.TryParse(E.Rows[0]["U_CPHT1"].ToString(), out tmp_cpht);
+                if (f_ht1 != "")
+                {
+                    ((Microsoft.Office.Interop.Excel.Range)oSheet.Cells[current_rownum, 5]).Formula = "=" + f_ht1.Substring(0, f_ht1.Length - 3);
+                    //string.Format("={0}*{1}/100", "D6", tmp_cpht);
+                    ((Microsoft.Office.Interop.Excel.Range)oSheet.Cells[current_rownum, 6]).Formula = "=" + f_ht1.Substring(0, f_ht1.Length - 3);
+                    //string.Format("={0}*{1}/100", "D6", tmp_cpht);
+                }
                 current_rownum++;
                 //Chi phi ho tro 2
                 oSheet.Range["B" + current_rownum, "H" + current_rownum].Font.Italic = true;
                 oSheet.Cells[current_rownum, 2] = "Chi phi hỗ trợ 2";
-                decimal tmp_cpht2 = 0;
-                decimal.TryParse(E.Rows[0]["U_CPHT2"].ToString(), out tmp_cpht2);
-                //oSheet.Cells[current_rownum, 4].Value2 = D.Select("U_TKKT='62770'").Count<DataRow>() > 0 ? D.Select("U_TKKT='62770'")[0]["U_GTDP"] : "";
-                ((Microsoft.Office.Interop.Excel.Range)oSheet.Cells[current_rownum, 5]).Formula = string.Format("={0}*{1}/100", "D6", tmp_cpht2);
-                ((Microsoft.Office.Interop.Excel.Range)oSheet.Cells[current_rownum, 6]).Formula = string.Format("={0}*{1}/100", "D6", tmp_cpht2);
+                //decimal tmp_cpht2 = 0;
+                //decimal.TryParse(E.Rows[0]["U_CPHT2"].ToString(), out tmp_cpht2);
+                if (f_ht2 != "")
+                {
+                    ((Microsoft.Office.Interop.Excel.Range)oSheet.Cells[current_rownum, 5]).Formula = "=" + f_ht2.Substring(0, f_ht2.Length - 3);
+                        //string.Format("={0}*{1}/100", "D6", tmp_cpht2);
+                    ((Microsoft.Office.Interop.Excel.Range)oSheet.Cells[current_rownum, 6]).Formula = "=" + f_ht2.Substring(0, f_ht2.Length - 3);
+                        //string.Format("={0}*{1}/100", "D6", tmp_cpht2);
+                }
                 current_rownum++;
                 //Chi phi quan ly cong ty
                 //oSheet.Range["B" + current_rownum, "H" + current_rownum].Font.Italic = true;
@@ -905,11 +909,15 @@ namespace R_BCTC
                 //Chi phi NG
                 oSheet.Range["B" + current_rownum, "H" + current_rownum].Font.Italic = true;
                 oSheet.Cells[current_rownum, 2] = "Chi phi NG";
-                decimal tmp_cpng = 0;
-                decimal.TryParse(E.Rows[0]["U_CPNG"].ToString(), out tmp_cpng);
-                //oSheet.Cells[current_rownum, 4].Value2 = D.Select("U_TKKT='62770'").Count<DataRow>() > 0 ? D.Select("U_TKKT='62770'")[0]["U_GTDP"] : "";
-                ((Microsoft.Office.Interop.Excel.Range)oSheet.Cells[current_rownum, 5]).Value2 = tmp_cpng; //string.Format("={0}*{1}/100", "D6",
-                ((Microsoft.Office.Interop.Excel.Range)oSheet.Cells[current_rownum, 6]).Value2 = tmp_cpng; 
+                //decimal tmp_cpng = 0;
+                //decimal.TryParse(E.Rows[0]["U_CPNG"].ToString(), out tmp_cpng);
+                if (f_ng != "")
+                {
+                    ((Microsoft.Office.Interop.Excel.Range)oSheet.Cells[current_rownum, 5]).Formula = "=" + f_ng.Substring(0, f_ng.Length - 3);
+                    //.Value2 = tmp_cpng; //string.Format("={0}*{1}/100", "D6",
+                    ((Microsoft.Office.Interop.Excel.Range)oSheet.Cells[current_rownum, 6]).Formula = "=" + f_ng.Substring(0, f_ng.Length - 3);
+                    //.Value2 = tmp_cpng;
+                }
                 current_rownum++;
 
                 //Total III
@@ -930,7 +938,7 @@ namespace R_BCTC
                 //current_rownum++;
 
                 //IV - DỰ PHÒNG PHÍ
-                //DataTable D = Get_Data_BCH(this.ComboBox0.Selected.Description);
+                
                 oSheet.Range["A" + current_rownum, "H" + current_rownum].Interior.Color = System.Drawing.Color.FromArgb(201, 201, 201);
                 oSheet.Range["A" + current_rownum, "H" + current_rownum].Font.Bold = true;
                 oSheet.Cells[current_rownum, 1] = "IV";
@@ -941,19 +949,29 @@ namespace R_BCTC
                 oSheet.Range["B" + current_rownum, "H" + current_rownum].Font.Italic = true;
                 //oSheet.Cells[current_rownum, 4].Value2 = D.Select("U_TKKT='62770'").Count<DataRow>() > 0 ? D.Select("U_TKKT='62770'")[0]["U_GTDP"] : "";
                 oSheet.Cells[current_rownum, 2] = "Dự phòng chi phí cho ĐTC/ NTP/ NCC (0.5% giá trị doanh thu)";
-                decimal tmp_dp1 = 0;
-                decimal.TryParse(E.Rows[0]["U_DPCP"].ToString(), out tmp_dp1);
-                ((Microsoft.Office.Interop.Excel.Range)oSheet.Cells[current_rownum, 5]).Formula = string.Format("={0}*{1}/100", "D6", tmp_dp1);
-                ((Microsoft.Office.Interop.Excel.Range)oSheet.Cells[current_rownum, 6]).Formula = string.Format("={0}*{1}/100", "D6", tmp_dp1);
+                //decimal tmp_dp1 = 0;
+                //decimal.TryParse(E.Rows[0]["U_DPCP"].ToString(), out tmp_dp1);
+                if (f_dpcp != "")
+                {
+                    ((Microsoft.Office.Interop.Excel.Range)oSheet.Cells[current_rownum, 5]).Formula = "=" + f_dpcp.Substring(0, f_dpcp.Length - 3);
+                        //string.Format("={0}*{1}/100", "D6", tmp_dp1);
+                    ((Microsoft.Office.Interop.Excel.Range)oSheet.Cells[current_rownum, 6]).Formula = "=" + f_dpcp.Substring(0, f_dpcp.Length - 3);
+                        //string.Format("={0}*{1}/100", "D6", tmp_dp1);
+                }
                 current_rownum++;
 
                 oSheet.Range["B" + current_rownum, "H" + current_rownum].Font.Italic = true;
                 //oSheet.Cells[current_rownum, 4].Value2 = D.Select("U_TKKT='62770'").Count<DataRow>() > 0 ? D.Select("U_TKKT='62770'")[0]["U_GTDP"] : "";
                 oSheet.Cells[current_rownum, 2] = "Dự phòng chi phí bảo hành (0.5% giá trị doanh thu)";
-                decimal tmp_dpbh = 0;
-                decimal.TryParse(E.Rows[0]["U_DPBH"].ToString(), out tmp_dpbh);
-                ((Microsoft.Office.Interop.Excel.Range)oSheet.Cells[current_rownum, 5]).Formula = string.Format("={0}*{1}/100", "D6", tmp_dpbh);
-                ((Microsoft.Office.Interop.Excel.Range)oSheet.Cells[current_rownum, 6]).Formula = string.Format("={0}*{1}/100", "D6", tmp_dpbh);
+                //decimal tmp_dpbh = 0;
+                //decimal.TryParse(E.Rows[0]["U_DPBH"].ToString(), out tmp_dpbh);
+                if (f_dpbh != "")
+                {
+                    ((Microsoft.Office.Interop.Excel.Range)oSheet.Cells[current_rownum, 5]).Formula = "=" + f_dpbh.Substring(0, f_dpbh.Length - 3);
+                    //string.Format("={0}*{1}/100", "D6", tmp_dpbh);
+                    ((Microsoft.Office.Interop.Excel.Range)oSheet.Cells[current_rownum, 6]).Formula = "=" + f_dpbh.Substring(0, f_dpbh.Length - 3);
+                    //string.Format("={0}*{1}/100", "D6", tmp_dpbh);
+                }
                 current_rownum++;
 
                 //Total IV
@@ -963,20 +981,6 @@ namespace R_BCTC
                 //Total B
                 if (Section_RowNum.Count > 0)
                 {
-                    //string cell_sum_congtac_cptt = "";
-                    //int temp = 1;
-                    //foreach (int t in Section_RowNum)
-                    //{
-                    //    if (temp < Section_RowNum.Count)
-                    //    {
-                    //        cell_sum_congtac_cptt += "E" + t + ",";
-                    //        temp++;
-                    //    }
-                    //    else
-                    //    {
-                    //        cell_sum_congtac_cptt += "E" + t;
-                    //    }
-                    //}
                     ((Microsoft.Office.Interop.Excel.Range)oSheet.Cells[13, 5]).Formula = string.Format("=SUBTOTAL(9,E{0}:E{1})", Section_RowNum[0], Section_RowNum[(Section_RowNum.Count - 1)] + 2);
                     ((Microsoft.Office.Interop.Excel.Range)oSheet.Cells[13, 4]).Formula = string.Format("=SUBTOTAL(9,D{0}:D{1})", Section_RowNum[0], Section_RowNum[(Section_RowNum.Count - 1)] + 2);
                     ((Microsoft.Office.Interop.Excel.Range)oSheet.Cells[13, 6]).Formula = string.Format("=SUBTOTAL(9,F{0}:F{1})", Section_RowNum[0], Section_RowNum[(Section_RowNum.Count - 1)] + 2);
@@ -1033,8 +1037,11 @@ namespace R_BCTC
                 //Chi phi quan ly cong ty
                 oSheet.Range["B" + current_rownum, "H" + current_rownum].Font.Bold = true;
                 oSheet.Cells[current_rownum, 2] = "CHI PHÍ QUẢN LÝ CÔNG TY";
-                ((Microsoft.Office.Interop.Excel.Range)oSheet.Cells[current_rownum, 5]).Formula = string.Format("={0}*{1}/100", "D6", E.Rows[0]["U_CPQLCT"]);
-                ((Microsoft.Office.Interop.Excel.Range)oSheet.Cells[current_rownum, 6]).Formula = string.Format("={0}*{1}/100", "D6", E.Rows[0]["U_CPQLCT"]);
+                if (f_cpqlct != "")
+                {
+                    ((Microsoft.Office.Interop.Excel.Range)oSheet.Cells[current_rownum, 5]).Formula = "=" + f_cpqlct.Substring(0, f_cpqlct.Length - 3);
+                    ((Microsoft.Office.Interop.Excel.Range)oSheet.Cells[current_rownum, 6]).Formula = "=" + f_cpqlct.Substring(0, f_cpqlct.Length - 3);
+                }
                 current_rownum++;
 
                 oSheet.Range["A" + current_rownum, "H" + current_rownum].Font.Bold = true;
@@ -1078,7 +1085,7 @@ namespace R_BCTC
             }
         }
 
-        System.Data.DataTable Get_Data_BCDTA(string pFinancialProject)
+        System.Data.DataTable Get_Data_BCDTA(string pFinancialProject, string pGoiThauKey = "")
         {
             DataTable result = new DataTable();
             SqlCommand cmd = null;
@@ -1087,6 +1094,7 @@ namespace R_BCTC
                 cmd = new SqlCommand("GET_DATA_BCDT_A", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@FinancialProject", pFinancialProject);
+                cmd.Parameters.AddWithValue("@GoiThauKey", pGoiThauKey);
                 conn.Open();
                 SqlDataReader rd = cmd.ExecuteReader();
                 result.Load(rd);
@@ -1155,13 +1163,13 @@ namespace R_BCTC
             return result;
         }
 
-        System.Data.DataTable Get_Data_BCH(string pFinancialProject, int pGoiThauKey = -1)
+        System.Data.DataTable Get_Data_BCH(string pFinancialProject, string pGoiThauKey = "")
         {
             DataTable result = new DataTable();
             SqlCommand cmd = null;
             try
             {
-                cmd = new SqlCommand("MM_CE_GET_DATA_BCH", conn);
+                cmd = new SqlCommand("MM_CE_GET_DATA_BCH_NEW", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@FinancialProject", pFinancialProject);
                 cmd.Parameters.AddWithValue("@GoiThauKey", pGoiThauKey);
@@ -1190,6 +1198,32 @@ namespace R_BCTC
                 cmd = new SqlCommand(string.Format("Select * from OPMG a where a.FIPROJECT='{0}' and a.STATUS <> 'T'", pFinancialProject), conn);
                 cmd.CommandType = CommandType.Text;
                 //cmd.Parameters.AddWithValue("@FinancialProject", pFinancialProject);
+                conn.Open();
+                SqlDataReader rd = cmd.ExecuteReader();
+                result.Load(rd);
+            }
+            catch (Exception ex)
+            {
+                oApp.MessageBox(ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+                cmd.Dispose();
+            }
+            return result;
+        }
+
+        System.Data.DataTable Get_Data_VII(string pFinancialProject, string pGoiThauKey = "")
+        {
+            DataTable result = new DataTable();
+            SqlCommand cmd = null;
+            try
+            {
+                cmd = new SqlCommand("MM_FI_GET_DATA_VII", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@FinancialProject", pFinancialProject);
+                cmd.Parameters.AddWithValue("@GoiThauKey", pGoiThauKey);
                 conn.Open();
                 SqlDataReader rd = cmd.ExecuteReader();
                 result.Load(rd);

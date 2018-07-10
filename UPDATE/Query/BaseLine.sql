@@ -280,9 +280,9 @@ Create table BASELINE_DUTRUB
 	[U_SubProjectDesc] [nvarchar](250) NULL,
 	[U_CP_TB] [numeric](19, 6) NULL,
 	[U_CP_K] [numeric](19, 6) NULL,
-	[U_TYPE] [nvarchar](2) NULL,
+	[U_TYPE] [nvarchar](4) NULL,
 	[U_TGDK] [datetime] NULL,
-	[U_NCTN] [nvarchar](10) NULL,
+	[U_NCTN] [nvarchar](100) NULL,
 	[U_PVCV] [nvarchar](200) NULL
 );
 
@@ -505,6 +505,144 @@ CREATE TABLE BASELINE_KLTTK(
 	[U_Sum] [numeric](19, 6) NULL,
 	[U_CompleteRate] [numeric](19, 6) NULL,
 	[U_CompleteAmount] [numeric](19, 6) NULL);
+
+--Table HD
+CREATE TABLE [dbo].[BASELINE_OOAT](
+	[ID] [int] IDENTITY(1,1) PRIMARY KEY,
+	[DocEntry_BaseLine] [int] NOT NULL,
+	[AbsID] [int] NOT NULL,
+	[BpCode] [nvarchar](15) NULL,
+	[BpName] [nvarchar](100) NULL,
+	[CntctCode] [int] NULL,
+	[StartDate] [datetime] NULL,
+	[EndDate] [datetime] NULL,
+	[TermDate] [datetime] NULL,
+	[Descript] [nvarchar](254) NULL,
+	[Type] [char](1) NULL,
+	[Status] [char](1) NULL,
+	[Owner] [int] NULL,
+	[Renewal] [char](1) NULL,
+	[UseDiscnt] [char](1) NULL,
+	[RemindVal] [smallint] NULL,
+	[RemindUnit] [char](1) NULL,
+	[Remarks] [ntext] NULL,
+	[AtchEntry] [int] NULL,
+	[LogInstanc] [int] NULL,
+	[UserSign] [smallint] NULL,
+	[UserSign2] [smallint] NULL,
+	[UpdtDate] [datetime] NULL,
+	[CreateDate] [datetime] NULL,
+	[Cancelled] [char](1) NULL,
+	[DataSource] [char](1) NULL,
+	[Transfered] [char](1) NULL,
+	[RemindFlg] [char](1) NULL,
+	[Fulfilled] [char](1) NULL,
+	[Attachment] [ntext] NULL,
+	[SettleProb] [numeric](19, 6) NULL,
+	[UpdtTime] [int] NULL,
+	[Method] [char](1) NULL,
+	[GroupNum] [smallint] NULL,
+	[ListNum] [smallint] NULL,
+	[SignDate] [datetime] NULL,
+	[AmendedTo] [int] NULL,
+	[Series] [smallint] NULL,
+	[Number] [int] NOT NULL,
+	[ObjType] [nvarchar](20) NULL,
+	[Handwrtten] [char](1) NULL,
+	[PIndicator] [nvarchar](10) NOT NULL,
+	[BpType] [char](1) NOT NULL,
+	[Instance] [smallint] NOT NULL,
+	[PayMethod] [nvarchar](15) NULL,
+	[U_PRJ] [nvarchar](30) NULL,
+	[U_PTTU] [numeric](19, 6) NULL,
+	[U_PTHU] [numeric](19, 6) NULL,
+	[U_PTBH] [numeric](19, 6) NULL,
+	[U_HTBH] [nvarchar](10) NULL,
+	[U_PVBH] [nvarchar](50) NULL,
+	[U_Apprv3] [nvarchar](10) NULL,
+	[U_Apprv5] [nvarchar](10) NULL,
+	[U_DTApprv1] [nvarchar](20) NULL,
+	[U_UsrApprv1] [nvarchar](50) NULL,
+	[U_CommApprv1] [nvarchar](254) NULL,
+	[U_UsrApprv2] [nvarchar](50) NULL,
+	[U_UsrApprv3] [nvarchar](50) NULL,
+	[U_UsrApprv4] [nvarchar](50) NULL,
+	[U_UsrApprv5] [nvarchar](50) NULL,
+	[U_DTApprv2] [nvarchar](20) NULL,
+	[U_DTApprv5] [nvarchar](20) NULL,
+	[U_CommApprv4] [nvarchar](254) NULL,
+	[U_CommApprv5] [nvarchar](254) NULL,
+	[U_Apprv1] [nvarchar](10) NULL,
+	[U_Apprv2] [nvarchar](10) NULL,
+	[U_Apprv4] [nvarchar](10) NULL,
+	[U_DTApprv3] [nvarchar](20) NULL,
+	[U_DTApprv4] [nvarchar](20) NULL,
+	[U_CommApprv3] [nvarchar](254) NULL,
+	[U_CommApprv2] [nvarchar](254) NULL,
+	[U_GGTM] [numeric](19, 6) NULL,
+	[U_PADXTK] [numeric](19, 6) NULL,
+	[U_PQL] [numeric](19, 6) NULL,
+	[U_TTTU] [nvarchar](10) NULL,
+	[U_Apprv6] [nvarchar](10) NULL,
+	[U_DTApprv6] [nvarchar](20) NULL,
+	[U_UsrApprv6] [nvarchar](50) NULL,
+	[U_CommApprv6] [nvarchar](254) NULL,
+	[U_Apprv7] [nvarchar](10) NULL,
+	[U_DTApprv7] [nvarchar](20) NULL,
+	[U_UsrApprv7] [nvarchar](50) NULL,
+	[U_CommApprv7] [nvarchar](254) NULL,
+	[U_Apprv8] [nvarchar](10) NULL,
+	[U_DTApprv8] [nvarchar](20) NULL,
+	[U_UsrApprv8] [nvarchar](50) NULL,
+	[U_CommApprv8] [nvarchar](254) NULL,
+	[U_CGroup] [nvarchar](10) NOT NULL,
+	[U_PTGL] [numeric](19, 6) NULL,
+	[U_Apprv9] [nvarchar](10) NULL,
+	[U_DTApprv9] [nvarchar](20) NULL,
+	[U_UsrApprv9] [nvarchar](50) NULL,
+	[U_CommApprv9] [nvarchar](254) NULL,
+	[U_Apprv10] [nvarchar](10) NULL,
+	[U_DTApprv10] [nvarchar](20) NULL,
+	[U_UsrApprv10] [nvarchar](50) NULL,
+	[U_CommApprv10] [nvarchar](254) NULL,
+	[U_DTApprv11] [nvarchar](20) NULL,
+	[U_Apprv11] [nvarchar](10) NULL,
+	[U_UsrApprv11] [nvarchar](50) NULL,
+	[U_CommApprv11] [nvarchar](254) NULL,
+	[U_PUTYPE] [nvarchar](10) NOT NULL,
+	[U_SHD] [int] NULL,
+	[U_Link] [ntext] NULL,
+	[U_CTQLDTC] [nvarchar](15) NULL,
+	[U_GOITHAU] [int] NULL);
+CREATE TABLE [dbo].[BASELINE_OAT1](
+	[ID] [int] IDENTITY(1,1) PRIMARY KEY,
+	[DocEntry_BaseLine] [int] NOT NULL,
+	[AgrNo] [int] NOT NULL,
+	[AgrLineNum] [int] NOT NULL,
+	[ItemCode] [nvarchar](50) NULL,
+	[ItemName] [nvarchar](100) NULL,
+	[ItemGroup] [smallint] NULL,
+	[PlanQty] [numeric](19, 6) NULL,
+	[UnitPrice] [numeric](19, 6) NULL,
+	[Currency] [nvarchar](3) NULL,
+	[CumQty] [numeric](19, 6) NULL,
+	[CumAmntFC] [numeric](19, 6) NULL,
+	[CumAmntLC] [numeric](19, 6) NULL,
+	[FreeTxt] [nvarchar](100) NULL,
+	[InvntryUom] [nvarchar](100) NULL,
+	[LogInstanc] [int] NULL,
+	[VisOrder] [int] NULL,
+	[RetPortion] [numeric](19, 6) NULL,
+	[WrrtyEnd] [datetime] NULL,
+	[LineStatus] [char](1) NULL,
+	[PlanAmtLC] [numeric](19, 6) NULL,
+	[PlanAmtFC] [numeric](19, 6) NULL,
+	[Discount] [numeric](19, 6) NULL,
+	[UomEntry] [int] NULL,
+	[UomCode] [nvarchar](20) NULL,
+	[NumPerMsr] [numeric](19, 6) NULL,
+	[U_SOW] [datetime] NULL,
+	[U_CTCV] [nvarchar](50) NULL)
 GO
 
 CREATE PROCEDURE [dbo].[BASELINE_GetList_Approve]
@@ -665,7 +803,7 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE [dbo].[BASELINE_Add_Data]
+ALTER PROCEDURE [dbo].[BASELINE_Add_Data]
 	@BaseLine_DocEntry as int
 AS
 BEGIN
@@ -833,6 +971,7 @@ BEGIN TRY
 													group by U_BPCode,U_BGroup,U_PUType) y
 						on x.U_BPCode = y.U_BPCode and x.U_DATETO = y.Dateto 
 						and x.U_BGroup = y.U_BGroup and x.U_PUType = y.U_PUType
+						and x.U_FIPROJECT = @FProject 
 						)
 	Union all
 
@@ -879,20 +1018,20 @@ BEGIN TRY
 	--Insert BASELINE_KLTTC
 	INSERT INTO BASELINE_KLTTC([DocEntry_BaseLine], [DocEntry], [LineId], [U_GoodsIssue], [U_DetailsKey]
 							 , [U_GoiThau], [U_DetailsName], [U_UoM], [U_UPrice], [U_Quantity], [U_Sum]
-							 , [U_CompleteRate], [U_CompleteAmount], [U_GoiThauKey])
+							 , [U_CompleteRate], [U_CompleteAmount], [U_GoiThauKey],[U_Type])
 	Select @BaseLine_DocEntry, [DocEntry], [LineId], [U_GoodsIssue], [U_DetailsKey]
 							 , [U_GoiThau], [U_DetailsName], [U_UoM], [U_UPrice], [U_Quantity], [U_Sum]
-							 , [U_CompleteRate], [U_CompleteAmount], [U_GoiThauKey]
+							 , [U_CompleteRate], [U_CompleteAmount], [U_GoiThauKey],[U_Type]
 	from [@KLTTC]
 	where DocEntry in (Select DocEntry from BASELINE_KLTT where DocEntry_BaseLine=@BaseLine_DocEntry);
 
 	--Insert BASELINE_KLTTD
 	INSERT INTO BASELINE_KLTTD([DocEntry_BaseLine], [DocEntry], [LineId], [U_GoodsIssue], [U_DetailsKey]
 							 , [U_GoiThau], [U_DetailsName], [U_UoM], [U_UPrice], [U_Quantity], [U_Sum]
-							 , [U_CompleteRate], [U_CompleteAmount], [U_GoiThauKey])
+							 , [U_CompleteRate], [U_CompleteAmount], [U_GoiThauKey],[U_Type])
 	Select @BaseLine_DocEntry, [DocEntry], [LineId], [U_GoodsIssue], [U_DetailsKey]
 							 , [U_GoiThau], [U_DetailsName], [U_UoM], [U_UPrice], [U_Quantity], [U_Sum]
-							 , [U_CompleteRate], [U_CompleteAmount], [U_GoiThauKey]
+							 , [U_CompleteRate], [U_CompleteAmount], [U_GoiThauKey],[U_Type]
 	from [@KLTTD]
 	where DocEntry in (Select DocEntry from BASELINE_KLTT where DocEntry_BaseLine=@BaseLine_DocEntry);
 
@@ -948,6 +1087,41 @@ BEGIN TRY
 	from [@KLTTK]
 	where DocEntry in (Select DocEntry from BASELINE_KLTT where DocEntry_BaseLine=@BaseLine_DocEntry);
 
+	--Insert BASELINE_OOAT
+	INSERT INTO BASELINE_OOAT ([DocEntry_BaseLine], [AbsID], [BpCode], [BpName], [CntctCode], [StartDate],
+							   [EndDate], [TermDate], [Descript], [Type], [Status], [Owner], [Renewal],
+							   [UseDiscnt], [RemindVal], [RemindUnit], [Remarks], [AtchEntry], [LogInstanc],
+							   [UserSign], [UserSign2], [UpdtDate], [CreateDate], [Cancelled], [DataSource],
+							   [Transfered], [RemindFlg], [Fulfilled], [Attachment], [SettleProb], [UpdtTime],
+							   [Method], [GroupNum], [ListNum], [SignDate], [AmendedTo], [Series], [Number],
+							   [ObjType], [Handwrtten], [PIndicator], [BpType], [Instance], [PayMethod], [U_PRJ],
+							   [U_PTTU], [U_PTHU], [U_PTBH], [U_HTBH], [U_PVBH],[U_GGTM], [U_PADXTK], [U_PQL],
+							   [U_TTTU], [U_CGroup], [U_PTGL], 	[U_PUTYPE], [U_SHD], [U_CTQLDTC], [U_GOITHAU])
+	Select @BaseLine_DocEntry ,[AbsID], [BpCode], [BpName], [CntctCode], [StartDate],
+							   [EndDate], [TermDate], [Descript], [Type], [Status], [Owner], [Renewal],
+							   [UseDiscnt], [RemindVal], [RemindUnit], [Remarks], [AtchEntry], [LogInstanc],
+							   [UserSign], [UserSign2], [UpdtDate], [CreateDate], [Cancelled], [DataSource],
+							   [Transfered], [RemindFlg], [Fulfilled], [Attachment], [SettleProb], [UpdtTime],
+							   [Method], [GroupNum], [ListNum], [SignDate], [AmendedTo], [Series], [Number],
+							   [ObjType], [Handwrtten], [PIndicator], [BpType], [Instance], [PayMethod], [U_PRJ],
+							   [U_PTTU], [U_PTHU], [U_PTBH], [U_HTBH], [U_PVBH],[U_GGTM], [U_PADXTK], [U_PQL],
+							   [U_TTTU], [U_CGroup], [U_PTGL], 	[U_PUTYPE], [U_SHD], [U_CTQLDTC], [U_GOITHAU]
+	from OOAT where U_PRJ= @FProject
+	and Series in (47,142,203)
+	and BpType = 'C'
+	and [Status] ='A'
+	and Cancelled <> 'Y';
+
+	--Insert BASELINE_OAT1 
+	INSERT INTO BASELINE_OAT1 ([DocEntry_BaseLine], [AgrNo], [AgrLineNum], [ItemCode], [ItemName], [ItemGroup], [PlanQty],
+							   [UnitPrice], [Currency], [CumQty], [CumAmntFC], [CumAmntLC], [FreeTxt], [InvntryUom],
+							   [LogInstanc], [VisOrder], [RetPortion], [WrrtyEnd], [LineStatus], [PlanAmtLC], [PlanAmtFC],
+							   [Discount], [UomEntry], [UomCode], [NumPerMsr], [U_SOW], [U_CTCV])
+	Select  @BaseLine_DocEntry,[AgrNo], [AgrLineNum], [ItemCode], [ItemName], [ItemGroup], [PlanQty],
+							   [UnitPrice], [Currency], [CumQty], [CumAmntFC], [CumAmntLC], [FreeTxt], [InvntryUom],
+							   [LogInstanc], [VisOrder], [RetPortion], [WrrtyEnd], [LineStatus], [PlanAmtLC], [PlanAmtFC],
+							   [Discount], [UomEntry], [UomCode], [NumPerMsr], [U_SOW], [U_CTCV]
+	From OAT1 where [AgrNo] in (Select [AbsID] from BASELINE_OOAT where [DocEntry_BaseLine] = @BaseLine_DocEntry);
 	COMMIT; 
 END TRY
 
@@ -1095,7 +1269,144 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE [dbo].[BASELINE_MM_CE_GETDATA_SUM]
+CREATE PROCEDURE [dbo].[BASELINE_MM_CE_GET_DATA_A]
+	-- Add the parameters for the stored procedure here
+	 @DocEntry_BaseLine as int
+	,@GoiThau_Key as varchar(250)
+AS
+BEGIN
+	SET NOCOUNT ON;
+	IF (@GoiThau_Key = '')
+		BEGIN
+			Select SUM(z.GTHD) as 'GTHD'
+			,SUM(z.GGTM) as 'GGTM'
+			,SUM(z.PA) as 'PA'
+			,SUM(z.PhiQL) as 'PhiQL'
+			,SUM(z.PLHD) as 'PLHD'
+			,SUM(z.KHAC) as 'KHAC'
+			from 
+			(
+				Select SUM(b.PlanQty*b.UnitPrice)+ SUM(b.PlanAmtLC) as 'GTHD'
+				,SUM(a.U_GGTM) as 'GGTM'
+				,SUM(a.U_PADXTK) as 'PA'
+				,SUM(a.U_PQL) as 'PhiQL'
+				,'0' as 'PLHD'
+				,'0' as 'KHAC'
+				from BASELINE_OOAT a left join BASELINE_OAT1 b on a.AbsID = b.AgrNo
+				where a.DocEntry_BaseLine = @DocEntry_BaseLine --@FinancialProject
+				and b.DocEntry_BaseLine = @DocEntry_BaseLine
+				and a.Series = 47
+				and a.BpType = 'C'
+				and a.[Status] ='A'
+				and a.Cancelled <> 'Y'
+				union all
+				Select '0' as 'GTHD'
+				,'0' as 'GGTM'
+				,'0' as 'PA'
+				,'0' as 'PhiQL'
+				,SUM(t1.PLHD) as PLHD
+				,'0' as 'KHAC'
+				from (
+				Select case a.Method when 'I' then b.PlanQty*b.UnitPrice else b.PlanAmtLC end as 'PLHD'
+				from BASELINE_OOAT a left join BASELINE_OAT1 b on a.AbsID = b.AgrNo
+				where 
+				a.DocEntry_BaseLine = @DocEntry_BaseLine 
+				and b.DocEntry_BaseLine = @DocEntry_BaseLine
+				--a.U_PRJ = @FinancialProject
+				and a.Series = 142
+				and a.BpType = 'C'
+				and a.[Status] ='A'
+				and a.Cancelled <> 'Y') t1
+				union all
+				Select 
+				'0' as 'GTHD'
+				,'0' as 'GGTM'
+				,'0' as 'PA'
+				,'0' as 'PhiQL'
+				,'0' as 'PLHD'
+				,SUM(t2.KHAC) as KHAC from (
+				Select case a.Method when 'I' then b.PlanQty*b.UnitPrice else b.PlanAmtLC end as 'KHAC'
+				from BASELINE_OOAT a left join BASELINE_OAT1 b on a.AbsID = b.AgrNo
+				where 
+				a.DocEntry_BaseLine = @DocEntry_BaseLine
+				and b.DocEntry_BaseLine = @DocEntry_BaseLine
+				--a.U_PRJ = @FinancialProject
+				and a.Series = 203
+				and a.[Status] ='A'
+				and a.BpType = 'C'
+				and a.Cancelled <> 'Y') t2
+			) z
+		END
+	ELSE
+		BEGIN
+			Select SUM(z.GTHD) as 'GTHD'
+			,SUM(z.GGTM) as 'GGTM'
+			,SUM(z.PA) as 'PA'
+			,SUM(z.PhiQL) as 'PhiQL'
+			,SUM(z.PLHD) as 'PLHD'
+			,SUM(z.KHAC) as 'KHAC'
+			from 
+			(
+				Select SUM(b.PlanQty*b.UnitPrice)+ SUM(b.PlanAmtLC) as 'GTHD'
+				,SUM(a.U_GGTM) as 'GGTM'
+				,SUM(a.U_PADXTK) as 'PA'
+				,SUM(a.U_PQL) as 'PhiQL'
+				,'0' as 'PLHD'
+				,'0' as 'KHAC'
+				from BASELINE_OOAT a left join BASELINE_OAT1 b on a.AbsID = b.AgrNo
+				where --a.U_PRJ = @FinancialProject
+				a.DocEntry_BaseLine = @DocEntry_BaseLine 
+				and b.DocEntry_BaseLine = @DocEntry_BaseLine
+				and a.Series = 47
+				and a.BpType = 'C'
+				and a.[Status] ='A'
+				and a.Cancelled <> 'Y'
+				and (Select AbsEntry from BASELINE_OPMG where DocNum = a.U_GOITHAU and DocEntry_BaseLine=@DocEntry_BaseLine) in (Select splitdata from dbo.fnSplitString(@GoiThau_Key,','))
+				
+				union all
+				
+				Select '0' as 'GTHD'
+				,'0' as 'GGTM'
+				,'0' as 'PA'
+				,'0' as 'PhiQL'
+				,SUM(t1.PLHD) as PLHD
+				,'0' as 'KHAC'
+				from (
+				Select case a.Method when 'I' then b.PlanQty*b.UnitPrice else b.PlanAmtLC end as 'PLHD'
+				from BASELINE_OOAT a left join BASELINE_OAT1 b on a.AbsID = b.AgrNo
+				where --a.U_PRJ = @FinancialProject
+				a.DocEntry_BaseLine = @DocEntry_BaseLine 
+				and b.DocEntry_BaseLine = @DocEntry_BaseLine
+				and a.Series = 142
+				and a.BpType = 'C'
+				and a.[Status] ='A'
+				and a.Cancelled <> 'Y'
+				and (Select AbsEntry from BASELINE_OPMG where DocNum = a.U_GOITHAU and DocEntry_BaseLine=@DocEntry_BaseLine) in (Select splitdata from dbo.fnSplitString(@GoiThau_Key,','))) t1
+				union all
+				Select 
+				'0' as 'GTHD'
+				,'0' as 'GGTM'
+				,'0' as 'PA'
+				,'0' as 'PhiQL'
+				,'0' as 'PLHD'
+				,SUM(t2.KHAC) as KHAC from (
+				Select case a.Method when 'I' then b.PlanQty*b.UnitPrice else b.PlanAmtLC end as 'KHAC'
+				from BASELINE_OOAT a left join BASELINE_OAT1 b on a.AbsID = b.AgrNo
+				where --a.U_PRJ = @FinancialProject
+				a.DocEntry_BaseLine = @DocEntry_BaseLine 
+				and b.DocEntry_BaseLine = @DocEntry_BaseLine
+				and a.Series = 203
+				and a.BpType = 'C'
+				and a.[Status] ='A'
+				and a.Cancelled <> 'Y'
+				and (Select AbsEntry from BASELINE_OPMG where DocNum = a.U_GOITHAU and DocEntry_BaseLine=@DocEntry_BaseLine) in (Select splitdata from dbo.fnSplitString(@GoiThau_Key,','))) t2
+			) z
+	END
+END
+
+GO
+
+ALTER PROCEDURE [dbo].[BASELINE_MM_CE_GETDATA_SUM]
 	-- Add the parameters for the stored procedure here
 	@DocEntry_BaseLine as int
 	,@GoiThauKey as varchar(250)
@@ -1103,20 +1414,43 @@ AS
 BEGIN
 	SET NOCOUNT ON;
     -- Insert statements for procedure here
-	if (@GoiThauKey = '')
-			Select * 
-			FROM [BASELINE_DUTRUA] 
-			where DocEntry_BaseLine = @DocEntry_BaseLine; 
+		if (@GoiThauKey = '')
+			Select * from 
+			(
+				Select * 
+				FROM [BASELINE_DUTRUA] 
+				where DocEntry_BaseLine = @DocEntry_BaseLine
+			) T0 
+			left join 
+			(
+				Select U_001,SUM(U_TTHD) as 'TTHD' 
+				from BASELINE_OPHA 
+				where ProjectID in (Select AbsEntry from BASELINE_OPMG where DocEntry_BaseLine= @DocEntry_BaseLine)
+				and [Level] = 2
+				group by U_001
+			) T1 on T0.U_SubProjectCode = T1.U_001;
 	else
-			Select * 
-			FROM [BASELINE_DUTRUA] 
-			where DocEntry_BaseLine= @DocEntry_BaseLine
-			and DocEntry_DUTRU in  
-			(Select DocEntry 
-			 From BASELINE_DUTRU 
-			 where ProjectID in (Select splitdata from dbo.fnSplitString(@GoiThauKey,','))
-			 and DocEntry_BaseLine = @DocEntry_BaseLine
-			);
+		Select * from 
+			(
+				Select * 
+				FROM [BASELINE_DUTRUA] 
+				where DocEntry_BaseLine= @DocEntry_BaseLine
+				and DocEntry_DUTRU in  
+				(
+					 Select DocEntry 
+					 From BASELINE_DUTRU 
+					 where ProjectID in (Select splitdata from dbo.fnSplitString(@GoiThauKey,','))
+					 and DocEntry_BaseLine = @DocEntry_BaseLine
+				)
+			) T0 
+			left join 
+			(
+				Select U_001,SUM(U_TTHD) as 'TTHD' 
+				from BASELINE_OPHA 
+				where ProjectID in (Select splitdata from dbo.fnSplitString(@GoiThauKey,','))
+				and [Level] = 2
+				group by U_001
+			) T1 on T0.U_SubProjectCode = T1.U_001;
 END
 GO
 
@@ -1356,7 +1690,7 @@ END
 
 GO
 
-CREATE PROCEDURE [dbo].[BASELINE_MM_CE_GET_DATA_BCH]
+ALTER PROCEDURE [dbo].[BASELINE_MM_CE_GET_DATA_BCH]
 	-- Add the parameters for the stored procedure here
 	@DocEntry_BaseLine as int
 	,@GoiThauKey as varchar(200)
@@ -1364,11 +1698,8 @@ CREATE PROCEDURE [dbo].[BASELINE_MM_CE_GET_DATA_BCH]
 AS
 BEGIN
 	SET NOCOUNT ON;
-	--DECLARE @ProjectID as int;
 	DECLARE @FinancialProject as nvarchar(200);
 	Select @FinancialProject = U_FProject from [@BASELINE] where DocEntry = @DocEntry_BaseLine;
-    -- Insert statements for procedure here
-	--SELECT top 1 @ProjectID = AbsEntry from OPMG where FIPROJECT = @FinancialProject;
 	if (@GoiThauKey = '')
 		Select * from
 		(
@@ -1384,22 +1715,160 @@ BEGIN
 		group by b.Account) b on a.U_TKKT=b.Account;
 	else
 		Select * from
-		(Select left(U_TKKT + '00000000',8) as 'U_TKKT',U_TTKKT,U_GTDP FROM [BASELINE_CTG4]
-			where DocEntry_CTG in 
-			(Select DocEntry from [BASELINE_CTG] where U_GoiThauKey in (Select splitdata from dbo.fnSplitString(@GoiThauKey,',')))
-		) a
+		(Select left(x.U_TKKT + '00000000',8) as 'U_TKKT',x.U_TTKKT,SUM(x.U_GTDP) as 'U_GTDP'  
+		FROM [BASELINE_CTG4] x inner join [BASELINE_CTG] y on x.DocEntry_CTG=y.DocEntry and y.DocEntry_BaseLine=@DocEntry_BaseLine
+		where x.DocEntry_BaseLine = @DocEntry_BaseLine 
+		and y.U_GoiThauKey in (Select splitdata from dbo.fnSplitString(@GoiThauKey,','))
+		group by x.U_TTKKT,left(x.U_TKKT + '00000000',8)
+			) a
 		left join 
 			(Select b.Account,SUM(b.Debit) as TOTAL_BCH
 			From OJDT a inner join JDT1 b on a.TransID=b.TransId
-			where a.Project = @FinancialProject
-			and a.U_LCP = 'BCH'
+			where b.Project = @FinancialProject
 			group by b.Account) b 
 		on a.U_TKKT=b.Account ;
 END;
 
 GO
 
-CREATE PROCEDURE [dbo].[BASELINE_MM_FI_GET_DATA_B]
+ALTER PROCEDURE [dbo].[BASELINE_MM_FI_GET_DATA_A]
+	-- Add the parameters for the stored procedure here
+	 @DocEntry_BaseLine as int
+	,@GoiThau_Key as varchar(250)
+AS
+BEGIN
+	SET NOCOUNT ON;
+	IF (@GoiThau_Key = '')
+		BEGIN
+			Select SUM(z.GTHD) as 'GTHD'
+			,SUM(z.GGTM) as 'GGTM'
+			,SUM(z.PA) as 'PA'
+			,SUM(z.PhiQL) as 'PhiQL'
+			,SUM(z.PLHD) as 'PLHD'
+			,SUM(z.KHAC) as 'KHAC'
+			from 
+			(
+				Select SUM(b.PlanQty*b.UnitPrice)+ SUM(b.PlanAmtLC) as 'GTHD'
+				,SUM(a.U_GGTM) as 'GGTM'
+				,SUM(a.U_PADXTK) as 'PA'
+				,SUM(a.U_PQL) as 'PhiQL'
+				,'0' as 'PLHD'
+				,'0' as 'KHAC'
+				from BASELINE_OOAT a left join BASELINE_OAT1 b on a.AbsID = b.AgrNo
+				where a.DocEntry_BaseLine = @DocEntry_BaseLine --@FinancialProject
+				and b.DocEntry_BaseLine = @DocEntry_BaseLine
+				and a.Series = 47
+				and a.BpType = 'C'
+				and a.[Status] ='A'
+				and a.Cancelled <> 'Y'
+				union all
+				Select '0' as 'GTHD'
+				,'0' as 'GGTM'
+				,'0' as 'PA'
+				,'0' as 'PhiQL'
+				,SUM(t1.PLHD) as PLHD
+				,'0' as 'KHAC'
+				from (
+				Select case a.Method when 'I' then b.PlanQty*b.UnitPrice else b.PlanAmtLC end as 'PLHD'
+				from BASELINE_OOAT a left join BASELINE_OAT1 b on a.AbsID = b.AgrNo
+				where 
+				a.DocEntry_BaseLine = @DocEntry_BaseLine 
+				and b.DocEntry_BaseLine = @DocEntry_BaseLine
+				--a.U_PRJ = @FinancialProject
+				and a.Series = 142
+				and a.BpType = 'C'
+				and a.[Status] ='A'
+				and a.Cancelled <> 'Y') t1
+				union all
+				Select 
+				'0' as 'GTHD'
+				,'0' as 'GGTM'
+				,'0' as 'PA'
+				,'0' as 'PhiQL'
+				,'0' as 'PLHD'
+				,SUM(t2.KHAC) as KHAC from (
+				Select case a.Method when 'I' then b.PlanQty*b.UnitPrice else b.PlanAmtLC end as 'KHAC'
+				from BASELINE_OOAT a left join BASELINE_OAT1 b on a.AbsID = b.AgrNo
+				where 
+				a.DocEntry_BaseLine = @DocEntry_BaseLine
+				and b.DocEntry_BaseLine = @DocEntry_BaseLine
+				--a.U_PRJ = @FinancialProject
+				and a.Series = 203
+				and a.[Status] ='A'
+				and a.BpType = 'C'
+				and a.Cancelled <> 'Y') t2
+			) z
+		END
+	ELSE
+		BEGIN
+			Select SUM(z.GTHD) as 'GTHD'
+			,SUM(z.GGTM) as 'GGTM'
+			,SUM(z.PA) as 'PA'
+			,SUM(z.PhiQL) as 'PhiQL'
+			,SUM(z.PLHD) as 'PLHD'
+			,SUM(z.KHAC) as 'KHAC'
+			from 
+			(
+				Select SUM(b.PlanQty*b.UnitPrice)+ SUM(b.PlanAmtLC) as 'GTHD'
+				,SUM(a.U_GGTM) as 'GGTM'
+				,SUM(a.U_PADXTK) as 'PA'
+				,SUM(a.U_PQL) as 'PhiQL'
+				,'0' as 'PLHD'
+				,'0' as 'KHAC'
+				from BASELINE_OOAT a left join BASELINE_OAT1 b on a.AbsID = b.AgrNo
+				where --a.U_PRJ = @FinancialProject
+				a.DocEntry_BaseLine = @DocEntry_BaseLine 
+				and b.DocEntry_BaseLine = @DocEntry_BaseLine
+				and a.Series = 47
+				and a.BpType = 'C'
+				and a.[Status] ='A'
+				and a.Cancelled <> 'Y'
+				and (Select AbsEntry from BASELINE_OPMG where DocNum = a.U_GOITHAU and DocEntry_BaseLine=@DocEntry_BaseLine) in (Select splitdata from dbo.fnSplitString(@GoiThau_Key,','))
+				
+				union all
+				
+				Select '0' as 'GTHD'
+				,'0' as 'GGTM'
+				,'0' as 'PA'
+				,'0' as 'PhiQL'
+				,SUM(t1.PLHD) as PLHD
+				,'0' as 'KHAC'
+				from (
+				Select case a.Method when 'I' then b.PlanQty*b.UnitPrice else b.PlanAmtLC end as 'PLHD'
+				from BASELINE_OOAT a left join BASELINE_OAT1 b on a.AbsID = b.AgrNo
+				where --a.U_PRJ = @FinancialProject
+				a.DocEntry_BaseLine = @DocEntry_BaseLine 
+				and b.DocEntry_BaseLine = @DocEntry_BaseLine
+				and a.Series = 142
+				and a.BpType = 'C'
+				and a.[Status] ='A'
+				and a.Cancelled <> 'Y'
+				and (Select AbsEntry from BASELINE_OPMG where DocNum = a.U_GOITHAU and DocEntry_BaseLine=@DocEntry_BaseLine) in (Select splitdata from dbo.fnSplitString(@GoiThau_Key,','))) t1
+				union all
+				Select 
+				'0' as 'GTHD'
+				,'0' as 'GGTM'
+				,'0' as 'PA'
+				,'0' as 'PhiQL'
+				,'0' as 'PLHD'
+				,SUM(t2.KHAC) as KHAC from (
+				Select case a.Method when 'I' then b.PlanQty*b.UnitPrice else b.PlanAmtLC end as 'KHAC'
+				from BASELINE_OOAT a left join BASELINE_OAT1 b on a.AbsID = b.AgrNo
+				where --a.U_PRJ = @FinancialProject
+				a.DocEntry_BaseLine = @DocEntry_BaseLine 
+				and b.DocEntry_BaseLine = @DocEntry_BaseLine
+				and a.Series = 203
+				and a.BpType = 'C'
+				and a.[Status] ='A'
+				and a.Cancelled <> 'Y'
+				and (Select AbsEntry from BASELINE_OPMG where DocNum = a.U_GOITHAU and DocEntry_BaseLine=@DocEntry_BaseLine) in (Select splitdata from dbo.fnSplitString(@GoiThau_Key,','))) t2
+			) z
+	END
+END
+
+GO
+
+ALTER PROCEDURE [dbo].[BASELINE_MM_FI_GET_DATA_B]
 	-- Add the parameters for the stored procedure here
 	@DocEntry_BaseLine as int
 	,@Goithau_Key as varchar(200)
@@ -1408,6 +1877,7 @@ BEGIN
 	SET NOCOUNT ON;
 	DECLARE @FinancialProject as varchar(200)
 	Select @FinancialProject=U_FProject from [@BASELINE] where DocEntry = @DocEntry_BaseLine;
+		SET NOCOUNT ON;
 	if (@Goithau_Key = '')
 	begin
 		Select T0.U_BPCode
@@ -1419,6 +1889,7 @@ BEGIN
 		,T0.U_CP_DTC
 		,T0.U_CP_DP2
 		,T1.U_BGroup
+		,T1.BP
 		,T1.U_PUType
 		,case when (Select GroupCode from OCRD where CardCode=T0.U_BPCode) <> 112 then T1.KL_HD
 			else T1.KL_HD  * (U_PTQuanly/100) end as 'KL_HD'
@@ -1440,7 +1911,7 @@ BEGIN
 				  ,0 as 'U_CP_DTC'
 				  ,'PUT01' as PUType
 			FROM [BASELINE_DUTRUB] a inner join  OCRD b on a.U_BPCode = b.CardCode
-			where a.DocEntry_BaseLine = @DocEntry_BaseLine 
+			where a.DocEntry_BaseLine = @DocEntry_BaseLine
 			group by [U_BPCode],[U_BPName],b.Series,a.[U_TYPE]
 			Union ALL
 			Select [U_BPCode]
@@ -1474,20 +1945,14 @@ BEGIN
 			(Select a.U_BPCode
 				,a.U_BPName
 				,a.U_BGroup
-				,case when a.U_PUType  in ('PUT01','PUT03','PUT04','PUT05','PUT06','PUT07','PUT08') and c.Series in (70,71) then 'PUT01'
-					  when a.U_PUType  in ('PUT02') and c.Series in (70,71) then 'PUT02'
-					  when a.U_PUType  in ('PUT09') and c.Series in (70,71) then 'PUT09'
-					  --NTP
-					  when a.U_PUType  in ('PUT01','PUT03','PUT04','PUT07','PUT08') and c.Series in (72,73) then 'PUT01'
-					  when a.U_PUType  in ('PUT02','PUT05','PUT06') and c.Series in (72,73) then 'PUT02'
-					  when a.U_PUType  in ('PUT09') and c.Series in (72,73) then 'PUT09'
-					  --DTC
-					  when a.U_PUType  in ('PUT01','PUT03','PUT04','PUT07','PUT08') and c.Series in (78) then 'PUT01'
-					  when a.U_PUType  in ('PUT02') and c.Series in (78) then 'PUT02'
-					  when a.U_PUType  in ('PUT05','PUT06','PUT09') and c.Series in (78) then 'PUT09'
-					  else ISNULL(a.U_PUType,'') end as 'U_PUType'
-				,a.U_BPCode2
-				,a.U_PTQuanly
+				,case (Select dept from OHEM where Userid = a.UserSign) when 1 then 'CCM'
+					when -2 then 'KT'
+					when 3 then 'DA'
+					else ''
+				 end as 'BP'
+				,dbo.fnPUType_Convert(a.U_PUType,a.U_BPCode) as 'U_PUType'
+				,ISNULL(a.U_BPCode2,'') as 'U_BPCode2'
+				,ISNULL(a.U_PTQuanly,0) as 'U_PTQuanly'
 				,SUM(b.U_SUM) as 'KL_HD'
 				,SUM(b.U_CompleteAmount) as 'KL_TT'
 				,SUM(case a.Status when 'C' then (b.U_CompleteAmount) else 0 end) as 'KL_TT_DD'
@@ -1497,80 +1962,72 @@ BEGIN
 					Select DocEntry,U_SUM as 'Sum_PL',U_CompleteAmount as 'SUM_CA'
 					from [BASELINE_KLTTA]
 					where DocEntry_BaseLine= @DocEntry_BaseLine
-					union
+					union all
 					Select DocEntry,U_SUM as 'Sum_PL',U_CompleteAmount as 'SUM_CA'
 					from [BASELINE_KLTTB] 
 					where DocEntry_BaseLine= @DocEntry_BaseLine
-					union
+					union all
 					Select DocEntry,U_SUM as 'Sum_PL',U_CompleteAmount as 'SUM_CA'
 					from [BASELINE_KLTTK] 
 					where DocEntry_BaseLine= @DocEntry_BaseLine
-					union
-					Select DocEntry,-U_SUM as 'Sum_PL',-U_CompleteAmount as 'SUM_CA'
+					union all
+					Select DocEntry 
+									, case ISNULL([U_TYPE],'GI') when 'GI' then -[U_Sum] else [U_Sum] end as 'Sum_PL'
+									, case ISNULL([U_TYPE],'GI') when 'GI' then -[U_CompleteAmount] else [U_CompleteAmount] end as 'SUM_CA'
 					from [BASELINE_KLTTC] 
 					where DocEntry_BaseLine= @DocEntry_BaseLine
-					union
-					Select DocEntry,-U_SUM as 'Sum_PL',-U_CompleteAmount as 'SUM_CA'
+					union all
+					Select DocEntry 
+									, case ISNULL([U_TYPE],'GI') when 'GI' then -[U_Sum] else [U_Sum] end as 'Sum_PL'
+									, case ISNULL([U_TYPE],'GI') when 'GI' then -[U_CompleteAmount] else [U_CompleteAmount] end as 'SUM_CA'
 					from [BASELINE_KLTTD] 
 					where DocEntry_BaseLine= @DocEntry_BaseLine
-					union
+					union all
 					Select DocEntry,U_SUM as 'Sum_PL',U_CompleteAmount as 'SUM_CA'
 					from [BASELINE_KLTTE] 
 					where DocEntry_BaseLine= @DocEntry_BaseLine
-					union
+					union all
 					Select DocEntry,U_SUM as 'Sum_PL',U_CompleteAmount as 'SUM_CA'
 					from [BASELINE_KLTTF] 
 					where DocEntry_BaseLine= @DocEntry_BaseLine
-					union
+					union all
 					Select DocEntry,U_SUM as 'Sum_PL',U_CompleteAmount as 'SUM_CA'
 					from [BASELINE_KLTTG]
 					where DocEntry_BaseLine= @DocEntry_BaseLine) z1
 					group by z1.DocEntry
 				) b on a.DocEntry = b.DocEntry and a.DocEntry_BaseLine= @DocEntry_BaseLine
-				inner join  OCRD c on a.U_BPCode = c.CardCode
-				--where a.DocEntry in (
-				--Select --y.U_BPCode,
-				--DocEntry from [@KLTT] x inner join (
-				--Select U_BPCode,U_BGroup,U_PUType,MAx(U_Dateto) as Dateto from [@KLTT] where U_FIPROJECT = @FinancialProject group by U_BPCode,U_BGroup,U_PUType) y
-				--on x.U_BPCode = y.U_BPCode and x.U_DATETO = y.Dateto and x.U_BGroup = y.U_BGroup and x.U_PUType = y.U_PUType)
-				group by  a.U_BPCode,a.U_BPName,a.U_BGroup
-				,case when a.U_PUType  in ('PUT01','PUT03','PUT04','PUT05','PUT06','PUT07','PUT08') and c.Series in (70,71) then 'PUT01'
-					  when a.U_PUType  in ('PUT02') and c.Series in (70,71) then 'PUT02'
-					  when a.U_PUType  in ('PUT09') and c.Series in (70,71) then 'PUT09'
-					  --NTP
-					  when a.U_PUType  in ('PUT01','PUT03','PUT04','PUT07','PUT08') and c.Series in (72,73) then 'PUT01'
-					  when a.U_PUType  in ('PUT02','PUT05','PUT06') and c.Series in (72,73) then 'PUT02'
-					  when a.U_PUType  in ('PUT09') and c.Series in (72,73) then 'PUT09'
-					  --DTC
-					  when a.U_PUType  in ('PUT01','PUT03','PUT04','PUT07','PUT08') and c.Series in (78) then 'PUT01'
-					  when a.U_PUType  in ('PUT02') and c.Series in (78) then 'PUT02'
-					  when a.U_PUType  in ('PUT05','PUT06','PUT09') and c.Series in (78) then 'PUT09'
-					  else ISNULL(a.U_PUType,'') end
-				,a.U_BPCode2,a.U_PTQuanly
-				--,a.U_PUType
+				where a.U_BType in (2,3)
+				group by  a.U_BPCode,a.U_BPName,a.U_BGroup,a.UserSign
+				,dbo.fnPUType_Convert(a.U_PUType,a.U_BPCode)
+				,ISNULL(a.U_BPCode2,''),ISNULL(a.U_PTQuanly,0)
 				) T1
 				on T0.U_BPCode = T1.U_BPCode and T0.U_TYPE = T1.U_BGroup and T0.PUType = T1.U_PUType
 				and (T0.U_CP_NCC <> 0 or T0.U_CP_DTC <> 0 or T0.U_CP_NTP <>0 )
 			LEFT JOIN
-			(Select x.BpCode
-				,x.U_CGroup
-				,x.U_PUType
-				,(Select (SUM(b.PlanQty*b.UnitPrice) + SUM(b.PlanAmtLC))
-				from OAT1 b
-				where  b.AgrNo = AbsID) as 'GTHD'
-				from OOAT x inner join 
-				(Select BpCode
-				,U_CGroup
-				,U_PUType
-				,Max(StartDate) as 'Last_Date'
-				from OOAT
-				where 
-				Status ='A'
-				and Series =48
-				and U_PRJ = @FinancialProject
-				group by BpCode	,U_CGroup,U_PUType) y on x.BpCode = y.BpCode and x.U_CGroup = y.U_CGroup and x.U_PUTYPE = y.U_PUTYPE and x.StartDate = y.Last_Date
-				where Series =48
-				and Status = 'A') T2
+			(Select BpCode,U_CGroup,U_PUType,SUM(GTHD) as 'GTHD' from
+				(Select x.BpCode
+					,x.U_CGroup
+					,x.U_PUType
+					,(Select (SUM(b.PlanQty*b.UnitPrice) + SUM(b.PlanAmtLC))
+					from OAT1 b
+					where  b.AgrNo = AbsID) as 'GTHD'
+					from OOAT x inner join 
+					(Select BpCode
+					,U_CGroup
+					,U_PUType
+					,Max(StartDate) as 'Last_Date'
+					from OOAT
+					where 
+					[Status] ='A'
+					and Cancelled <> 'Y'
+					and Series =48
+					and U_PRJ = @FinancialProject
+					group by BpCode	,U_CGroup,U_PUType) y on x.BpCode = y.BpCode and x.U_CGroup = y.U_CGroup and x.U_PUTYPE = y.U_PUTYPE and x.StartDate = y.Last_Date
+					where Series =48
+					and Status = 'A'
+					and Cancelled <> 'Y') T 
+			where T.GTHD <> 1
+			group by BpCode,U_CGroup,U_PUType) T2
 			on T0.U_BPCode = T2.BpCode 
 			and T1.U_BGroup = T2.U_CGroup
 			and T1.U_PUType = T2.U_PUType
@@ -1588,20 +2045,24 @@ BEGIN
 	begin
 		Select T0.U_BPCode
 		,T0.U_BPName
+		,(Select CardName from OCRD where CardCode = T1.U_BPCode2) as 'U_BPCode2'
 		,T0.U_TYPE
 		,T0.U_CP_NCC
 		,T0.U_CP_NTP
 		,T0.U_CP_DTC
 		,T0.U_CP_DP2
 		,T1.U_BGroup
+		,T1.BP
 		,T1.U_PUType
-		,T1.KL_HD
+		,case when (Select GroupCode from OCRD where CardCode=T0.U_BPCode) <> 112 then T1.KL_HD
+			else T1.KL_HD  * (U_PTQuanly/100) end as 'KL_HD'
 		,T1.KL_TT
-		,T1.KL_TT_DD
+		,case when (Select GroupCode from OCRD where CardCode=T0.U_BPCode) <> 112 then T1.KL_TT_DD
+			else T1.KL_TT_DD  * (U_PTQuanly/100) end as 'KL_TT_DD' --T1.KL_TT_DD
 		,T2.GTHD
-		,T3.TOTAL as 'TOTAL_AP_INVOICE' from 
+		,T3.TOTAL as 'TOTAL_AP_INVOICE' 
+		from 
 			(
-			--DU TRU
 			Select [U_BPCode]
 				  ,[U_BPName]
 				  ,a.[U_TYPE]
@@ -1613,14 +2074,10 @@ BEGIN
 				  ,0 as 'U_CP_DTC'
 				  ,'PUT01' as PUType
 			FROM [BASELINE_DUTRUB] a inner join  OCRD b on a.U_BPCode = b.CardCode
-			where a.DocEntry_DUTRU in 
-						(Select DocEntry
-						from [BASELINE_DUTRU] 
-						where DUTRU_TYPE = 1
-						and DocEntry_BaseLine = @DocEntry_BaseLine
-						and ProjectID in (Select splitdata from dbo.fnSplitString(@Goithau_Key,','))
-						)
-			and DocEntry_BaseLine = @DocEntry_BaseLine
+			where a.DocEntry_BaseLine = @DocEntry_BaseLine
+			and a.DocEntry_DUTRU in (Select DocEntry from BASELINE_DUTRU 
+										where DocEntry_BaseLine = @DocEntry_BaseLine
+										and ProjectID in (Select splitdata from dbo.fnSplitString(@Goithau_Key,','))) 
 			group by [U_BPCode],[U_BPName],b.Series,a.[U_TYPE]
 			Union ALL
 			Select [U_BPCode]
@@ -1634,14 +2091,10 @@ BEGIN
 				  ,0 as 'U_CP_DTC'
 				  ,'PUT02' as PUType
 			FROM [BASELINE_DUTRUB] a inner join  OCRD b on a.U_BPCode = b.CardCode
-			where a.DocEntry_DUTRU in 
-						(Select DocEntry
-						from [BASELINE_DUTRU] 
-						where DUTRU_TYPE = 1
-						and DocEntry_BaseLine = @DocEntry_BaseLine
-						and ProjectID in (Select splitdata from dbo.fnSplitString(@Goithau_Key,','))
-						)
-			and DocEntry_BaseLine = @DocEntry_BaseLine
+			where  a.DocEntry_BaseLine = @DocEntry_BaseLine
+			and a.DocEntry_DUTRU in (Select DocEntry from BASELINE_DUTRU 
+										where DocEntry_BaseLine = @DocEntry_BaseLine
+										and ProjectID in (Select splitdata from dbo.fnSplitString(@Goithau_Key,','))) 
 			group by [U_BPCode],[U_BPName],b.Series,a.[U_TYPE]
 			Union ALL
 			Select [U_BPCode]
@@ -1655,135 +2108,118 @@ BEGIN
 				  as 'U_CP_DTC'
 				  ,'PUT09' as PUType
 			FROM [BASELINE_DUTRUB] a inner join  OCRD b on a.U_BPCode = b.CardCode
-			where a.DocEntry_DUTRU in 
-						(Select DocEntry
-						from [BASELINE_DUTRU] 
-						where DUTRU_TYPE = 1
-						and DocEntry_BaseLine = @DocEntry_BaseLine
-						and ProjectID in (Select splitdata from dbo.fnSplitString(@Goithau_Key,','))
-						)
-			and DocEntry_BaseLine = @DocEntry_BaseLine
+			where  a.DocEntry_BaseLine = @DocEntry_BaseLine
+			and a.DocEntry_DUTRU in (Select DocEntry from BASELINE_DUTRU 
+										where DocEntry_BaseLine = @DocEntry_BaseLine
+										and ProjectID in (Select splitdata from dbo.fnSplitString(@Goithau_Key,','))) 
 			group by [U_BPCode],[U_BPName],b.Series,a.[U_TYPE]) T0
 			LEFT JOIN
-			--Khoi luong thanh toan
 			(Select a.U_BPCode
 				,a.U_BPName
 				,a.U_BGroup
-				--,a.U_PUType
-				--NCC
-				,case when a.U_PUType  in ('PUT01','PUT03','PUT04','PUT05','PUT06','PUT07','PUT08') and c.Series in (70,71) then 'PUT01'
-					  when a.U_PUType  in ('PUT02') and c.Series in (70,71) then 'PUT02'
-					  when a.U_PUType  in ('PUT09') and c.Series in (70,71) then 'PUT09'
-					  --NTP
-					  when a.U_PUType  in ('PUT01','PUT03','PUT04','PUT07','PUT08') and c.Series in (72,73) then 'PUT01'
-					  when a.U_PUType  in ('PUT02','PUT05','PUT06') and c.Series in (72,73) then 'PUT02'
-					  when a.U_PUType  in ('PUT09') and c.Series in (72,73) then 'PUT09'
-					  --DTC
-					  when a.U_PUType  in ('PUT01','PUT03','PUT04','PUT07','PUT08') and c.Series in (78) then 'PUT01'
-					  when a.U_PUType  in ('PUT02') and c.Series in (78) then 'PUT02'
-					  when a.U_PUType  in ('PUT05','PUT06','PUT09') and c.Series in (78) then 'PUT09'
-					  else ISNULL(a.U_PUType,'') end as 'U_PUType'
+				,case (Select dept from OHEM where Userid = a.UserSign) when 1 then 'CCM'
+					when -2 then 'KT'
+					when 3 then 'DA'
+					else ''
+				 end as 'BP'
+				,dbo.fnPUType_Convert(a.U_PUType,a.U_BPCode) as 'U_PUType'
+				,ISNULL(a.U_BPCode2,'') as 'U_BPCode2'
+				,ISNULL(a.U_PTQuanly,0) as 'U_PTQuanly'
 				,SUM(b.U_SUM) as 'KL_HD'
 				,SUM(b.U_CompleteAmount) as 'KL_TT'
-				,SUM(case a.Status when 'C' then b.U_CompleteAmount else 0 end) as 'KL_TT_DD'
+				,SUM(case a.Status when 'C' then (b.U_CompleteAmount) else 0 end) as 'KL_TT_DD'
 				from [BASELINE_KLTT] a inner join (
 				Select z1.DocEntry,SUM(z1.Sum_PL) as 'U_SUM', SUM(z1.SUM_CA) as 'U_CompleteAmount'
 				from (
 					Select DocEntry,U_SUM as 'Sum_PL',U_CompleteAmount as 'SUM_CA'
 					from [BASELINE_KLTTA]
-					where DocEntry_BaseLine= @DocEntry_BaseLine
-					and U_GoiThauKey in (Select splitdata from dbo.fnSplitString(@Goithau_Key,','))
-					union
+					where U_GoiThauKey in (Select splitdata from dbo.fnSplitString(@Goithau_Key,','))
+					and DocEntry_BaseLine= @DocEntry_BaseLine
+					union all
 					Select DocEntry,U_SUM as 'Sum_PL',U_CompleteAmount as 'SUM_CA'
 					from [BASELINE_KLTTB] 
-					where DocEntry_BaseLine= @DocEntry_BaseLine
-					and U_GoiThauKey in (Select splitdata from dbo.fnSplitString(@Goithau_Key,','))
-					union
+					where U_GoiThauKey in (Select splitdata from dbo.fnSplitString(@Goithau_Key,','))
+					and DocEntry_BaseLine= @DocEntry_BaseLine
+					union all
 					Select DocEntry,U_SUM as 'Sum_PL',U_CompleteAmount as 'SUM_CA'
 					from [BASELINE_KLTTK] 
-					where DocEntry_BaseLine= @DocEntry_BaseLine
-					and U_GoiThauKey in (Select splitdata from dbo.fnSplitString(@Goithau_Key,','))
-					union
-					Select DocEntry,-U_SUM as 'Sum_PL',-U_CompleteAmount as 'SUM_CA'
+					where U_GoiThauKey in (Select splitdata from dbo.fnSplitString(@Goithau_Key,','))
+					and DocEntry_BaseLine= @DocEntry_BaseLine
+					union all
+					Select DocEntry
+									, case ISNULL([U_TYPE],'GI') when 'GI' then -[U_Sum] else [U_Sum] end as 'Sum_PL'
+									, case ISNULL([U_TYPE],'GI') when 'GI' then -[U_CompleteAmount] else [U_CompleteAmount] end as 'SUM_CA'
 					from [BASELINE_KLTTC] 
-					where DocEntry_BaseLine= @DocEntry_BaseLine
-					and U_GoiThauKey in (Select splitdata from dbo.fnSplitString(@Goithau_Key,','))
-					union
-					Select DocEntry,-U_SUM as 'Sum_PL',-U_CompleteAmount as 'SUM_CA'
+					where U_GoiThauKey in (Select splitdata from dbo.fnSplitString(@Goithau_Key,','))
+					and DocEntry_BaseLine= @DocEntry_BaseLine
+					union all
+					Select DocEntry									
+									, case ISNULL([U_TYPE],'GI') when 'GI' then -[U_Sum] else [U_Sum] end as 'Sum_PL'
+									, case ISNULL([U_TYPE],'GI') when 'GI' then -[U_CompleteAmount] else [U_CompleteAmount] end as 'SUM_CA'
 					from [BASELINE_KLTTD] 
-					where DocEntry_BaseLine= @DocEntry_BaseLine
-					and U_GoiThauKey in (Select splitdata from dbo.fnSplitString(@Goithau_Key,','))
-					union
+					where U_GoiThauKey in (Select splitdata from dbo.fnSplitString(@Goithau_Key,','))
+					and DocEntry_BaseLine= @DocEntry_BaseLine
+					union all
 					Select DocEntry,U_SUM as 'Sum_PL',U_CompleteAmount as 'SUM_CA'
 					from [BASELINE_KLTTE] 
-					where DocEntry_BaseLine= @DocEntry_BaseLine
-					and U_GoiThauKey in (Select splitdata from dbo.fnSplitString(@Goithau_Key,','))
-					union
+					where U_GoiThauKey in (Select splitdata from dbo.fnSplitString(@Goithau_Key,','))
+					and DocEntry_BaseLine= @DocEntry_BaseLine
+					union all
 					Select DocEntry,U_SUM as 'Sum_PL',U_CompleteAmount as 'SUM_CA'
 					from [BASELINE_KLTTF] 
-					where DocEntry_BaseLine= @DocEntry_BaseLine
-					and U_GoiThauKey in (Select splitdata from dbo.fnSplitString(@Goithau_Key,','))
-					union
+					where U_GoiThauKey in (Select splitdata from dbo.fnSplitString(@Goithau_Key,','))
+					and DocEntry_BaseLine= @DocEntry_BaseLine
+					union all
 					Select DocEntry,U_SUM as 'Sum_PL',U_CompleteAmount as 'SUM_CA'
 					from [BASELINE_KLTTG]
-					where DocEntry_BaseLine= @DocEntry_BaseLine
-					and U_GoiThauKey in (Select splitdata from dbo.fnSplitString(@Goithau_Key,','))) z1
+					where U_GoiThauKey in (Select splitdata from dbo.fnSplitString(@Goithau_Key,','))
+					and DocEntry_BaseLine= @DocEntry_BaseLine
+					union all
+					Select DocEntry,U_SUM as 'Sum_PL',U_CompleteAmount as 'SUM_CA'
+					from [BASELINE_KLTTK]
+					where U_GoiThauKey in (Select splitdata from dbo.fnSplitString(@Goithau_Key,','))
+					and DocEntry_BaseLine= @DocEntry_BaseLine) z1
 					group by z1.DocEntry
-				) b on a.DocEntry = b.DocEntry and a.DocEntry_BaseLine = @DocEntry_BaseLine
-				inner join  OCRD c on a.U_BPCode = c.CardCode
-				--where a.DocEntry in (
-				--Select --y.U_BPCode,
-				--DocEntry from [@KLTT] x inner join (
-				--Select U_BPCode,U_BGroup,U_PUType,MAx(U_Dateto) as Dateto from [@KLTT] where U_FIPROJECT = @FinancialProject and U_GoiThauKey=@Goithau_Key group by U_BPCode,U_BGroup,U_PUType) y
-				--on x.U_BPCode = y.U_BPCode and x.U_DATETO = y.Dateto and x.U_BGroup = y.U_BGroup and x.U_PUType = y.U_PUType
-				--where b.U_Sub1 in (Select AbsEntry from OPHA where ProjectID = @Goithau_Key))
-				group by  a.U_BPCode,a.U_BPName,a.U_BGroup
-				,case when a.U_PUType  in ('PUT01','PUT03','PUT04','PUT05','PUT06','PUT07','PUT08') and c.Series in (70,71) then 'PUT01'
-					  when a.U_PUType  in ('PUT02') and c.Series in (70,71) then 'PUT02'
-					  when a.U_PUType  in ('PUT09') and c.Series in (70,71) then 'PUT09'
-					  --NTP
-					  when a.U_PUType  in ('PUT01','PUT03','PUT04','PUT07','PUT08') and c.Series in (72,73) then 'PUT01'
-					  when a.U_PUType  in ('PUT02','PUT05','PUT06') and c.Series in (72,73) then 'PUT02'
-					  when a.U_PUType  in ('PUT09') and c.Series in (72,73) then 'PUT09'
-					  --DTC
-					  when a.U_PUType  in ('PUT01','PUT03','PUT04','PUT07','PUT08') and c.Series in (78) then 'PUT01'
-					  when a.U_PUType  in ('PUT02') and c.Series in (78) then 'PUT02'
-					  when a.U_PUType  in ('PUT05','PUT06','PUT09') and c.Series in (78) then 'PUT09'
-					  else ISNULL(a.U_PUType,'') end
-				--,--a.U_PUType
+				) b on a.DocEntry = b.DocEntry and a.DocEntry_BaseLine= @DocEntry_BaseLine
+				where a.U_BType in (2,3)
+				group by  a.U_BPCode,a.U_BPName,a.U_BGroup,a.UserSign
+				,dbo.fnPUType_Convert(a.U_PUType,a.U_BPCode)
+				,ISNULL(a.U_BPCode2,''),ISNULL(a.U_PTQuanly,0)
 				) T1
-				on T0.U_BPCode = T1.U_BPCode and T0.U_TYPE = T1.U_BGroup 
+				on T0.U_BPCode = T1.U_BPCode and T0.U_TYPE = T1.U_BGroup and T0.PUType = T1.U_PUType
+				and (T0.U_CP_NCC <> 0 or T0.U_CP_DTC <> 0 or T0.U_CP_NTP <>0 )
 			LEFT JOIN
-			--Hop dong
-			(Select x.BpCode
-				,x.U_CGroup
-				,x.U_PUType
-				,(Select (SUM(b.PlanQty*b.UnitPrice) + SUM(b.PlanAmtLC))
-				from OAT1 b
-				where  b.AgrNo = AbsID) as 'GTHD'
-				from OOAT x inner join 
-				(Select BpCode
-				,U_CGroup
-				,U_PUType
-				,Max(StartDate) as 'Last_Date'
-				from OOAT
-				where 
-				Status ='A'
-				and Series =48
-				and U_PRJ = @FinancialProject
-				and U_GOITHAU = @Goithau_Key
-				group by BpCode	,U_CGroup,U_PUType) y on x.BpCode = y.BpCode and x.U_CGroup = y.U_CGroup and x.U_PUTYPE = y.U_PUTYPE and x.StartDate = y.Last_Date
-				where Series = 48
-				and Status = 'A') T2
+			(Select BpCode,U_CGroup,U_PUType,SUM(GTHD) as 'GTHD' from
+				(Select x.BpCode
+					,x.U_CGroup
+					,x.U_PUType
+					,(Select (SUM(b.PlanQty*b.UnitPrice) + SUM(b.PlanAmtLC))
+					from OAT1 b
+					where  b.AgrNo = AbsID) as 'GTHD'
+					from OOAT x inner join 
+					(Select BpCode
+					,U_CGroup
+					,U_PUType
+					,Max(StartDate) as 'Last_Date'
+					from OOAT
+					where 
+					[Status] ='A'
+					and [Cancelled] <> 'Y'
+					and Series =48
+					and U_PRJ = @FinancialProject
+					--and U_Goithau in (Select splitdata from dbo.fnSplitString(@Goithau_Key,','))
+					group by BpCode	,U_CGroup,U_PUType) y on x.BpCode = y.BpCode and x.U_CGroup = y.U_CGroup and x.U_PUTYPE = y.U_PUTYPE and x.StartDate = y.Last_Date
+					where Series =48
+					and [Status] ='A'
+					and [Cancelled] <> 'Y') T 
+			where T.GTHD <> 1
+			group by BpCode,U_CGroup,U_PUType) T2
 			on T0.U_BPCode = T2.BpCode 
 			and T1.U_BGroup = T2.U_CGroup
 			and T1.U_PUType = T2.U_PUType
 			LEFT JOIN 
-			--Hoa don - AP Invoice
-			(Select a.CardCode
-				,a.U_RECTYPE
-				,a.U_PUTYPE
-				,(Select SUM(LineTotal) from PCH1 where DocEntry=a.DocEntry and U_ParentID1 in (Select AbsEntry from OPHA where ProjectID = @Goithau_Key)) as 'TOTAL'
+			(Select a.CardCode,a.U_RECTYPE,a.U_PUTYPE
+				,(Select SUM(LineTotal) from PCH1 where DocEntry=a.DocEntry) as 'TOTAL'
 			from OPCH a
 			where a.Project = @FinancialProject
 			and a.CANCELED not in ('Y','C'))T3
@@ -1795,61 +2231,220 @@ END
 
 GO
 
-CREATE PROCEDURE [dbo].[BASELINE_MM_FI_GET_DATA_BCH]
+ALTER PROCEDURE [dbo].[BASELINE_MM_FI_GET_DATA_BCH]
 	-- Add the parameters for the stored procedure here
 	@DocEntry_BaseLine as int
 	,@GoiThauKey as varchar(200)
-	--,@CTG_Entry as int
 AS
 BEGIN
 	SET NOCOUNT ON;
-	--DECLARE @ProjectID as int;
 	DECLARE @FinancialProject as nvarchar(200);
 	Select @FinancialProject = U_FProject from [@BASELINE] where DocEntry = @DocEntry_BaseLine;
-    -- Insert statements for procedure here
-	--SELECT top 1 @ProjectID = AbsEntry from OPMG where FIPROJECT = @FinancialProject;
 	if (@GoiThauKey = '')
 		Select * from
 		(
 		Select left(U_TKKT + '00000000',8) as 'U_TKKT',U_TTKKT,SUM(U_GTDP) as 'U_GTDP' 
-		FROM [BASE_LINECTG4] 
+		FROM [BASELINE_CTG4] 
 		where DocEntry_BaseLine = @DocEntry_BaseLine 
-		--in 
-		--(Select DocEntry 
-		--from [@DUTRU] 
-		--where 
-		--U_DUTRU_TYPE=1
-		--and U_CTG_Key in 
-		--		(Select x.CTG_KEY 
-		--		from 
-		--			(Select U_GoiThauKey,max(DocEntry) as CTG_KEY 
-		--			from [@CTG] 
-		--			where U_PrjCode = @FinancialProject group by U_GoiThauKey) x))
 		group by U_TKKT,U_TTKKT) a
 		left join 
 		(Select b.Account,SUM(b.Debit) as TOTAL_BCH
 		From OJDT a inner join JDT1 b on a.TransID=b.TransId
-		where a.Project = @FinancialProject
-		and a.U_LCP = 'BCH'
+		where b.Project = @FinancialProject
 		group by b.Account) b on a.U_TKKT=b.Account;
 	else
 		Select * from
-		(Select left(x.U_TKKT + '00000000',8) as 'U_TKKT',x.U_TTKKT,x.U_GTDP FROM [BASELINE_CTG4] x inner join [BASELINE_CTG] y on x.DocEntry_CTG=y.DocEntry and y.DocEntry_BaseLine=@DocEntry_BaseLine
-			where x.DocEntry_BaseLine = @DocEntry_BaseLine 
-			and y.U_GoiThauKey in (Select splitdata from dbo.fnSplitString(@GoiThauKey,','))
-			--in 
-			--(Select DocEntry from [@DUTRU] where U_CTG_Key in 
-			--	(Select DocEntry From [@CTG] where U_PrjCode = @FinancialProject and U_GoiThauKey = @GoiThauKey)
-			--)
+		(Select left(x.U_TKKT + '00000000',8) as 'U_TKKT',x.U_TTKKT,SUM(x.U_GTDP) as 'U_GTDP'  
+		FROM [BASELINE_CTG4] x inner join [BASELINE_CTG] y on x.DocEntry_CTG=y.DocEntry and y.DocEntry_BaseLine=@DocEntry_BaseLine
+		where x.DocEntry_BaseLine = @DocEntry_BaseLine 
+		and y.U_GoiThauKey in (Select splitdata from dbo.fnSplitString(@GoiThauKey,','))
+		group by x.U_TTKKT,left(x.U_TKKT + '00000000',8)
 			) a
 		left join 
 			(Select b.Account,SUM(b.Debit) as TOTAL_BCH
 			From OJDT a inner join JDT1 b on a.TransID=b.TransId
-			where a.Project = @FinancialProject
-			and a.U_LCP = 'BCH'
+			where b.Project = @FinancialProject
 			group by b.Account) b 
 		on a.U_TKKT=b.Account ;
 END;
+GO
+
+CREATE PROCEDURE [dbo].[BASELINE_MM_FI_GET_DATA_VII]
+	@DocEntry_BaseLine as int
+	,@GoiThauKey as varchar(250)
+AS
+BEGIN
+	SET NOCOUNT ON;
+	IF (@GoiThauKey = '')
+		BEGIN
+			Select
+			  z.U_GOITHAU
+			  ,(Select U_CPHT1 from OPMG where DocNum=z.U_GOITHAU) as 'HT1'
+			  ,(Select U_CPHT2 from OPMG where DocNum=z.U_GOITHAU) as 'HT2'
+			  ,(Select U_CPNG from OPMG where DocNum=z.U_GOITHAU) as 'CPNG'
+			  ,(Select U_DPCP from OPMG where DocNum=z.U_GOITHAU) as 'DPCP'
+			  ,(Select U_DPBH from OPMG where DocNum=z.U_GOITHAU) as 'DPBH'
+			  ,(Select U_CPQLCT from OPMG where DocNum=z.U_GOITHAU) as 'CPQLCT'
+			  ,SUM(z.GTHD) as 'GTHD'
+			  ,SUM(z.GGTM) as 'GGTM'
+			  ,SUM(z.PA) as 'PA'
+			  ,SUM(z.PhiQL) as 'PhiQL'
+			  ,SUM(z.PLHD) as 'PLHD'
+			  ,SUM(z.KHAC) as 'KHAC'
+			  ,SUM(z.GTHD) + SUM(z.GGTM) + SUM(z.PA) + SUM(z.PhiQL) + SUM(z.PLHD) + SUM(z.KHAC) as 'Total'
+					from 
+					(
+						Select 
+						a.U_GOITHAU
+						,SUM(b.PlanQty*b.UnitPrice)+ SUM(b.PlanAmtLC) as 'GTHD'
+						,SUM(a.U_GGTM) as 'GGTM'
+						,SUM(a.U_PADXTK) as 'PA'
+						,SUM(a.U_PQL) as 'PhiQL'
+						,'0' as 'PLHD'
+						,'0' as 'KHAC'
+						from BASELINE_OOAT a left join BASELINE_OAT1 b on a.AbsID = b.AgrNo
+						where 
+						a.DocEntry_BaseLine = @DocEntry_BaseLine
+						and a.Series = 47
+						and a.BpType = 'C'
+						and a.[Status] ='A'
+						and a.Cancelled <> 'Y'
+						group by a.U_GOITHAU
+
+						union all
+
+						Select 
+						t1.U_GOITHAU
+						,'0' as 'GTHD'
+						,'0' as 'GGTM'
+						,'0' as 'PA'
+						,'0' as 'PhiQL'
+						,SUM(t1.PLHD) as PLHD
+						,'0' as 'KHAC'
+						from (
+						Select a.U_GOITHAU,case a.Method when 'I' then b.PlanQty*b.UnitPrice else b.PlanAmtLC end as 'PLHD'
+						from BASELINE_OOAT a left join BASELINE_OAT1 b on a.AbsID = b.AgrNo
+						where 
+						a.DocEntry_BaseLine = @DocEntry_BaseLine
+						--a.U_PRJ = @FinancialProject
+						and a.Series = 142
+						and a.BpType = 'C'
+						and a.[Status] ='A'
+						and a.Cancelled <> 'Y'
+						) t1
+						group by t1.U_GOITHAU
+
+						union all
+
+						Select 
+						t2.U_GOITHAU
+						,'0' as 'GTHD'
+						,'0' as 'GGTM'
+						,'0' as 'PA'
+						,'0' as 'PhiQL'
+						,'0' as 'PLHD'
+						,SUM(t2.KHAC) as KHAC from (
+						Select a.U_GOITHAU,case a.Method when 'I' then b.PlanQty*b.UnitPrice else b.PlanAmtLC end as 'KHAC'
+						from BASELINE_OOAT a left join BASELINE_OAT1 b on a.AbsID = b.AgrNo
+						where --a.U_PRJ = @FinancialProject
+						a.DocEntry_BaseLine = @DocEntry_BaseLine
+						and a.Series = 203
+						and a.[Status] ='A'
+						and a.BpType = 'C'
+						and a.Cancelled <> 'Y') t2
+						group by U_GOITHAU
+
+					) z
+					group by z.U_GOITHAU
+					order by z.U_GOITHAU
+		END
+	ELSE
+		BEGIN
+		Select
+			  z.U_GOITHAU
+			  ,(Select U_CPHT1 from OPMG where DocNum=z.U_GOITHAU) as 'HT1'
+			  ,(Select U_CPHT2 from OPMG where DocNum=z.U_GOITHAU) as 'HT2'
+			  ,(Select U_CPNG from OPMG where DocNum=z.U_GOITHAU) as 'CPNG'
+			  ,(Select U_DPCP from OPMG where DocNum=z.U_GOITHAU) as 'DPCP'
+			  ,(Select U_DPBH from OPMG where DocNum=z.U_GOITHAU) as 'DPBH'
+			  ,(Select U_CPQLCT from OPMG where DocNum=z.U_GOITHAU) as 'CPQLCT'
+			  ,SUM(z.GTHD) as 'GTHD'
+			  ,SUM(z.GGTM) as 'GGTM'
+			  ,SUM(z.PA) as 'PA'
+			  ,SUM(z.PhiQL) as 'PhiQL'
+			  ,SUM(z.PLHD) as 'PLHD'
+			  ,SUM(z.KHAC) as 'KHAC'
+			  ,SUM(z.GTHD) + SUM(z.GGTM) + SUM(z.PA) + SUM(z.PhiQL) + SUM(z.PLHD) + SUM(z.KHAC) as 'Total'
+					from 
+					(
+						Select 
+						a.U_GOITHAU
+						,SUM(b.PlanQty*b.UnitPrice)+ SUM(b.PlanAmtLC) as 'GTHD'
+						,SUM(a.U_GGTM) as 'GGTM'
+						,SUM(a.U_PADXTK) as 'PA'
+						,SUM(a.U_PQL) as 'PhiQL'
+						,'0' as 'PLHD'
+						,'0' as 'KHAC'
+						from BASELINE_OOAT a left join BASELINE_OAT1 b on a.AbsID = b.AgrNo
+						where --a.U_PRJ = @FinancialProject
+						a.DocEntry_BaseLine = @DocEntry_BaseLine
+						and a.Series = 47
+						and a.BpType = 'C'
+						and a.[Status] ='A'
+						and a.Cancelled <> 'Y'
+						and (Select AbsEntry from BASELINE_OPMG where DocNum = a.U_GOITHAU) in (Select splitdata from dbo.fnSplitString(@GoiThauKey,','))
+						group by a.U_GOITHAU
+
+						union all
+
+						Select 
+						t1.U_GOITHAU
+						,'0' as 'GTHD'
+						,'0' as 'GGTM'
+						,'0' as 'PA'
+						,'0' as 'PhiQL'
+						,SUM(t1.PLHD) as PLHD
+						,'0' as 'KHAC'
+						from (
+						Select a.U_GOITHAU,case a.Method when 'I' then b.PlanQty*b.UnitPrice else b.PlanAmtLC end as 'PLHD'
+						from BASELINE_OOAT a left join BASELINE_OAT1 b on a.AbsID = b.AgrNo
+						where --a.U_PRJ = @FinancialProject
+						a.DocEntry_BaseLine = @DocEntry_BaseLine
+						and a.Series = 142
+						and a.BpType = 'C'
+						and a.[Status] ='A'
+						and a.Cancelled <> 'Y'
+						and (Select AbsEntry from BASELINE_OPMG where DocNum = a.U_GOITHAU) in (Select splitdata from dbo.fnSplitString(@GoiThauKey,','))
+						) t1
+						group by t1.U_GOITHAU
+
+						union all
+
+						Select 
+						t2.U_GOITHAU
+						,'0' as 'GTHD'
+						,'0' as 'GGTM'
+						,'0' as 'PA'
+						,'0' as 'PhiQL'
+						,'0' as 'PLHD'
+						,SUM(t2.KHAC) as KHAC from (
+						Select a.U_GOITHAU,case a.Method when 'I' then b.PlanQty*b.UnitPrice else b.PlanAmtLC end as 'KHAC'
+						from BASELINE_OOAT a left join BASELINE_OAT1 b on a.AbsID = b.AgrNo
+						where --a.U_PRJ = @FinancialProject
+						a.DocEntry_BaseLine = @DocEntry_BaseLine
+						and a.Series = 203
+						and a.[Status] ='A'
+						and a.BpType = 'C'
+						and a.Cancelled <> 'Y'
+						and (Select AbsEntry from BASELINE_OPMG where DocNum = a.U_GOITHAU) in (Select splitdata from dbo.fnSplitString(@GoiThauKey,','))) t2
+						group by U_GOITHAU
+
+					) z
+					group by z.U_GOITHAU
+					order by z.U_GOITHAU
+	END
+END
+
 GO
 
 CREATE PROCEDURE [dbo].[BASELINE_Approve_LV]
