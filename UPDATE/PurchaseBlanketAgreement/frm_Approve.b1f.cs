@@ -164,7 +164,7 @@ namespace PurchaseBlanketAgreement
         void Get_Posting_Level()
         {
             SAPbobsCOM.Recordset rs = (SAPbobsCOM.Recordset)oCom.GetBusinessObject(SAPbobsCOM.BoObjectTypes.BoRecordset);
-            string str_query = string.Format("Select U_Apprv1, U_Apprv2, U_Apprv3, U_Apprv4, U_Apprv5, U_Apprv6, U_Apprv7, U_Apprv8, U_Apprv9, U_Apprv10, U_Apprv11 "
+            string str_query = string.Format("Select U_Apprv1, U_Apprv2, U_Apprv3, U_Apprv4, U_Apprv5, U_Apprv6, U_Apprv7, U_Apprv8, U_Apprv9, U_Apprv10, U_Apprv11, U_Apprv12 "
                                 + " from OOAT where BpType = '{0}' and Status ='D' and Cancelled ='N' and Number ='{1}'", Blanket_Type, Blanket_Agreement_No);
             rs.DoQuery(str_query);
             if (rs.RecordCount > 0)
@@ -180,6 +180,7 @@ namespace PurchaseBlanketAgreement
                 Post_Level.Add(9, rs.Fields.Item("U_Apprv9").Value.ToString());
                 Post_Level.Add(10, rs.Fields.Item("U_Apprv10").Value.ToString());
                 Post_Level.Add(11, rs.Fields.Item("U_Apprv11").Value.ToString());
+                Post_Level.Add(12, rs.Fields.Item("U_Apprv12").Value.ToString());
             }
         }
 
