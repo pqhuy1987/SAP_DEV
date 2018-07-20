@@ -1022,25 +1022,29 @@ namespace R_BCTC
             #endregion
 
             #region Thong tin bill
-            decimal GTTU = 0, GTHU = 0;
-            decimal pp_pl = 0, pp_ca = 0, pp_ca_no_VAT = 0, pp_tu_lastbill = 0, pp_hu_lastbill = 0;
+            decimal GTTU = 0, GTHU = 0, PhiQL_Current = 0;
+            decimal pp_pl = 0, pp_ca = 0, pp_ca_no_VAT = 0, pp_tu_lastbill = 0, pp_hu_lastbill = 0, pp_PhiQL = 0;
             decimal sum_ca_novat = 0;
             if (SPP_CURRENT.Rows.Count == 1)
             {
-                decimal.TryParse(SPP_CURRENT.Rows[0]["SUM_CA_NOVAT"].ToString(), out sum_ca_novat);
-                decimal.TryParse(SPP_CURRENT.Rows[0]["TOTAL_TU"].ToString(), out GTTU);
-                decimal.TryParse(SPP_CURRENT.Rows[0]["TOTAL_HU"].ToString(), out GTHU);
+                    decimal.TryParse(SPP_CURRENT.Rows[0]["SUM_CA_NOVAT"].ToString(), out sum_ca_novat);
+                    decimal.TryParse(SPP_CURRENT.Rows[0]["TOTAL_TU"].ToString(), out GTTU);
+                    decimal.TryParse(SPP_CURRENT.Rows[0]["TOTAL_HU"].ToString(), out GTHU);
+                    decimal.TryParse(SPP_CURRENT.Rows[0]["PhiQL"].ToString(), out PhiQL_Current);
+                    //sum_ca_novat = sum_ca_novat + (sum_ca_novat * PhiQL)/100;
             }
 
 
             if (SPP.Rows.Count == 1)
             {
-                decimal.TryParse(SPP.Rows[0]["SUM_PL"].ToString(), out pp_pl);
-                decimal.TryParse(SPP.Rows[0]["SUM_CA"].ToString(), out pp_ca);
-                decimal.TryParse(SPP.Rows[0]["SUM_CA_NOVAT"].ToString(), out pp_ca_no_VAT);
-                //decimal.TryParse(SPP.Rows[0]["TOTAL_TU"].ToString(), out GTTU);
-                decimal.TryParse(SPP.Rows[0]["TOTAL_HU"].ToString(), out pp_hu_lastbill);
-                decimal.TryParse(SPP.Rows[0]["TOTAL_TU_LASTBILL"].ToString(), out pp_tu_lastbill);
+                    decimal.TryParse(SPP.Rows[0]["SUM_PL"].ToString(), out pp_pl);
+                    decimal.TryParse(SPP.Rows[0]["SUM_CA"].ToString(), out pp_ca);
+                    decimal.TryParse(SPP.Rows[0]["SUM_CA_NOVAT"].ToString(), out pp_ca_no_VAT);
+                    decimal.TryParse(SPP.Rows[0]["PhiQL"].ToString(), out pp_PhiQL);
+                    //decimal.TryParse(SPP.Rows[0]["TOTAL_TU"].ToString(), out GTTU);
+                    decimal.TryParse(SPP.Rows[0]["TOTAL_HU"].ToString(), out pp_hu_lastbill);
+                    decimal.TryParse(SPP.Rows[0]["TOTAL_TU_LASTBILL"].ToString(), out pp_tu_lastbill);
+                    //pp_ca_no_VAT = pp_ca_no_VAT + (pp_ca_no_VAT * PhiQL) / 100;
             }
             //Gia tri thuc hien den ky nay
             decimal GTKN = 0;
@@ -1138,6 +1142,9 @@ namespace R_BCTC
             //GT thanh toan ky nay
             KLTT_Kynay = Math.Round(TongGT - KLTT_Kytruoc, 0);
                 //String.Format("{0:n}", Math.Round(decimal.Parse(EditText16.Value) - decimal.Parse(EditText18.Value), 0));
+            KLTT_Kynay      = KLTT_Kynay + (KLTT_Kynay * PhiQL_Current) / 100;
+            KLTT_Kytruoc    = KLTT_Kytruoc + (KLTT_Kytruoc * pp_PhiQL) / 100;
+            TongGT          = TongGT + (TongGT * pp_PhiQL) / 100;
             #endregion
         }
 

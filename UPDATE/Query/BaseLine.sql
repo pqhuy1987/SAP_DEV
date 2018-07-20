@@ -1691,10 +1691,8 @@ END
 GO
 
 ALTER PROCEDURE [dbo].[BASELINE_MM_CE_GET_DATA_BCH]
-	-- Add the parameters for the stored procedure here
 	@DocEntry_BaseLine as int
 	,@GoiThauKey as varchar(200)
-	--,@CTG_Entry as int
 AS
 BEGIN
 	SET NOCOUNT ON;
@@ -1708,11 +1706,12 @@ BEGIN
 		where DocEntry_BaseLine = @DocEntry_BaseLine
 		group by U_TKKT,U_TTKKT) a
 		left join 
-		(Select b.Account,SUM(b.Debit) as TOTAL_BCH
+		(Select case SUBSTRING( b.Account,1,4) when '3341' then '33410000' else b.Account end as 'Account'
+		 , SUM(b.Debit) as TOTAL_BCH
 		From OJDT a inner join JDT1 b on a.TransID=b.TransId
 		where a.Project = @FinancialProject
 		and a.U_LCP = 'BCH'
-		group by b.Account) b on a.U_TKKT=b.Account;
+		group by case SUBSTRING( b.Account,1,4) when '3341' then '33410000' else b.Account end) b on a.U_TKKT=b.Account;
 	else
 		Select * from
 		(Select left(x.U_TKKT + '00000000',8) as 'U_TKKT',x.U_TTKKT,SUM(x.U_GTDP) as 'U_GTDP'  
@@ -1722,10 +1721,11 @@ BEGIN
 		group by x.U_TTKKT,left(x.U_TKKT + '00000000',8)
 			) a
 		left join 
-			(Select b.Account,SUM(b.Debit) as TOTAL_BCH
+			(Select case SUBSTRING( b.Account,1,4) when '3341' then '33410000' else b.Account end as 'Account'
+			 , SUM(b.Debit) as TOTAL_BCH
 			From OJDT a inner join JDT1 b on a.TransID=b.TransId
 			where b.Project = @FinancialProject
-			group by b.Account) b 
+			group by case SUBSTRING( b.Account,1,4) when '3341' then '33410000' else b.Account end) b 
 		on a.U_TKKT=b.Account ;
 END;
 
@@ -2248,10 +2248,11 @@ BEGIN
 		where DocEntry_BaseLine = @DocEntry_BaseLine 
 		group by U_TKKT,U_TTKKT) a
 		left join 
-		(Select b.Account,SUM(b.Debit) as TOTAL_BCH
+		(Select case SUBSTRING( b.Account,1,4) when '3341' then '33410000' else b.Account end as 'Account'
+		 ,SUM(b.Debit) as TOTAL_BCH
 		From OJDT a inner join JDT1 b on a.TransID=b.TransId
 		where b.Project = @FinancialProject
-		group by b.Account) b on a.U_TKKT=b.Account;
+		group by case SUBSTRING( b.Account,1,4) when '3341' then '33410000' else b.Account end) b on a.U_TKKT=b.Account;
 	else
 		Select * from
 		(Select left(x.U_TKKT + '00000000',8) as 'U_TKKT',x.U_TTKKT,SUM(x.U_GTDP) as 'U_GTDP'  
@@ -2261,10 +2262,11 @@ BEGIN
 		group by x.U_TTKKT,left(x.U_TKKT + '00000000',8)
 			) a
 		left join 
-			(Select b.Account,SUM(b.Debit) as TOTAL_BCH
+			(Select case SUBSTRING( b.Account,1,4) when '3341' then '33410000' else b.Account end as 'Account'
+			 ,SUM(b.Debit) as TOTAL_BCH
 			From OJDT a inner join JDT1 b on a.TransID=b.TransId
 			where b.Project = @FinancialProject
-			group by b.Account) b 
+			group by case SUBSTRING( b.Account,1,4) when '3341' then '33410000' else b.Account end) b 
 		on a.U_TKKT=b.Account ;
 END;
 GO
